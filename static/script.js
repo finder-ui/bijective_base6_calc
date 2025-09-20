@@ -1,47 +1,99 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Theme Switcher Logic ---
+    const themeSwitcher = document.getElementById('theme-switcher');
+    const htmlElement = document.documentElement;
+
+    // Function to set the theme and update the icon
+    function setTheme(theme) {
+        htmlElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        // Update the icon based on the new theme
+        themeSwitcher.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+    }
+
+    // Event listener for the button
+    themeSwitcher.addEventListener('click', () => {
+        const currentTheme = htmlElement.getAttribute('data-theme');
+        if (currentTheme === 'dark') {
+            setTheme('light');
+        } else {
+            setTheme('dark');
+        }
+    });
+
+    // On page load, check for a saved theme and set it
+    const savedTheme = localStorage.getItem('theme') || 'light'; // Default to light
+    setTheme(savedTheme);
+
+
+    // --- Calculator Logic ---
     const num1Input = document.getElementById('num1');
     const num2Input = document.getElementById('num2');
     const operationButtons = document.querySelectorAll('.operation-buttons button');
 
+    const resultArea = document.getElementById('result-area');
     const problemDisplay = document.getElementById('problem-display');
     const stepsDisplay = document.getElementById('steps-display');
     const answerDisplay = document.getElementById('answer-display');
     const errorDisplay = document.getElementById('error-display');
 
     operationButtons.forEach(button => {
-        button.addEventListener('click', async () => {
+        button.addEventListener('click', () => {
             const num1 = num1Input.value.trim();
             const num2 = num2Input.value.trim();
             const operation = button.dataset.op;
 
-            // Clear previous results
-            problemDisplay.innerHTML = '';
-            stepsDisplay.innerHTML = '';
-            answerDisplay.innerHTML = '';
-            errorDisplay.innerHTML = '';
+            clearResults();
+            let hasError = false;
 
-            if (!num1 || !num2) {
-                errorDisplay.textContent = 'Please enter both numbers.';
-                return;
+            if (!num1) {
+                triggerShake(num1Input);
+                hasError = true;
+            }
+            if (!num2) {
+                triggerShake(num2Input);
+                hasError = true;
             }
 
-            const response = await fetch('/calculate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ num1, num2, operation }),
-            });
+            setTimeout(async () => {
+                if (hasError) {
+                    errorDisplay.textContent = 'Please enter both numbers.';
+                    resultArea.classList.add('visible');
+                    return;
+                }
 
-            const data = await response.json();
+                const response = await fetch('/calculate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ num1, num2, operation }),
+                });
 
-            if (data.error) {
-                errorDisplay.textContent = `Error: ${data.error}`;
-            } else {
-                displayProblem(num1, num2, operation, data);
-            }
+                const data = await response.json();
+
+                if (data.error) {
+                    errorDisplay.textContent = `Error: ${data.error}`;
+                } else {
+                    displayProblem(num1, num2, operation, data);
+                }
+                resultArea.classList.add('visible');
+            }, 10);
         });
     });
+
+    function clearResults() {
+        resultArea.classList.remove('visible');
+        problemDisplay.innerHTML = '';
+        stepsDisplay.innerHTML = '';
+        answerDisplay.innerHTML = '';
+        errorDisplay.innerHTML = '';
+    }
+
+    function triggerShake(element) {
+        element.classList.add('shake');
+        setTimeout(() => {
+            element.classList.remove('shake');
+        }, 500);
+    }
 
     function getOperationSymbol(op) {
         switch (op) {
@@ -56,10 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function displayProblem(num1, num2, operation, data) {
         const symbol = getOperationSymbol(operation);
         
-        // 1. Display the original problem
         problemDisplay.innerHTML = `<strong>Problem:</strong> ${num1} <sub>(base-6)</sub> ${symbol} ${num2} <sub>(base-6)</sub>`;
 
-        // 2. Display the conversion steps
         stepsDisplay.innerHTML = `
             <h4>Steps:</h4>
             <ol>
@@ -70,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </ol>
         `;
 
-        // 3. Display the final answer
         answerDisplay.innerHTML = `<strong>Answer:</strong> <span class="final-answer">${data.result_bijective}</span> <sub>(base-6)</sub>`;
     }
 });
