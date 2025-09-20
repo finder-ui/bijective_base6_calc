@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bijective Base-6 Math Practice</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Bijective Base-6 Mathematics</h1>
+        </header>
+
+        <section id="explanation">
+            <h2>Understanding the Number System</h2>
+            <p>
+                This system is a <strong>bijective base-6 numeration</strong>. Unlike our standard decimal (base-10) system, it uses six digits, but it has no zero. The digits are <strong>1, 2, 3, 4, 5, 6</strong>.
+            </p>
+            <p>
+                Counting proceeds as follows: After reaching 6, the next number is not 10, but 11. Think of it like rolling over an odometer that has no zero.
+            </p>
+            <ul>
+                <li>1 to 6 are represented as: <code>1, 2, 3, 4, 5, 6</code></li>
+                <li>7 is represented as <code>11</code> (one group of 6, plus 1)</li>
+                <li>8 is represented as <code>12</code> (one group of 6, plus 2)</li>
+                <li>12 is represented as <code>16</code> (one group of 6, plus 6)</li>
+                <li>13 is represented as <code>21</code> (two groups of 6, plus 1)</li>
+            </ul>
+            <p>The sequence looks like: <code>1, 2, 3, 4, 5, 6, 11, 12, 13, 14, 15, 16, 21, ...</code></p>
+        </section>
+
+        <section id="applications">
+            <h2>Practical Applications & Scientific Context</h2>
+            <p>
+                While it might seem like a mathematical curiosity, bijective numeration (number systems without a zero) has significant advantages in computer science, particularly for data encoding and generating unique identifiers.
+            </p>
+            <ul>
+                <li>
+                    <strong>Unambiguous Identifiers:</strong> In standard number systems, a number can have multiple representations (e.g., <code>7</code>, <code>07</code>, <code>007</code>). Bijective systems eliminate this by having only one unique string for each number. This is crucial in systems where identifiers must be canonical and fixed-length.
+                </li>
+                <li>
+                    <strong>Efficient Data Encoding:</strong> Bijective numeration is related to <strong>variable-length quantity (VLQ)</strong> encodings. These are used in data serialization formats (like Google's Protocol Buffers) to store integers using a smaller number of bytes for smaller numbers. This saves significant space in large-scale data systems.
+                </li>
+                <li>
+                    <strong>Human-Readable & URL-Safe IDs:</strong> Systems like URL shorteners (e.g., bit.ly) or video platforms (e.g., YouTube) use a similar principle. They need to generate short, unique, easy-to-type IDs. A base-62 system (using <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>) is a bijective system that can represent massive numbers in just a few characters, without the ambiguity of leading zeros. Our base-6 system is a smaller-scale example of this powerful concept.
+                </li>
+            </ul>
+        </section>
+
+        <section id="advanced-concepts">
+            <h2>Advanced Concepts & Further Applications</h2>
+            <p>The properties of bijective numeration extend into more complex areas of computer science and mathematics:</p>
+            <ul>
+                <li>
+                    <strong>Cryptographic Hashing & Key Representation:</strong> A hash function (like SHA-256) produces a very large integer. To use this hash in a URL or a configuration file, it must be encoded as a string. Using a bijective system (like base-58, which is used by Bitcoin addresses) creates the shortest possible string representation that is also URL-safe and has no ambiguous characters (like 0/O or 1/l). This is not about making the hash *algorithm* better, but about making its *output* compact and reliable.
+                </li>
+                <li>
+                    <strong>Canonical Forms in Abstract Algebra:</strong> In advanced cryptography, such as <strong>Elliptic Curve Cryptography (ECC)</strong>, calculations are performed on abstract mathematical objects (like points on a curve). For these systems to be secure and interoperable, every object must have a single, universally agreed-upon representation, known as a <strong>canonical form</strong>. Bijective systems are a perfect way to enforce this, ensuring that a specific cryptographic key or signature has one, and only one, valid string representation.
+                </li>
+                <li>
+                    <strong>Algorithmic Enumeration:</strong> Because there is a perfect one-to-one mapping between the positive integers and the strings in a bijective system, it is ideal for algorithms that need to work with every possible combination of a set of items. It provides a natural and predictable way to list, or enumerate, all permutations without gaps or duplicates.
+                </li>
+            </ul>
+        </section>
+
+        <section id="calculator">
+            <h2>Math Problem Generator</h2>
+            <div class="input-group">
+                <input type="text" id="num1" placeholder="Enter first base-6 number">
+                <input type="text" id="num2" placeholder="Enter second base-6 number">
+            </div>
+            <div class="operation-buttons">
+                <button data-op="add">+</button>
+                <button data-op="subtract">-</button>
+                <button data-op="multiply">*</button>
+                <button data-op="divide">/</button>
+            </div>
+        </section>
+
+        <section id="result-area">
+            <h3>Result</h3>
+            <div id="problem-display"></div>
+            <div id="steps-display"></div>
+            <div id="answer-display"></div>
+            <div id="error-display"></div>
+        </section>
+
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
