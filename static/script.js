@@ -1,279 +1,316 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const htmlElement = document.documentElement;
-
-    // --- Configurations ---
-    const SUPPORTED_LANGS = {
-        en: { flag: "🇺🇸", name: "English" },
-        ru: { flag: "🇷🇺", name: "Русский" },
-        he: { flag: "🇮🇱", name: "עברית" },
-        es: { flag: "🇪🇸", name: "Español" },
-        fr: { flag: "🇫🇷", name: "Français" },
-        de: { flag: "🇩🇪", name: "Deutsch" },
-        ar: { flag: "🇸🇦", name: "العربية" }
+document.addEventListener('DOMContentLoaded', () => {
+    const supportedLangs = {
+        'en': { flag: '🇺🇸', name: 'English' },
+        'ru': { flag: '🇷🇺', name: 'Русский' },
+        'he': { flag: '🇮🇱', name: 'עברית' },
+        'es': { flag: '🇪🇸', name: 'Español' },
+        'fr': { flag: '🇫🇷', name: 'Français' },
+        'de': { flag: '🇩🇪', name: 'Deutsch' },
+        'ar': { flag: '🇸🇦', name: 'العربية' }
     };
-    const RTL_LANGS = ["he", "ar"];
-    const OPS_MAP = { addition: "+", subtraction: "-", multiplication: "×", division: "÷" };
 
-    // --- Utilities ---
-    async function safeFetch(url, options = {}) {
+    const htmlElement = document.documentElement;
+    let i18nData = {};
+
+    // --- Utility Functions ---
+    const toBijective = (n) => {
+        if (n <= 0) return '';
+        let result = '';
+        while (n > 0) {
+            result = '123456'[(n - 1) % 6] + result;
+            n = Math.floor((n - 1) / 6);
+        }
+        return result;
+    };
+    
+    const safeFetch = async (url, options) => {
         try {
             const response = await fetch(url, options);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             return await response.json();
-        } catch (err) {
-            console.error(`Fetch failed: ${url}`, err);
-            return null;
+        } catch (error) {
+            console.error(`Fetch failed: ${url}`, error);
+            return { error: error.message };
         }
-    }
+    };
 
-    function qs(selector) {
-        return document.querySelector(selector);
-    }
-
-    function qsa(selector) {
-        return document.querySelectorAll(selector);
-    }
-
-    function setAttr(el, attr, val) {
-        if (el) el.setAttribute(attr, val);
-    }
-
-    function clearElement(el) {
-        if (el) el.innerHTML = "";
-    }
-
-    // --- Internationalization ---
+    // --- Internationalization (i18n) Logic ---
     async function setLanguage(lang) {
-        if (!SUPPORTED_LANGS[lang]) {
-            console.warn(`Unsupported language: ${lang}`);
-            return;
+        if (!supportedLangs[lang]) lang = 'en';
+        try {
+            const response = await fetch(`/locales/${lang}.json`);
+            i18nData = await response.json();
+            applyTranslations(i18nData);
+            htmlElement.setAttribute('lang', lang);
+            htmlElement.dir = (lang === 'he' || lang === 'ar') ? 'rtl' : 'ltr';
+            localStorage.setItem('language', lang);
+            updateSeoTags(lang);
+            updateLangSwitcher(lang);
+        } catch (error) {
+            console.error(`Fatal error loading language file for ${lang}:`, error);
         }
+    }
 
-        const langData = await safeFetch(`/locales/${lang}.json`);
-        if (!langData) return;
+    function updateSeoTags(currentLang) {
+        // Remove any existing hreflang tags to prevent duplicates
+        document.querySelectorAll('link[rel="alternate"]').forEach(el => el.remove());
 
-        applyTranslations(langData);
-        htmlElement.lang = lang;
-        htmlElement.dir = RTL_LANGS.includes(lang) ? "rtl" : "ltr";
+        // Add new hreflang tags for all supported languages
+        const head = document.head;
+        const baseUrl = window.location.origin + window.location.pathname;
 
-        localStorage.setItem("language", lang);
-        updateLangSwitcherUI(lang);
+        for (const langCode in supportedLangs) {
+            const link = document.createElement('link');
+            link.rel = 'alternate';
+            link.hreflang = langCode;
+            link.href = `${baseUrl}?lang=${langCode}`; // See note on URL structure
+            head.appendChild(link);
+        }
     }
 
     function applyTranslations(data) {
-        qsa("[data-i18n]").forEach(el => {
-            const key = el.dataset.i18n;
-            if (data[key] !== undefined) el.innerHTML = data[key];
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (data[key]) el.innerHTML = data[key];
         });
-        qsa("[data-i18n-placeholder]").forEach(el => {
-            const key = el.dataset.i18nPlaceholder;
-            if (data[key] !== undefined) el.placeholder = data[key];
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (data[key]) el.placeholder = data[key];
         });
-        qsa("[data-i18n-aria-label]").forEach(el => {
-            const key = el.dataset.i18nAriaLabel;
-            if (data[key] !== undefined) el.setAttribute("aria-label", data[key]);
-        });
-    }
-
-    function setupLangSwitcher() {
-        const container = qs("#lang-switcher-container");
-        if (!container) return;
-        clearElement(container);
-
-        Object.entries(SUPPORTED_LANGS).forEach(([code, { flag, name }]) => {
-            const btn = document.createElement("span");
-            btn.className = "lang-btn";
-            btn.textContent = flag;
-            btn.dataset.lang = code;
-            btn.role = "button";
-            btn.ariaLabel = `Switch to ${name}`;
-            container.appendChild(btn);
-        });
-
-        container.addEventListener("click", e => {
-            const btn = e.target.closest(".lang-btn");
-            if (btn?.dataset.lang) setLanguage(btn.dataset.lang);
+        document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+            const key = el.getAttribute('data-i18n-aria-label');
+            if (data[key]) el.setAttribute('aria-label', data[key]);
         });
     }
 
-    function updateLangSwitcherUI(lang) {
-        qsa(".lang-btn").forEach(btn =>
-            btn.classList.toggle("active", btn.dataset.lang === lang)
-        );
-    }
-
-    // --- Theme Switcher ---
-    function setTheme(theme) {
-        htmlElement.dataset.theme = theme;
-        localStorage.setItem("theme", theme);
-        const switcher = qs("#theme-switcher");
-        if (switcher) switcher.innerHTML = theme === "dark" ? "☀️" : "🌙";
-    }
-
-    function setupThemeSwitcher() {
-        const switcher = qs("#theme-switcher");
-        if (!switcher) return;
-        switcher.addEventListener("click", () => {
-            const current = htmlElement.dataset.theme || "light";
-            setTheme(current === "dark" ? "light" : "dark");
-        });
-    }
-
-    // --- Tables ---
-    function renderTable(header, rows, container) {
-        if (!container) return;
-        let html = `<table class="table table-bordered table-hover"><thead><tr><th>#</th>`;
-        header.forEach(h => (html += `<th>${h}</th>`));
-        html += "</tr></thead><tbody>";
-        rows.forEach((row, i) => {
-            html += `<tr><th>${header[i]}</th>`;
-            row.forEach(cell => (html += `<td>${cell}</td>`));
-            html += "</tr>";
-        });
-        html += "</tbody></table>";
-        container.innerHTML = html;
-    }
-
-    function setupTablesTab() {
-        const tab = qs("#tables-tab");
-        if (!tab) return;
-        let loaded = false;
-
-        tab.addEventListener("shown.bs.tab", async () => {
-            if (loaded) return;
-            const addC = qs("#addition-table-container");
-            const mulC = qs("#multiplication-table-container");
-            if (addC) addC.innerHTML = "<p class='text-center'>Loading...</p>";
-
-            const data = await safeFetch("/get-tables");
-            if (!data) return;
-
-            renderTable(data.header, data.addition, addC);
-            renderTable(data.header, data.multiplication, mulC);
-            loaded = true;
-        });
-    }
-
-    // --- Converter ---
-    function setupConverter() {
-        const input = qs("#decimal-input");
-        const results = qs("#conversion-results");
-        if (!input || !results) return;
-
-        input.addEventListener("input", async e => {
-            const val = parseInt(e.target.value, 10);
-            if (!val || val <= 0) {
-                results.innerHTML = "";
-                return;
-            }
-
-            const data = await safeFetch("/convert", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ decimal_value: val })
-            });
-
-            if (!data) return;
-            results.innerHTML = data.error
-                ? `<div class="text-danger">${data.error}</div>`
-                : `
-                <div class="result-grid">
-                    <div><strong>Decimal:</strong> <code>${data.decimal}</code></div>
-                    <div><strong>Binary:</strong> <code>${data.binary}</code></div>
-                    <div><strong>Hexadecimal:</strong> <code>${data.hexadecimal}</code></div>
-                    <div><strong>Bijective Base-6:</strong> <code>${data.bijective_base6}</code></div>
-                </div>`;
-        });
-    }
-
-    // --- Calculator ---
-    function triggerShake(el) {
-        if (!el) return;
-        el.classList.add("shake");
-        setTimeout(() => el.classList.remove("shake"), 500);
-    }
-
-    function clearCalculatorResults(area, grid, errorEl) {
-        if (area) area.classList.remove("visible");
-        if (grid) grid.innerHTML = "";
-        if (errorEl) errorEl.innerHTML = "";
-    }
-
-    function displayAllOpsResults(num1, num2, data, grid) {
-        if (!grid) return;
-        grid.innerHTML = "";
-
-        for (const [opName, opData] of Object.entries(data.results || {})) {
-            const resultItem = document.createElement("div");
-            resultItem.classList.add("col");
-
-            const problemBijective = `${num1} ${OPS_MAP[opName]} ${num2}`;
-            const decimalStep =
-                opData.decimal !== null
-                    ? `${data.n1_decimal} ${OPS_MAP[opName]} ${data.n2_decimal} = ${opData.decimal}`
-                    : opData.bijective;
-
-            resultItem.innerHTML = `
-                <div class="op-result-item h-100">
-                    <div class="op-title">${opName[0].toUpperCase() + opName.slice(1)}</div>
-                    <div class="op-problem">${problemBijective}</div>
-                    <div class="op-step">${decimalStep}</div>
-                    <div class="op-answer">${opData.decimal !== null ? opData.bijective : "&nbsp;"}</div>
-                </div>`;
-            grid.appendChild(resultItem);
+    function createLangSwitcher() {
+        const menu = document.getElementById('lang-switcher-menu');
+        if (!menu) {
+            console.warn('Language switcher menu element not found. Skipping population.');
+            return;
+        }
+        for (const [code, details] of Object.entries(supportedLangs)) {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.className = 'dropdown-item';
+            a.href = '#';
+            a.dataset.lang = code;
+            a.innerHTML = `<span class="flag">${details.flag}</span> ${details.name}`;
+            a.addEventListener('click', (e) => { e.preventDefault(); setLanguage(code); });
+            li.appendChild(a);
+            menu.appendChild(li);
         }
     }
 
-    function setupCalculator() {
-        const num1 = qs("#num1");
-        const num2 = qs("#num2");
-        const btn = qs("#calculate-all-btn");
-        const area = qs("#result-area");
-        const grid = qs("#ops-results-grid");
-        const errorEl = qs("#error-display");
+    function updateLangSwitcher(lang) {
+        const mainBtn = document.getElementById('lang-switcher-btn');
+        if (mainBtn && supportedLangs[lang]) mainBtn.innerHTML = supportedLangs[lang].flag;
+    }
 
-        if (!btn || !num1 || !num2) return;
+    // --- Tab & Table Logic ---
+    const tablesTab = document.getElementById('tables-tab');
+    let tablesData = null;
+    tablesTab.addEventListener('shown.bs.tab', async () => {
+        if (!tablesData) {
+            const addContainer = document.getElementById('addition-table-container');
+            const mulContainer = document.getElementById('multiplication-table-container');
+            addContainer.innerHTML = `<p class="text-center">${i18nData.ui_loading || 'Loading...'}</p>`;
+            const response = await fetch('/get-tables');
+            tablesData = await response.json();
+            renderTable(tablesData.header, tablesData.addition, addContainer);
+            renderTable(tablesData.header, tablesData.multiplication, mulContainer);
+        }
+    });
 
-        btn.addEventListener("click", () => {
-            clearCalculatorResults(area, grid, errorEl);
-            const val1 = num1.value.trim();
-            const val2 = num2.value.trim();
+    function renderTable(header, data, container) {
+        let tableHTML = '<table class="table table-bordered table-hover table-sm"><thead><tr><th>#</th>';
+        header.forEach(h => tableHTML += `<th>${h}</th>`);
+        tableHTML += '</tr></thead><tbody>';
+        data.forEach((row, rowIndex) => {
+            tableHTML += `<tr><th>${header[rowIndex]}</th>`;
+            row.forEach(cell => tableHTML += `<td>${cell}</td>`);
+            tableHTML += '</tr>';
+        });
+        container.innerHTML = tableHTML + '</tbody></table>';
+    }
 
-            let hasError = false;
-            if (!val1) { triggerShake(num1); hasError = true; }
-            if (!val2) { triggerShake(num2); hasError = true; }
+    // --- Calculator Logic ---
+    const num1Input = document.getElementById('num1');
+    const num2Input = document.getElementById('num2');
+    const calculateAllBtn = document.getElementById('calculate-all-btn');
+    const resultArea = document.getElementById('result-area');
+    const opsResultsGrid = document.getElementById('ops-results-grid');
+    const errorDisplay = document.getElementById('error-display');
 
-            setTimeout(async () => {
-                if (hasError) {
-                    if (errorEl) errorEl.textContent = "Please enter both numbers.";
-                    if (area) area.classList.add("visible");
+    calculateAllBtn.addEventListener('click', () => {
+        const num1 = num1Input.value.trim().toUpperCase();
+        const num2 = num2Input.value.trim();
+        clearCalculatorResults();
+        let hasError = false;
+        if (!num1) { triggerShake(num1Input); hasError = true; }
+        if (!num2) { triggerShake(num2Input); hasError = true; }
+
+        setTimeout(async () => {
+            if (hasError) {
+                errorDisplay.textContent = i18nData.errorBothNumbers || 'Please enter both numbers.';
+                resultArea.style.display = 'block';
+                setTimeout(() => resultArea.classList.add('visible'), 10);
+                return;
+            }
+            const response = await fetch('/calculate-all', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ num1, num2 }) });
+            const data = await response.json();
+            if (data.error) {
+                errorDisplay.textContent = `${i18nData.errorGeneric || 'Error:'} ${data.error}`;
+            } else {
+                displayAllOpsResults(num1, num2, data);
+            }
+            resultArea.style.display = 'block';
+            setTimeout(() => resultArea.classList.add('visible'), 10);
+        }, 10);
+    });
+
+    function clearCalculatorResults() { resultArea.classList.remove('visible'); resultArea.style.display = 'none'; opsResultsGrid.innerHTML = ''; errorDisplay.innerHTML = ''; }
+    function triggerShake(element) { element.classList.add('shake'); setTimeout(() => { element.classList.remove('shake'); }, 500); }
+
+    function displayAllOpsResults(num1, num2, data) {
+        const ops = { addition: '+', subtraction: '-', multiplication: '×', division: '÷' };
+        opsResultsGrid.innerHTML = '';
+        for (const opName in data.results) {
+            const opData = data.results[opName];
+            const resultItem = document.createElement('div');
+            resultItem.classList.add('col');
+            const problemBijective = `${num1} ${ops[opName]} ${num2}`;
+            const decimalStep = opData.decimal !== null ? `${data.n1_decimal} ${ops[opName]} ${data.n2_decimal} = ${opData.decimal}` : opData.bijective;
+            resultItem.innerHTML = `<div class="op-result-item h-100"><div class="op-title">${opName.charAt(0).toUpperCase() + opName.slice(1)}</div><div class="op-problem">${problemBijective}</div><div class="op-step">${decimalStep}</div><div class="op-answer">${opData.decimal !== null ? opData.bijective : '&nbsp;'}</div></div>`;
+            opsResultsGrid.appendChild(resultItem);
+        }
+    }
+
+    // --- Algorithm Visualizer & Quiz Logic ---
+    function setupLiveConverter() {
+        const container = document.getElementById('live-converter-container');
+        if (!container) return;
+        container.innerHTML = `
+            <div class="mb-3">
+                <label for="decimal-input" class="form-label" data-i18n="decimalInputLabel"></label>
+                <input type="number" class="form-control" id="decimal-input" data-i18n-placeholder="decimalInputPlaceholder" min="1">
+            </div>
+            <div id="live-converter-results" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3"></div>
+        `;
+
+        const input = document.getElementById('decimal-input');
+        const resultsContainer = document.getElementById('live-converter-results');
+        let debounceTimer;
+
+        input.addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(async () => {
+                const val = parseInt(input.value, 10);
+                if (!val || val <= 0) {
+                    resultsContainer.innerHTML = '';
                     return;
                 }
-
-                const data = await safeFetch("/calculate-all", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ num1: val1, num2: val2 })
-                });
-                if (!data) return;
-
+                const data = await safeFetch("/convert", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ decimal_value: val }) });
                 if (data.error) {
-                    if (errorEl) errorEl.textContent = `Error: ${data.error}`;
+                    resultsContainer.innerHTML = `<div class="col"><div class="op-result-item h-100"><div class="op-answer text-danger">${data.error}</div></div></div>`;
                 } else {
-                    displayAllOpsResults(val1, val2, data, grid);
+                    resultsContainer.innerHTML = `
+                        <div class="col"><div class="op-result-item h-100"><div class="op-title">Decimal</div><div class="op-answer">${data.decimal}</div></div></div>
+                        <div class="col"><div class="op-result-item h-100"><div class="op-title">Binary</div><div class="op-answer">${data.binary}</div></div></div>
+                        <div class="col"><div class="op-result-item h-100"><div class="op-title">Hexadecimal</div><div class="op-answer">${data.hexadecimal}</div></div></div>
+                        <div class="col"><div class="op-result-item h-100"><div class="op-title">Bijective Base-6</div><div class="op-answer">${data.bijective_base6}</div></div></div>`;
                 }
-                if (area) area.classList.add("visible");
-            }, 10);
+            }, 300);
+        });
+    }
+    function setupVisualizer() {
+        const container = document.getElementById('visualizer-container');
+        if (!container) return;
+        container.innerHTML = `<h4 data-i18n="visualizerTitle"></h4><p data-i18n="visualizerDesc"></p><div class="input-group mb-3"><input type="number" id="visualizer-input" class="form-control" data-i18n-placeholder="visualizerInputPlaceholder" min="1"><button id="visualize-btn" class="btn btn-primary" data-i18n="visualizeBtn"></button></div><div id="visualizer-steps"></div>`;
+        const input = document.getElementById('visualizer-input');
+        const button = document.getElementById('visualize-btn');
+        const stepsContainer = document.getElementById('visualizer-steps');
+        button.addEventListener('click', () => {
+            const n = parseInt(input.value, 10);
+            if (!n || n <= 0) return;
+            stepsContainer.innerHTML = '';
+            let steps = [];
+            let currentN = n;
+            let result = '';
+            while (currentN > 0) {
+                const nMinus1 = currentN - 1;
+                const remainder = nMinus1 % 6;
+                const digit = '123456'[remainder];
+                result = digit + result;
+                const nextN = Math.floor(nMinus1 / 6);
+                steps.push(`Start: <strong>${currentN}</strong>. <code>(${currentN}-1)%6 = ${remainder}</code> → <strong>${digit}</strong>`);
+                currentN = nextN;
+            }
+            steps.push(`Result: <strong>${result}</strong>`);
+            steps.forEach((step, i) => {
+                setTimeout(() => {
+                    const stepDiv = document.createElement('div');
+                    stepDiv.className = 'vis-step';
+                    stepDiv.innerHTML = step;
+                    stepsContainer.appendChild(stepDiv);
+                    setTimeout(() => stepDiv.classList.add('visible'), 50);
+                }, i * 1200);
+            });
         });
     }
 
-    // --- Initialize ---
-    setupLangSwitcher();
-    setupThemeSwitcher();
-    setupTablesTab();
-    setupConverter();
-    setupCalculator();
+    function setupQuiz() {
+        const container = document.getElementById('quiz-container');
+        if (!container) return;
+        const difficultySelector = document.getElementById('difficulty-range');
+        let correctAnswer = '';
+        let autoNextTimer = null;
 
-    setLanguage(localStorage.getItem("language") || "en");
-    setTheme(localStorage.getItem("theme") || "dark");
+        function generateQuestion() {
+            const maxNum = parseInt(difficultySelector.value, 10) || 12;
+            const decimalToConvert = (Math.floor(Math.random() * 1000) % maxNum) + 1;
+            correctAnswer = toBijective(decimalToConvert);
+            
+            container.innerHTML = `<div id="quiz-question">${i18nData.quizQuestion || 'What is'} <code>${decimalToConvert}</code> in bijective base-6?</div><div class="input-group mt-3 mx-auto" style="max-width: 300px;"><input type="text" id="quiz-answer" class="form-control" placeholder="Answer..."><button id="quiz-submit" class="btn btn-primary">${i18nData.quizSubmitBtn || 'Submit'}</button></div><div id="quiz-feedback" class="mt-3 text-center"></div>`;
+            document.getElementById('quiz-submit').addEventListener('click', checkAnswer);
+            document.getElementById('quiz-answer').addEventListener('keypress', e => { if (e.key === 'Enter') checkAnswer(); });
+        }
+        function checkAnswer() {
+            const userAnswer = document.getElementById('quiz-answer').value.trim();
+            const feedbackEl = document.getElementById('quiz-feedback');
+            document.getElementById('quiz-submit').disabled = true;
+
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'btn btn-secondary mt-3';
+            nextBtn.textContent = i18nData.quizNextBtn || 'Next Question';
+            nextBtn.onclick = () => {
+                clearTimeout(autoNextTimer);
+                generateQuestion();
+            };
+
+            if (userAnswer.toUpperCase() === correctAnswer) {
+                feedbackEl.innerHTML = `<span class="feedback-correct">${i18nData.quizCorrectFeedback || 'Correct! 🎉'}</span>`;
+                autoNextTimer = setTimeout(generateQuestion, 5000); // Auto-advance after 5s
+            } else {
+                feedbackEl.innerHTML = `<span class="feedback-incorrect">${i18nData.quizIncorrectFeedback || 'Not quite! The correct answer was'} <strong>${correctAnswer}</strong>.</span>`;
+            }
+            feedbackEl.appendChild(document.createElement('br'));
+            feedbackEl.appendChild(nextBtn);
+        }
+
+        difficultySelector.addEventListener('change', () => { clearTimeout(autoNextTimer); generateQuestion(); });
+        generateQuestion();
+    }
+
+    // --- Initial Load ---
+    async function initialize() {
+        createLangSwitcher();
+        setupLiveConverter();
+        setupVisualizer();
+        setupQuiz();
+        const initialLang = localStorage.getItem('language') || 'en';
+        await setLanguage(initialLang);
+    }
+
+    initialize();
 });

@@ -3,9 +3,9 @@ import uvicorn
 import os
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, FileResponse
-from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
+from starlette.staticfiles import StaticFiles
 
 app = FastAPI()
 
@@ -60,23 +60,6 @@ async def get_locale(lang: str):
     return {"error": "Language not found"}, 404
 
 
-@app.post("/convert")
-async def convert_decimal(req: ConversionRequest):
-    try:
-        dec_val = req.decimal_value
-        if dec_val <= 0:
-            return {"error": "Please enter a positive number."}
-
-        return {
-            "decimal": dec_val,
-            "binary": bin(dec_val)[2:],
-            "hexadecimal": hex(dec_val)[2:].upper(),
-            "bijective_base6": to_bijective_base6(dec_val)
-        }
-    except Exception as e:
-        return {"error": f"An unexpected error occurred: {e}"}
-
-
 @app.post("/calculate-all")
 async def calculate_all_ops(problem: AllOpsRequest):
     try:
@@ -106,9 +89,23 @@ async def calculate_all_ops(problem: AllOpsRequest):
     except Exception as e: return {"error": f"An unexpected error occurred: {e}"}
 
 
+@app.post("/convert")
+async def convert_live(req: ConversionRequest):
+    if req.decimal_value <= 0: return {"error": "Please enter a positive whole number."}
+    try:
+        decimal_val = req.decimal_value
+        return {
+            "decimal": str(decimal_val),
+            "binary": bin(decimal_val)[2:],
+            "hexadecimal": hex(decimal_val)[2:].upper(),
+            "bijective_base6": to_bijective_base6(decimal_val)
+        }
+    except Exception as e: return {"error": f"An error occurred during conversion: {e}"}
+
+
 @app.get("/get-tables")
 async def get_tables():
-    table_size = 12
+    table_size = 24 # Expanded from 12 to 24
     header = [to_bijective_base6(i) for i in range(1, table_size + 1)]
     add_table = [[to_bijective_base6(i + j) for j in range(1, table_size + 1)] for i in range(1, table_size + 1)]
     mul_table = [[to_bijective_base6(i * j) for j in range(1, table_size + 1)] for i in range(1, table_size + 1)]
