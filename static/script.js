@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="op-title">${opName.charAt(0).toUpperCase() + opName.slice(1)}</div>
                     <div class="op-problem">${problemBijective}</div>
                     <div class="op-step">${decimalStep}</div>
-                    <div class="op-answer">${opData.decimal !== null ? opData.bijective : '&nbsp;' }</div>
+                    <div class="op-answer">${opData.decimal !== null ? opData.bijective : '&nbsp;'}</div>
                 </div>
             `;
             opsResultsGrid.appendChild(resultItem);

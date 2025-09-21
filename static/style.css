@@ -1,5 +1,5 @@
 :root {
-    /* Light Theme (Default) - UPDATED ACCENT */
+    /* Light Theme (Default) */
     --bg-color: #f8f9fa;
     --text-color: #212529;
     --text-color-muted: #6c757d;
@@ -74,11 +74,11 @@ section { box-shadow: none !important; border: none !important; background-color
     border-color: var(--input-border-color) !important;
     font-family: var(--font-mono);
 }
-.form-control:focus { 
+.form-control:focus {
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 25%, transparent) !important;
 }
 
-.btn-primary { 
+.btn-primary {
     background-color: var(--accent-color) !important;
     border-color: var(--accent-color) !important;
     color: var(--calc-btn-text-color) !important;
