@@ -9,7 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function setTheme(theme) {
         htmlElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
-        themeSwitcher.innerHTML = themeIcons[theme] || '☀️';
+        // The icon shows what you will switch TO
+        const currentIndex = themes.indexOf(theme);
+        const nextIndex = (currentIndex + 1) % themes.length;
+        const nextTheme = themes[nextIndex];
+        for(const t in themeIcons){
+            if(nextTheme == t){
+                themeSwitcher.innerHTML = themeIcons[t];
+            }
+        }
     }
 
     themeSwitcher.addEventListener('click', () => {
@@ -20,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Internationalization (i18n) Logic ---
-    // ... (existing i18n logic from previous correct version) ...
     const supportedLangs = {
         'en': { flag: '🇺🇸', name: 'English' },
         'ru': { flag: '🇷🇺', name: 'Русский' },
