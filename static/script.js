@@ -1,4 +1,4 @@
-// Version 2.0 - Forcing update with guard clause
+// Version 2.1 - Adding guard clauses for stability
 document.addEventListener('DOMContentLoaded', () => {
     const htmlElement = document.documentElement;
 
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const initialLang = localStorage.getItem('language') || 'en';
     setLanguage(initialLang);
 
-    // --- Calculator & Table Logic (ensure elements exist) ---
+    // --- Calculator & Table Logic (with Null Checks) ---
     const tablesTab = document.getElementById('tables-tab');
     if (tablesTab) {
         let tablesData = null;
