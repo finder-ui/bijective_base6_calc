@@ -275,10 +275,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const num1 = (Math.floor(Math.random() * 1000) % maxNum);
                 const num2 = (Math.floor(Math.random() * 1000) % maxNum);
 
-                if (num1 === 0 || num2 === 0) {
-                    setupQuiz()
-                }
-
                 const op = Math.random() > 0.5 ? '+' : '×';
                 correctAnswer = (op === '+') ? toBijective(num1 + num2) : toBijective(num1 * num2);
                 questionHTML = `${i18nData.quizQuestion || 'What is'} <code>${toBijective(num1)} ${op} ${toBijective(num2)}</code>?`;
