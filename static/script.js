@@ -13,7 +13,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Internationalization (i18n) Logic ---
     async function setLanguage(lang) {
+        if (!supportedLangs[lang]) {
+            console.error(`Language ${lang} not supported.`);
+            return;
+        }
+
         const response = await fetch(`/locales/${lang}.json`);
+        if (!response.ok) {
+            console.error(`Failed to load locale file for ${lang}`);
+            return;
+        }
         const langData = await response.json();
         
         applyTranslations(langData);
@@ -42,6 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createLangSwitcher() {
         const langSwitcherContainer = document.getElementById('lang-switcher-container');
+        langSwitcherContainer.innerHTML = ''; // Clear previous buttons
+
         for (const [code, details] of Object.entries(supportedLangs)) {
             const btn = document.createElement('span');
             btn.className = 'lang-btn';
@@ -49,7 +60,12 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.dataset.lang = code;
             btn.setAttribute('role', 'button');
             btn.setAttribute('aria-label', `Switch to ${details.name}`);
-            btn.addEventListener('click', () => setLanguage(code));
+            
+            // CORRECTED: Ensure event listener is added to every button
+            btn.addEventListener('click', () => {
+                setLanguage(code);
+            });
+            
             langSwitcherContainer.appendChild(btn);
         }
     }
@@ -72,36 +88,23 @@ document.addEventListener('DOMContentLoaded', () => {
         setTheme(currentTheme === 'dark' ? 'light' : 'dark');
     });
 
-    // --- Custom Tab & Table Logic ---
-    const tabLinks = document.querySelectorAll('.tab-link');
-    const tabContents = document.querySelectorAll('.tab-content');
+    // --- Tab & Table Logic ---
+    const tablesTab = document.getElementById('tables-tab');
     let tablesData = null;
-
-    tabLinks.forEach(link => {
-        link.addEventListener('click', async () => {
-            const tabId = link.dataset.tab;
-
-            tabLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-
-            tabContents.forEach(content => {
-                content.classList.toggle('active', content.id === tabId);
-            });
-
-            if (tabId === 'tab-tables' && !tablesData) {
-                const addContainer = document.getElementById('addition-table-container');
-                const mulContainer = document.getElementById('multiplication-table-container');
-                addContainer.innerHTML = '<p class="text-center">Loading...</p>';
-                const response = await fetch('/get-tables');
-                tablesData = await response.json();
-                renderTable(tablesData.header, tablesData.addition, addContainer);
-                renderTable(tablesData.header, tablesData.multiplication, mulContainer);
-            }
-        });
+    tablesTab.addEventListener('shown.bs.tab', async () => {
+        if (!tablesData) {
+            const addContainer = document.getElementById('addition-table-container');
+            const mulContainer = document.getElementById('multiplication-table-container');
+            addContainer.innerHTML = '<p class="text-center">Loading...</p>';
+            const response = await fetch('/get-tables');
+            tablesData = await response.json();
+            renderTable(tablesData.header, tablesData.addition, addContainer);
+            renderTable(tablesData.header, tablesData.multiplication, mulContainer);
+        }
     });
 
     function renderTable(header, data, container) {
-        let tableHTML = '<table><thead><tr><th>#</th>';
+        let tableHTML = '<table class="table table-bordered table-hover"><thead><tr><th>#</th>';
         header.forEach(h => tableHTML += `<th>${h}</th>`);
         tableHTML += '</tr></thead><tbody>';
         data.forEach((row, rowIndex) => {
@@ -109,7 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
             row.forEach(cell => tableHTML += `<td>${cell}</td>`);
             tableHTML += '</tr>';
         });
-        tableHTML += '</tbody></table>';
         container.innerHTML = tableHTML;
     }
 
@@ -121,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!decimalValue || decimalValue <= 0) { conversionResults.innerHTML = ''; return; }
         const response = await fetch('/convert-all', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ decimal_value: decimalValue }) });
         const data = await response.json();
-        conversionResults.innerHTML = data.error ? `<div class="error-display">${data.error}</div>` : `<div class="result-grid"><div><strong>Decimal:</strong> <code>${data.decimal}</code></div><div><strong>Binary:</strong> <code>${data.binary}</code></div><div><strong>Hexadecimal:</strong> <code>${data.hexadecimal}</code></div><div><strong>Bijective Base-6:</strong> <code>${data.bijective_base6}</code></div></div>`;
+        conversionResults.innerHTML = data.error ? `<div class="text-danger">${data.error}</div>` : `<div class="result-grid"><div><strong>Decimal:</strong> <code>${data.decimal}</code></div><div><strong>Binary:</strong> <code>${data.binary}</code></div><div><strong>Hexadecimal:</strong> <code>${data.hexadecimal}</code></div><div><strong>Bijective Base-6:</strong> <code>${data.bijective_base6}</code></div></div>`;
     });
 
     const num1Input = document.getElementById('num1');
@@ -165,14 +167,16 @@ document.addEventListener('DOMContentLoaded', () => {
         for (const opName in data.results) {
             const opData = data.results[opName];
             const resultItem = document.createElement('div');
-            resultItem.classList.add('op-result-item');
+            resultItem.classList.add('col');
             const problemBijective = `${num1} ${ops[opName]} ${num2}`;
             const decimalStep = opData.decimal !== null ? `${data.n1_decimal} ${ops[opName]} ${data.n2_decimal} = ${opData.decimal}` : opData.bijective;
             resultItem.innerHTML = `
-                <div class="op-title">${opName.charAt(0).toUpperCase() + opName.slice(1)}</div>
-                <div class="op-problem">${problemBijective}</div>
-                <div class="op-step">${decimalStep}</div>
-                <div class="op-answer">${opData.decimal !== null ? opData.bijective : '&nbsp;'}</div>
+                <div class="op-result-item h-100">
+                    <div class="op-title">${opName.charAt(0).toUpperCase() + opName.slice(1)}</div>
+                    <div class="op-problem">${problemBijective}</div>
+                    <div class="op-step">${decimalStep}</div>
+                    <div class="op-answer">${opData.decimal !== null ? opData.bijective : '&nbsp;'}</div>
+                </div>
             `;
             opsResultsGrid.appendChild(resultItem);
         }
