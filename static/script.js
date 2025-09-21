@@ -86,6 +86,24 @@ document.addEventListener('DOMContentLoaded', () => {
             const key = el.getAttribute('data-i18n-list');
             if (data[key] && Array.isArray(data[key])) el.innerHTML = data[key].map(item => `<li>${item}</li>`).join('');
         });
+
+        // Render Pros and Cons
+        const renderProsCons = (containerId, dataKey) => {
+            const container = document.getElementById(containerId);
+            if (container && data[dataKey] && Array.isArray(data[dataKey])) {
+                container.innerHTML = data[dataKey].map(item => `
+                    <div class="col-md-6">
+                        <div class="op-result-item h-100 text-start">
+                            <div class="op-title">${item.title}</div>
+                            <p class="mb-0 mt-2">${item.desc}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        };
+
+        renderProsCons('pros-container', 'pros');
+        renderProsCons('cons-container', 'cons');
     }
 
     function createLangSwitcher() {

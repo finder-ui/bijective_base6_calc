@@ -4,6 +4,7 @@
     "mainTitle": "Bijective Base-6 Calculator & Explorer",
     "tabCalculator": "Calculator",
     "tabTables": "Reference Tables",
+    "tabProsCons": "Pros & Cons",
     "tabLearn": "Learn",
     "tabPractice": "Practice",
     "liveConverterTitle": "Live Numeral System Explorer",
@@ -39,6 +40,22 @@
     "geomPathList": [ "Start at the root.", "Take the 4th branch.", "From that node, take the 2nd branch.", "From that node, take the 5th branch." ],
     "hashingTitle": "A Note on Collisions and Hashing",
     "hashingDesc": "Observing the multiplication table reveals that <code>2 × 3 = 6</code> and <code>1 × 6 = 6</code>. This is a <strong>collision</strong>. While interesting mathematically, this property is the opposite of what is desired in cryptographic hashing functions (like SHA-256), which must be specifically designed to make finding collisions computationally infeasible. This system, therefore, is a good tool for understanding the concept of collisions, but it is not a secure hashing algorithm itself.",
+    "prosTitle": "Advantages of Bijective Base-6",
+    "prosIntro": "The zero-less nature of this system provides several unique benefits, especially in computing and human-readable identifiers.",
+    "pros": [
+        { "title": "Unambiguous & Human-Friendly", "desc": "No leading zeros means no confusion. <code>123</code> is always <code>123</code>, never <code>0123</code>. This is ideal for product codes, serial numbers, or short links where clarity is critical." },
+        { "title": "Compact & Efficient", "desc": "Every possible string of digits is a valid number, making it a highly dense and efficient way to represent data. There are no wasted or invalid combinations." },
+        { "title": "Natural Fit for Computing", "desc": "The one-to-one mapping between numbers and strings is perfect for algorithms that require unique identifiers, such as indexing complex data structures or generating unique keys in distributed systems." },
+        { "title": "No Null Pointers (A Theoretical Idea)", "desc": "Since every string is a valid number, there's no 'empty' or 'null' representation. This aligns with modern programming concepts aimed at eliminating null-reference errors, a common source of bugs." }
+    ],
+    "consTitle": "Disadvantages and Trade-offs",
+    "consIntro": "While powerful, the system is not widely used for general arithmetic for a few key reasons.",
+    "cons": [
+        { "title": "Unfamiliar Arithmetic", "desc": "The rules for carrying and borrowing in addition and subtraction are different from the decimal system, making mental math and manual calculations challenging for most people." },
+        { "title": "Conversion Overhead", "desc": "It's not a native system for computers (which use binary) or humans (who use decimal). A conversion step is always required when interfacing with other systems, adding computational overhead." },
+        { "title": "Limited Native Support", "desc": "Very few programming languages or standard libraries have built-in functions for bijective numeration. This means developers must implement custom logic for all arithmetic and conversion operations." },
+        { "title": "Complex Multiplication Patterns", "desc": "Unlike standard bases where multiplying by the base simply adds a zero, the patterns in bijective multiplication are less intuitive, making it harder to perform quick estimations or calculations." }
+    ],
     "practiceTitle": "Practice Mode",
     "practiceDesc": "Test your skills against the clock! Choose a difficulty and solve the problems.",
     "difficultyLabel": "Difficulty:",

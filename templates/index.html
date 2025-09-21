@@ -32,6 +32,9 @@
                 <button class="nav-link" id="tables-tab" data-bs-toggle="tab" data-bs-target="#tab-tables" type="button" role="tab" data-i18n="tabTables"></button>
             </li>
             <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pros-cons-tab" data-bs-toggle="tab" data-bs-target="#tab-pros-cons" type="button" role="tab" data-i18n="tabProsCons"></button>
+            </li>
+            <li class="nav-item" role="presentation">
                 <button class="nav-link" id="learn-tab" data-bs-toggle="tab" data-bs-target="#tab-learn" type="button" role="tab" data-i18n="tabLearn"></button>
             </li>
             <li class="nav-item" role="presentation">
@@ -82,6 +85,20 @@
                 <section>
                     <h2 data-i18n="multiplicationTableTitle"></h2>
                     <div id="multiplication-table-container" class="table-responsive"></div>
+                </section>
+            </div>
+
+            <div class="tab-pane fade" id="tab-pros-cons" role="tabpanel">
+                <section>
+                    <h2 data-i18n="prosTitle"></h2>
+                    <p data-i18n="prosIntro"></p>
+                    <div id="pros-container" class="row g-4"></div>
+                </section>
+                <hr class="my-5">
+                <section>
+                    <h2 data-i18n="consTitle"></h2>
+                    <p data-i18n="consIntro"></p>
+                    <div id="cons-container" class="row g-4"></div>
                 </section>
             </div>
 
