@@ -30,9 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.add('active');
 
             tabContents.forEach(content => {
-                content.classList.remove('active');
+                // CORRECTED: Use classList to toggle visibility
                 if (content.id === tabId) {
                     content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
                 }
             });
 
