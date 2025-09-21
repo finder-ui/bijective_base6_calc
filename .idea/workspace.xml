@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50350d4a-48f4-48cb-849b-1dff3eef744e" name="Changes" comment="lang/themees/tabs" />
+    <list default="true" id="50350d4a-48f4-48cb-849b-1dff3eef744e" name="Changes" comment="lang/themees/tabs">
+      <change beforePath="$PROJECT_DIR$/locales/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/ar.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/de.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/de.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/es.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/es.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/fr.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/fr.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/he.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/he.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/ja.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/ja.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/ru.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/zh.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/zh.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -170,22 +180,6 @@
       <workItem from="1758425240653" duration="1916000" />
       <workItem from="1758427334375" duration="9393000" />
       <workItem from="1758437221260" duration="10450000" />
-    </task>
-    <task id="LOCAL‎-00164" summary="תרגום">
-      <option name="closed" value="true" />
-      <created>1758450697837</created>
-      <option name="number" value="00164" />
-      <option name="presentableId" value="LOCAL‎-00164" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758450697837</updated>
-    </task>
-    <task id="LOCAL‎-00165" summary="תרגום">
-      <option name="closed" value="true" />
-      <created>1758450891573</created>
-      <option name="number" value="00165" />
-      <option name="presentableId" value="LOCAL‎-00165" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758450891573</updated>
     </task>
     <task id="LOCAL‎-00166" summary="תרגום">
       <option name="closed" value="true" />
@@ -563,7 +557,23 @@
       <option name="project" value="LOCAL‎" />
       <updated>1758494761695</updated>
     </task>
-    <option name="localTasksCounter" value="213" />
+    <task id="LOCAL‎-00213" summary="lang/themees/tabs">
+      <option name="closed" value="true" />
+      <created>1758495351691</created>
+      <option name="number" value="00213" />
+      <option name="presentableId" value="LOCAL‎-00213" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758495351691</updated>
+    </task>
+    <task id="LOCAL‎-00214" summary="lang/themees/tabs">
+      <option name="closed" value="true" />
+      <created>1758495484391</created>
+      <option name="number" value="00214" />
+      <option name="presentableId" value="LOCAL‎-00214" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758495484391</updated>
+    </task>
+    <option name="localTasksCounter" value="215" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

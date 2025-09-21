@@ -1,26 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const htmlElement = document.documentElement;
-
-    // --- Theme Switcher Logic (Simplified 2-State Toggle) ---
-    const themeSwitcher = document.getElementById('theme-switcher');
-    
-    function setTheme(theme) {
-        htmlElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-        if (themeSwitcher) {
-            themeSwitcher.innerHTML = theme === 'dark' ? '☀️' : '🌙';
-        }
-    }
-
-    if (themeSwitcher) {
-        themeSwitcher.addEventListener('click', () => {
-            const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            setTheme(newTheme);
-        });
-    }
-
-    // --- Internationalization (i18n) Logic ---
     const supportedLangs = {
         'en': { flag: '🇺🇸', name: 'English' },
         'ru': { flag: '🇷🇺', name: 'Русский' },
@@ -28,9 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
         'es': { flag: '🇪🇸', name: 'Español' },
         'fr': { flag: '🇫🇷', name: 'Français' },
         'de': { flag: '🇩🇪', name: 'Deutsch' },
-        'ar': { flag: '🇸🇦', name: 'العربية' }
+        'ar': { flag: '🇸🇦', name: 'العربية' },
+        'zh': { flag: '🇨🇳', name: '中文' },
+        'ja': { flag: '🇯🇵', name: '日本語' }
     };
 
+    const htmlElement = document.documentElement;
+
+    // --- Internationalization (i18n) Logic ---
     async function setLanguage(lang) {
         if (!supportedLangs[lang]) return;
         try {
@@ -52,31 +35,129 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function setupLangSwitcher() {
-        const mainBtn = document.getElementById('lang-switcher-btn');
-        const menu = document.getElementById('lang-switcher-menu');
-        if (!mainBtn || !menu) return;
-
-        menu.innerHTML = ''; // Clear any existing options
+        const container = document.getElementById('lang-switcher-container');
+        if (!container) return;
+        container.innerHTML = ''; // Clear previous buttons
         for (const [code, details] of Object.entries(supportedLangs)) {
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.className = 'dropdown-item';
-            a.href = '#';
-            a.dataset.lang = code;
-            a.innerHTML = `<span class="flag">${details.flag}</span> ${details.name}`;
-            a.addEventListener('click', (e) => {
-                e.preventDefault();
-                setLanguage(code);
-            });
-            li.appendChild(a);
-            menu.appendChild(li);
+            const btn = document.createElement('span');
+            btn.className = 'lang-btn';
+            btn.textContent = details.flag;
+            btn.dataset.lang = code;
+            btn.setAttribute('role', 'button');
+            btn.setAttribute('aria-label', `Switch to ${details.name}`);
+            container.appendChild(btn);
         }
+        container.addEventListener('click', (event) => {
+            const clickedButton = event.target.closest('.lang-btn');
+            if (clickedButton && clickedButton.dataset.lang) {
+                setLanguage(clickedButton.dataset.lang);
+            }
+        });
     }
 
     function updateLangSwitcherUI(lang) {
-        const mainBtn = document.getElementById('lang-switcher-btn');
-        if (mainBtn && supportedLangs[lang]) {
-            mainBtn.innerHTML = supportedLangs[lang].flag;
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+    }
+
+    // --- Theme Switcher Logic ---
+    const themeSwitcher = document.getElementById('theme-switcher');
+    function setTheme(theme) {
+        htmlElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        if(themeSwitcher) themeSwitcher.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+    }
+    if (themeSwitcher) {
+        themeSwitcher.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+    }
+
+    // --- Tab & Table Logic ---
+    const tablesTab = document.getElementById('tables-tab');
+    let tablesData = null;
+    if (tablesTab) {
+        tablesTab.addEventListener('shown.bs.tab', async () => {
+            if (!tablesData) {
+                const addContainer = document.getElementById('addition-table-container');
+                const mulContainer = document.getElementById('multiplication-table-container');
+                addContainer.innerHTML = '<p class="text-center">Loading...</p>';
+                const response = await fetch('/get-tables');
+                tablesData = await response.json();
+                renderTable(tablesData.header, tablesData.addition, addContainer);
+                renderTable(tablesData.header, tablesData.multiplication, mulContainer);
+            }
+        });
+    }
+
+    function renderTable(header, data, container) {
+        let tableHTML = '<table class="table table-bordered table-hover"><thead><tr><th>#</th>';
+        header.forEach(h => tableHTML += `<th>${h}</th>`);
+        tableHTML += '</tr></thead><tbody>';
+        data.forEach((row, rowIndex) => {
+            tableHTML += `<tr><th>${header[rowIndex]}</th>`;
+            row.forEach(cell => tableHTML += `<td>${cell}</td>`);
+            tableHTML += '</tr>';
+        });
+        container.innerHTML = tableHTML;
+    }
+
+    // --- Calculator Logic ---
+    const num1Input = document.getElementById('num1');
+    const num2Input = document.getElementById('num2');
+    const calculateAllBtn = document.getElementById('calculate-all-btn');
+    const resultArea = document.getElementById('result-area');
+    const opsResultsGrid = document.getElementById('ops-results-grid');
+    const errorDisplay = document.getElementById('error-display');
+
+    if (calculateAllBtn) {
+        calculateAllBtn.addEventListener('click', () => {
+            const num1 = num1Input.value.trim();
+            const num2 = num2Input.value.trim();
+            clearCalculatorResults();
+            let hasError = false;
+            if (!num1) { triggerShake(num1Input); hasError = true; }
+            if (!num2) { triggerShake(num2Input); hasError = true; }
+
+            setTimeout(async () => {
+                if (hasError) {
+                    errorDisplay.textContent = 'Please enter both numbers.';
+                    resultArea.classList.add('visible');
+                    return;
+                }
+                const response = await fetch('/calculate-all', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ num1, num2 }) });
+                const data = await response.json();
+                if (data.error) {
+                    errorDisplay.textContent = `Error: ${data.error}`;
+                } else {
+                    displayAllOpsResults(num1, num2, data);
+                }
+                resultArea.classList.add('visible');
+            }, 10);
+        });
+    }
+
+    function clearCalculatorResults() { if(resultArea) { resultArea.classList.remove('visible'); opsResultsGrid.innerHTML = ''; errorDisplay.innerHTML = ''; } }
+    function triggerShake(element) { element.classList.add('shake'); setTimeout(() => { element.classList.remove('shake'); }, 500); }
+
+    function displayAllOpsResults(num1, num2, data) {
+        const ops = { addition: '+', subtraction: '-', multiplication: '×', division: '÷' };
+        opsResultsGrid.innerHTML = '';
+        for (const opName in data.results) {
+            const opData = data.results[opName];
+            const resultItem = document.createElement('div');
+            resultItem.classList.add('col');
+            const problemBijective = `${num1} ${ops[opName]} ${num2}`;
+            const decimalStep = opData.decimal !== null ? `${data.n1_decimal} ${ops[opName]} ${data.n2_decimal} = ${opData.decimal}` : opData.bijective;
+            resultItem.innerHTML = `
+                <div class="op-result-item h-100">
+                    <div class="op-title">${opName.charAt(0).toUpperCase() + opName.slice(1)}</div>
+                    <div class="op-problem">${problemBijective}</div>
+                    <div class="op-step">${decimalStep}</div>
+                    <div class="op-answer">${opData.decimal !== null ? opData.bijective : '&nbsp;'}</div>
+                </div>
+            `;
+            opsResultsGrid.appendChild(resultItem);
         }
     }
 
@@ -86,41 +167,4 @@ document.addEventListener('DOMContentLoaded', () => {
     setLanguage(initialLang);
     const initialTheme = localStorage.getItem('theme') || 'light';
     setTheme(initialTheme);
-
-    // --- Tab Content Population (Example for Calculator Tab) ---
-    const calculatorTab = document.getElementById('tab-calculator');
-    if(calculatorTab) {
-        calculatorTab.innerHTML = `
-            <section>
-                <div class="row g-5">
-                    <div class="col-lg-6">
-                        <h2 data-i18n="liveConverterTitle"></h2>
-                        <p data-i18n="liveConverterDesc"></p>
-                        <div class="mb-3">
-                            <label for="decimal-input" class="form-label" data-i18n="decimalInputLabel"></label>
-                            <input type="number" class="form-control" id="decimal-input" data-i18n-placeholder="decimalInputPlaceholder" min="1">
-                        </div>
-                        <div id="conversion-results"></div>
-                    </div>
-                    <div class="col-lg-6">
-                        <h2 data-i18n="calculatorTitle"></h2>
-                        <p data-i18n="calculatorDesc"></p>
-                        <div class="row g-2 mb-3">
-                            <div class="col-sm-6"><input type="text" class="form-control" id="num1" data-i18n-placeholder="num1Placeholder"></div>
-                            <div class="col-sm-6"><input type="text" class="form-control" id="num2" data-i18n-placeholder="num2Placeholder"></div>
-                        </div>
-                        <div class="d-grid">
-                            <button id="calculate-all-btn" class="btn btn-primary" data-i18n="calculateBtn"></button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section id="result-area" class="mt-4">
-                <h3 data-i18n="resultsTitle"></h3>
-                <div id="ops-results-grid" class="row row-cols-1 row-cols-md-2 g-3"></div>
-                <div id="error-display" class="mt-3 text-center"></div>
-            </section>
-        `;
-    }
-    // NOTE: Similar population logic would be needed for other tabs if they were not static
 });
