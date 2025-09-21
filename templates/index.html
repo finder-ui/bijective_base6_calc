@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" data-i18n="pageDescription" content="An interactive educational tool to calculate and explore the bijective base-6 number system (a number system with no zero). Features a live converter and reference tables.">
-    <title data-i18n="pageTitle">Bijective Base-6 Calculator & Explorer</title>
+    <meta name="description" content="An interactive educational tool to calculate and explore the bijective base-6 number system (a number system with no zero). Features a live converter and reference tables.">
+    <title>Bijective Base-6 Calculator & Explorer</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
@@ -35,27 +35,12 @@
         <div class="tab-content p-4" id="myTabContent">
             <div class="tab-pane fade show active" id="tab-calculator" role="tabpanel">
                 <section>
-                    <div class="row g-5">
-                        <div class="col-lg-6">
-                            <h2 data-i18n="liveConverterTitle">Live Conversion Explorer</h2>
-                            <p data-i18n="liveConverterDesc">Enter a decimal number to see its real-time representation across different systems.</p>
-                            <div class="mb-3">
-                                <label for="decimal-input" class="form-label" data-i18n="decimalInputLabel">Enter a Decimal Number:</label>
-                                <input type="number" class="form-control" id="decimal-input" placeholder="e.g., 25" min="1">
-                            </div>
-                            <div id="conversion-results"></div>
-                        </div>
-                        <div class="col-lg-6">
-                            <h2 data-i18n="calculatorTitle">Bijective Math Calculator</h2>
-                            <p data-i18n="calculatorDesc">Enter two bijective base-6 numbers to see the results for all operations.</p>
-                            <div class="row g-2 mb-3">
-                                <div class="col-sm-6"><input type="text" class="form-control" id="num1" data-i18n-placeholder="num1Placeholder"></div>
-                                <div class="col-sm-6"><input type="text" class="form-control" id="num2" data-i18n-placeholder="num2Placeholder"></div>
-                            </div>
-                            <div class="d-grid">
-                                <button id="calculate-all-btn" class="btn btn-primary" data-i18n="calculateBtn">Calculate All Operations</button>
-                            </div>
-                        </div>
+                    <h2 data-i18n="calculatorTitle">Bijective Math Calculator</h2>
+                    <p data-i18n="calculatorDesc">Enter two bijective base-6 numbers to see the results for all operations.</p>
+                    <div class="row g-3 mb-3 align-items-center">
+                        <div class="col-sm-5"><input type="text" class="form-control" id="num1" data-i18n-placeholder="num1Placeholder"></div>
+                        <div class="col-sm-5"><input type="text" class="form-control" id="num2" data-i18n-placeholder="num2Placeholder"></div>
+                        <div class="col-sm-2 d-grid"><button id="calculate-all-btn" class="btn btn-primary" data-i18n="calculateBtn">Calc</button></div>
                     </div>
                 </section>
                 <section id="result-area" class="mt-4">
