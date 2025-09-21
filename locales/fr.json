@@ -48,6 +48,8 @@
     "quizQuestion": "Qu'est-ce que",
     "quizTypeConversion": "Conversion",
     "quizTypeMath": "Maths",
+    "quizQuestionConversionSuffix": "en base 6 bijective ?",
+    "quizAnswerPlaceholder": "Votre réponse...",
     "quizSubmitBtn": "Soumettre",
     "quizCorrectFeedback": "Correct ! 🎉",
     "quizIncorrectFeedback": "Pas tout à fait ! La bonne réponse était",

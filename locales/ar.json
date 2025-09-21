@@ -48,6 +48,8 @@
     "quizQuestion": "ما هو",
     "quizTypeConversion": "تحويل",
     "quizTypeMath": "رياضيات",
+    "quizQuestionConversionSuffix": "في نظام العد الستيني البيجكتيف؟",
+    "quizAnswerPlaceholder": "إجابتك...",
     "quizSubmitBtn": "إرسال",
     "quizCorrectFeedback": "صحيح! 🎉",
     "quizIncorrectFeedback": "ليس تماما! الإجابة الصحيحة كانت",

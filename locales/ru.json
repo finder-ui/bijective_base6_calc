@@ -15,6 +15,8 @@
     "num1Placeholder": "Первое число",
     "num2Placeholder": "Второе число",
     "calculateBtn": "Рассчитать все операции",
+    "quizQuestionConversionSuffix": "в биективной системе счисления по основанию 6?",
+    "quizAnswerPlaceholder": "Ваш ответ...",
     "resultsTitle": "Результаты",
     "practiceTitle": "Режим практики",
     "practiceDesc": "Проверьте свои навыки на время! Выберите сложность и решайте задачи.",

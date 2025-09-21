@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50350d4a-48f4-48cb-849b-1dff3eef744e" name="Changes" comment="bg">
+    <list default="true" id="50350d4a-48f4-48cb-849b-1dff3eef744e" name="Changes" comment="checkbox">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/locales/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/ar.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/locales/de.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/de.json" afterDir="false" />
@@ -13,8 +13,6 @@
       <change beforePath="$PROJECT_DIR$/locales/fr.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/fr.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/locales/he.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/he.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/locales/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/ru.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,31 +161,7 @@
       <updated>1757185942094</updated>
       <workItem from="1758425240653" duration="1916000" />
       <workItem from="1758427334375" duration="9393000" />
-      <workItem from="1758437221260" duration="9188000" />
-    </task>
-    <task id="LOCAL‎-00095" summary="dev">
-      <option name="closed" value="true" />
-      <created>1758432650135</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL‎-00095" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758432650135</updated>
-    </task>
-    <task id="LOCAL‎-00096" summary="dev">
-      <option name="closed" value="true" />
-      <created>1758432688473</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL‎-00096" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758432688473</updated>
-    </task>
-    <task id="LOCAL‎-00097" summary="dev">
-      <option name="closed" value="true" />
-      <created>1758432884465</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL‎-00097" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758432884465</updated>
+      <workItem from="1758437221260" duration="9608000" />
     </task>
     <task id="LOCAL‎-00098" summary="dev">
       <option name="closed" value="true" />
@@ -557,7 +531,31 @@
       <option name="project" value="LOCAL‎" />
       <updated>1758446227742</updated>
     </task>
-    <option name="localTasksCounter" value="144" />
+    <task id="LOCAL‎-00144" summary="checkbox">
+      <option name="closed" value="true" />
+      <created>1758446486700</created>
+      <option name="number" value="00144" />
+      <option name="presentableId" value="LOCAL‎-00144" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758446486700</updated>
+    </task>
+    <task id="LOCAL‎-00145" summary="checkbox">
+      <option name="closed" value="true" />
+      <created>1758446597424</created>
+      <option name="number" value="00145" />
+      <option name="presentableId" value="LOCAL‎-00145" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758446597424</updated>
+    </task>
+    <task id="LOCAL‎-00146" summary="checkbox">
+      <option name="closed" value="true" />
+      <created>1758446765830</created>
+      <option name="number" value="00146" />
+      <option name="presentableId" value="LOCAL‎-00146" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758446765830</updated>
+    </task>
+    <option name="localTasksCounter" value="147" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -571,6 +569,7 @@
     <MESSAGE value="stable" />
     <MESSAGE value="stable!" />
     <MESSAGE value="bg" />
-    <option name="LAST_COMMIT_MESSAGE" value="bg" />
+    <MESSAGE value="checkbox" />
+    <option name="LAST_COMMIT_MESSAGE" value="checkbox" />
   </component>
 </project>
