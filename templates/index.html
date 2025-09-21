@@ -30,7 +30,7 @@
         <div id="tab-calculator" class="tab-content active">
             <section id="live-converter">
                 <h2>Live Conversion Explorer</h2>
-                <p>To understand what makes the bijective system unique, it helps to see it in context. Enter a standard decimal number below to see how it's represented across different systems in real-time.</p>
+                <p>Enter a standard decimal number to see how it's represented across different systems in real-time.</p>
                 <div class="converter-input-group">
                     <label for="decimal-input">Enter a Decimal Number:</label>
                     <input type="number" id="decimal-input" placeholder="e.g., 25" min="1">
@@ -71,25 +71,24 @@
         <div id="tab-explanations" class="tab-content">
             <section id="primer">
                 <h2>A Primer on Numerical Systems</h2>
-                <p>Most number systems we use are <strong>positional</strong>. This means a digit's value depends on its position within a number. The "base" of a system tells us how many unique digits are used. The value of each position is an exponent of the base, starting from 0 on the right.</p>
-                <p>However, the inclusion of zero introduces certain ambiguities, or <strong>representational redundancy</strong>. For instance, the integer 'six' can be represented as <code>6</code>, <code>06</code>, or <code>006</code>. While this is a trivial issue in human arithmetic, it can complicate computational processes that require a single, canonical representation for every number.</p>
+                <p>Most number systems we use are <strong>positional</strong>. This means the value of a digit depends on its position within a number. The "base" of a system tells us how many unique digits are used. The value of each position is an exponent of the base, starting from 0 on the right.</p>
+                <ul>
+                    <li><strong>Base-10 (Decimal):</strong> We use ten digits (<code>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</code>). In the number <code>345</code>, the '3' is in the 10² (hundreds) place, the '4' is in the 10¹ (tens) place, and the '5' is in the 10⁰ (ones) place. The total value is <code>(3 * 100) + (4 * 10) + (5 * 1) = 345</code>.</li>
+                    <li><strong>Base-2 (Binary):</strong> Computers use two digits (<code>0, 1</code>). In the binary number <code>1101</code>, the digits (from right to left) are in the 2⁰, 2¹, 2², and 2³ places. The total value is <code>(1 * 8) + (1 * 4) + (0 * 2) + (1 * 1) = 13</code> in decimal.</li>
+                </ul>
+                <p>In these standard systems, the digit <strong>zero</strong> is essential. It is not just a number, but a fundamental <strong>placeholder</strong>. It signifies an empty position, like the tens place in <code>101</code>. The bijective system you are exploring is fascinating because it works without this placeholder.</p>
             </section>
 
             <section id="explanation">
                 <h2>Understanding the Bijective System</h2>
-                <p>This application explores the <strong>senary bijective system</strong>, a base-6 numeration that uses the digit set D = {1, 2, 3, 4, 5, 6}. Its key feature is establishing a bijective (one-to-one) correspondence between the set of positive integers (1, 2, 3, ...) and the set of all possible finite strings of its digits.</p>
-                <h4>Core Properties</h4>
-                <ul>
-                    <li><strong>No Zero:</strong> The most obvious difference is the lack of a zero digit. This eliminates the need for a placeholder and removes the ambiguity of leading zeros.</li>
-                    <li><strong>Lexicographical Order:</strong> The numerical order of the integers corresponds perfectly to the lexicographical (dictionary) order of their string representations. For example, <code>12</code> is numerically smaller than <code>13</code>, and the string "12" comes before "13" in the dictionary. This is not always true in systems with zero (e.g., `6` is less than `11`, but "6" comes after "11" in dictionary order).</li>
-                </ul>
+                <p>This system is a <strong>bijective base-6 numeration</strong>. It is positional, but with two key differences: it has no zero, and its digits run from 1 to 6. Because there is no zero to act as a placeholder, the system "rolls over" differently. After <code>6</code>, the next number is <code>11</code>.</p>
                 <h4>The Conversion Algorithm Explained</h4>
-                <p>The trick to converting from decimal to bijective base-6 is to temporarily shift the number system to align with standard computer arithmetic. Computers naturally work with remainders from 0 to 5, but our digits are 1 to 6. We bridge this gap by subtracting 1 before each calculation.</p>
+                <p>The trick to converting from decimal to bijective base-6 is to temporarily shift the number system. Computers naturally work with remainders from 0 to 5, but our digits are 1 to 6. We bridge this gap by subtracting 1 before each calculation.</p>
                 <p>Let's convert the decimal number <strong>43</strong>:</p>
                 <ol>
-                    <li><strong>Step 1:</strong> Start with 43. Subtract 1: <code>43 - 1 = 42</code>. Now, find the remainder when dividing by 6. <code>42 % 6 = 0</code>. The 0th digit in our character set <code>"123456"</code> is '1'. Our first result digit is <strong>1</strong>. The new number for the next step is <code>floor(42 / 6) = 7</code>.</li>
-                    <li><strong>Step 2:</strong> Start with 7. Subtract 1: <code>7 - 1 = 6</code>. Now, find the remainder. <code>6 % 6 = 0</code>. The 0th digit is again '1'. Our second result digit is <strong>1</strong>. The new number is <code>floor(6 / 6) = 1</code>.</li>
-                    <li><strong>Step 3:</strong> Start with 1. Subtract 1: <code>1 - 1 = 0</code>. Now, find the remainder. <code>0 % 6 = 0</code>. The 0th digit is again '1'. Our third result digit is <strong>1</strong>. The new number is <code>floor(0 / 6) = 0</code>.</li>
+                    <li><strong>Step 1:</strong> Start with 43. Subtract 1: <code>43 - 1 = 42</code>. Now, find the remainder when dividing by 6. <code>42 % 6 = 0</code>. The 0th digit in our character set <code>"123456"</code> is '1'. Our first result digit is <strong>1</strong>. The new number for the next step is <code>42 / 6 = 7</code>.</li>
+                    <li><strong>Step 2:</strong> Start with 7. Subtract 1: <code>7 - 1 = 6</code>. Now, find the remainder. <code>6 % 6 = 0</code>. The 0th digit is again '1'. Our second result digit is <strong>1</strong>. The new number is <code>6 / 6 = 1</code>.</li>
+                    <li><strong>Step 3:</strong> Start with 1. Subtract 1: <code>1 - 1 = 0</code>. Now, find the remainder. <code>0 % 6 = 0</code>. The 0th digit is again '1'. Our third result digit is <strong>1</strong>. The new number is <code>0 / 6 = 0</code>.</li>
                     <li><strong>Step 4:</strong> The number is 0, so we stop. Reverse the digits we found: <code>111</code>.</li>
                 </ol>
                 <p>Thus, the decimal number 43 is represented as <code>111</code> in bijective base-6.</p>
@@ -99,19 +98,24 @@
                 <h2>Practical Applications</h2>
                 <p>Bijective numeration is more than a curiosity; it solves real-world problems in computer science.</p>
                 <ul>
-                    <li><strong>Combinatorics & Enumeration:</strong> The system provides a natural mapping for problems involving sequences. For example, it can uniquely number every possible sequence of rolls of a six-sided die. A sequence of three rolls (e.g., 4, 2, 5) corresponds directly to the bijective number <code>425</code>, providing a compact and unique integer ID for every outcome.</li>
                     <li><strong>Spreadsheet Columns:</strong> Microsoft Excel and Google Sheets use a bijective base-26 system (A-Z) for columns. After Z comes AA, then AB, AC, and so on. This is a perfect, intuitive real-world example where there is no "zeroth" column.</li>
                     <li><strong>URL Shorteners:</strong> Services like bit.ly need to create the shortest possible unique string for billions of links. A bijective base-62 system (<code>a-z, A-Z, 0-9</code>) can represent a massive database ID like <code>2,183,401,055,849</code> as the short, clean string <code>`short`</code>.</li>
                 </ul>
             </section>
 
              <section id="advanced-concepts">
-                <h2>Advanced Concepts</h2>
-                <p>The properties of bijective numeration extend into more complex areas of computer science and mathematics:</p>
-                <ul>
-                    <li><strong>Canonical Forms in Cryptography:</strong> In advanced cryptography like Elliptic Curve Cryptography (ECC), it is absolutely critical that every unique public key has one, and only one, valid byte representation. If two different strings could represent the same key, it could allow an attacker to create a different-looking but valid signature for a transaction, leading to bugs or security vulnerabilities. Bijective systems provide a mathematical guarantee of this <strong>canonical representation</strong>.</li>
-                    <li><strong>Theoretical Computer Science:</strong> Bijective numeration is valuable in formal language theory. It provides a way to define <strong>Gödel numbering</strong>—a process of assigning a unique natural number to each statement or formula in a formal language—without the complexities and ambiguities introduced by a zero digit.</li>
-                </ul>
+                <h2>Deeper Mathematical Connections</h2>
+                <h4>A Note on 'Composite' Digits and Factorization</h4>
+                <p>An astute observer of the multiplication table will notice something curious: <code>2 × 3 = 6</code>, but also <code>1 × 6 = 6</code>. In our standard number system, the number 6 has a unique prime factorization (2 and 3). However, in the bijective system, <strong>the digit <code>6</code> itself acts like a composite number</strong>. The digits <code>1, 2, 3, 4, 5</code> are the "primes" of this single-digit world.</p>
+                <p>This reveals a deep property: the set of single digits in a bijective system does not form a <a href="https://en.wikipedia.org/wiki/Unique_factorization_domain" target="_blank">Unique Factorization Domain</a>. This is a direct consequence of using the base `k` as a digit instead of `0`. It doesn't break the system; rather, it highlights its unique algebraic structure.</p>
+
+                <h4>Connection to Formal Language Theory</h4>
+                <p>The bijective base-6 system has a beautiful connection to theoretical computer science. If we define an alphabet of symbols, Σ (Sigma), as our set of digits <code>{1, 2, 3, 4, 5, 6}</code>, then the set of all possible finite strings you can create with these symbols is called the Kleene Star, denoted Σ*. This set includes <code>{ε, 1, 2, ..., 6, 11, 12, ...}</code>, where ε is the empty string.</p>
+                <p>The bijective system is a perfect, ordered enumeration of this set. It provides a seamless way to assign a unique integer to any sequence of choices from our set of six, a fundamental operation in algorithms and computability theory.</p>
+
+                <h4>Geometric Interpretation: The Infinite Tree</h4>
+                <p>We can visualize the entire system as an infinite, complete 6-ary tree, where every node has exactly six children. The root of the tree represents a starting point. The first level of nodes are labeled 1 through 6. Each of those nodes is the parent of six more nodes. For example, node "2" is the parent of nodes "21", "22", "23", "24", "25", and "26".</p>
+                <p>In this model, every bijective base-6 number is the unique "address" or path from the root to a specific node. The number <code>425</code> means: start at the root, take the 4th branch, then the 2nd branch, then the 5th branch. This is crucial for indexing hierarchical data, like file systems or complex databases, where every part of the address is a meaningful choice.</p>
             </section>
         </div>
 
