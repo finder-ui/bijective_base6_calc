@@ -64,12 +64,13 @@ body {
 }
 
 /* --- Header, Footer, Donation --- */
-header h1 { color: var(--header-color); font-size: 2em; margin: 0; font-weight: 500; text-align: center; padding-bottom: 20px; }
+header { text-align: center; padding-bottom: 20px; margin-bottom: 30px; }
+header h1 { color: var(--header-color); font-size: 2em; margin: 0; font-weight: 500; }
 footer, .donation-section { text-align: center; margin: 20px 0; }
 footer { padding: 10px; color: var(--text-color-muted); font-size: 0.9em; }
-footer a, .donation-button { color: var(--accent-color); text-decoration: none; }
+footer a { color: var(--accent-color); text-decoration: none; }
 footer a:hover { text-decoration: underline; }
-.donation-button { display: inline-block; padding: 12px 25px; font-size: 1.1em; font-weight: bold; border: 2px solid var(--final-answer-color); border-radius: 5px; cursor: pointer; background-color: transparent; color: var(--final-answer-color); transition: all 0.2s; }
+.donation-button { display: inline-block; padding: 12px 25px; font-size: 1.1em; font-weight: bold; border: 2px solid var(--final-answer-color); border-radius: 5px; cursor: pointer; background-color: transparent; color: var(--final-answer-color); text-decoration: none; transition: all 0.2s; }
 .donation-button:hover { background-color: var(--final-answer-color); color: var(--section-bg-color); box-shadow: 0 0 15px var(--final-answer-color); }
 
 /* --- Theme Switcher & Tabs --- */
@@ -86,7 +87,7 @@ h2 { font-size: 1.3em; color: var(--accent-color); font-family: var(--font-mono)
 
 /* --- Grids and Tables --- */
 .result-grid, #ops-results-grid { display: grid; gap: 15px; grid-template-columns: 1fr; }
-.table-container { overflow-x: auto; }
+.table-container { overflow-x: auto; padding: 10px; background-color: var(--bg-color); border-radius: 5px; }
 table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); }
 table th, table td { padding: 4px 6px; text-align: center; border: 1px solid var(--border-color); font-size: 0.8em; }
 table th { background-color: var(--code-bg-color); color: var(--accent-color); }
