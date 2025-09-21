@@ -59,6 +59,7 @@
                     </div>
                 </section>
                 <section id="result-area" class="mt-4">
+                    <h3 data-i18n="resultsTitle">Results</h3>
                     <div id="ops-results-grid" class="row row-cols-1 row-cols-md-2 g-3"></div>
                     <div id="error-display" class="mt-3 text-center"></div>
                 </section>
@@ -78,14 +79,14 @@
             <div class="tab-pane fade" id="tab-explanations" role="tabpanel">
                 <section id="primer">
                     <h2 data-i18n="primerTitle">A Primer on Numerical Systems</h2>
-                    <p data-i18n="primerDesc1">Most number systems we use are <strong>positional</strong>...</p>
-                    <p data-i18n="primerDesc2">In these standard systems, the digit <strong>zero</strong> is essential...</p>
+                    <p data-i18n="primerDesc1">Most number systems we use are <strong>positional</strong>. This means the value of a digit depends on its position within a number. The "base" of a system tells us how many unique digits are used. The value of each position is an exponent of the base, starting from 0 on the right.</p>
+                    <p data-i18n="primerDesc2">In these standard systems, the digit <strong>zero</strong> is essential. It is not just a number, but a fundamental <strong>placeholder</strong>. It signifies an empty position, like the tens place in <code>101</code>. The bijective system you are exploring is fascinating because it works without this placeholder.</p>
                 </section>
                 <section id="explanation">
                     <h2 data-i18n="explanationTitle">Understanding the Bijective System</h2>
-                    <p data-i18n="explanationDesc1">This system is a <strong>bijective base-6 numeration</strong>...</p>
+                    <p data-i18n="explanationDesc1">This system is a <strong>bijective base-6 numeration</strong>. It is positional, but with two key differences: it has no zero, and its digits run from 1 to 6. Because there is no zero to act as a placeholder, the system "rolls over" differently. After <code>6</code>, the next number is <code>11</code>.</p>
                     <h4 data-i18n="algoTitle">The Conversion Algorithm Explained</h4>
-                    <p data-i18n="algoDesc">The trick to converting from decimal to bijective base-6 is to temporarily shift the number system...</p>
+                    <p data-i18n="algoDesc">The trick to converting from decimal to bijective base-6 is to temporarily shift the number system. Computers naturally work with remainders from 0 to 5, but our digits are 1 to 6. We bridge this gap by subtracting 1 before each calculation.</p>
                 </section>
                 <section id="applications">
                     <h2 data-i18n="applicationsTitle">Practical Applications</h2>
@@ -93,7 +94,7 @@
                 </section>
                  <section id="advanced-concepts">
                     <h2 data-i18n="advancedTitle">Deeper Mathematical Connections</h2>
-                    <p data-i18n="advancedDesc">The properties of bijective numeration extend into more complex areas of computer science and mathematics...</p>
+                    <p data-i18n="advancedDesc">The properties of bijective numeration extend into more complex areas of computer science and mathematics, such as cryptography and algorithmic enumeration.</p>
                 </section>
             </div>
         </div>
