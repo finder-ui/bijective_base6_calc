@@ -1,75 +1,65 @@
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('background-animation');
+    if (!canvas) {
+        console.error("Background canvas not found!");
+        return;
+    }
     const ctx = canvas.getContext('2d');
 
     // Set canvas to full screen
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    // The characters that will be dropping
     const letters = '123456'.split('');
-
     const fontSize = 16;
-    const columns = Math.floor(canvas.width / fontSize);
-
-    // An array to track the y-position of each dropping letter column
+    const columns = canvas.width / fontSize;
     const drops = [];
+
     for (let i = 0; i < columns; i++) {
         drops[i] = 1;
     }
 
-    let animationInterval;
-
     function draw() {
-        // Get the current theme's colors
         const bodyStyles = getComputedStyle(document.body);
-        const bgColor = bodyStyles.getPropertyValue('--bg-color');
-        const accentColor = bodyStyles.getPropertyValue('--accent-color');
+        const accentColor = bodyStyles.getPropertyValue('--accent-color').trim();
 
-        // Create a semi-transparent background to create the fading trail effect
-        ctx.fillStyle = `rgba(${hexToRgb(bgColor)}, 0.1)`;
+        // Create a semi-transparent black background to create the fading trail effect.
+        // A higher alpha value (e.g., 0.15) makes the trails fade faster, resulting in a dimmer background.
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         // Set the color for the letters
         ctx.fillStyle = accentColor;
-        ctx.font = `${fontSize}px Fira Code`;
 
-        // Loop through the columns
+        // Add a softer glow effect to the letters
+        ctx.shadowColor = accentColor;
+        ctx.shadowBlur = 10; // Reduced from 15 for a less intense glow
+
+        ctx.font = `${fontSize}px 'Roboto Mono', monospace`;
+
         for (let i = 0; i < drops.length; i++) {
             const text = letters[Math.floor(Math.random() * letters.length)];
             ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-            // Reset the drop to the top randomly to make the rain uneven
             if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
                 drops[i] = 0;
             }
-
-            // Move the drop down
             drops[i]++;
         }
+        // Reset shadow for the next frame to avoid affecting other elements
+        ctx.shadowBlur = 0;
     }
 
-    function hexToRgb(hex) {
-        // Helper to convert hex color to rgb for the rgba() background
-        let r = 0, g = 0, b = 0;
-        if (hex.length == 4) {
-            r = parseInt(hex[1] + hex[1], 16);
-            g = parseInt(hex[2] + hex[2], 16);
-            b = parseInt(hex[3] + hex[3], 16);
-        } else if (hex.length == 7) {
-            r = parseInt(hex[1] + hex[2], 16);
-            g = parseInt(hex[3] + hex[4], 16);
-            b = parseInt(hex[5] + hex[6], 16);
-        }
-        return `${r},${g},${b}`;
-    }
-
+    let animationInterval;
     function startAnimation() {
-        if (animationInterval) clearInterval(animationInterval);
-        animationInterval = setInterval(draw, 33);
+        if (animationInterval) {
+            clearInterval(animationInterval);
+        }
+        // Redraw the animation at a consistent frame rate
+        animationInterval = setInterval(draw, 50);
     }
 
-    // Restart animation on window resize
+    // Resize the canvas to fill browser window dynamically
     window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
