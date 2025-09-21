@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!langSwitcherContainer) return;
         langSwitcherContainer.innerHTML = ''; // Clear previous buttons
 
-        // Use a robust loop and attach listeners directly to each button
+        // Use a more robust loop and event delegation pattern
         for (const [code, details] of Object.entries(supportedLangs)) {
             const btn = document.createElement('span');
             btn.className = 'lang-btn';
@@ -66,14 +66,15 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.dataset.lang = code;
             btn.setAttribute('role', 'button');
             btn.setAttribute('aria-label', `Switch to ${details.name}`);
-            
-            // CORRECTED: This ensures a new, correct event listener is created for each button.
-            btn.addEventListener('click', () => {
-                setLanguage(code);
-            });
-            
             langSwitcherContainer.appendChild(btn);
         }
+
+        langSwitcherContainer.addEventListener('click', (event) => {
+            const clickedButton = event.target.closest('.lang-btn');
+            if (clickedButton && clickedButton.dataset.lang) {
+                setLanguage(clickedButton.dataset.lang);
+            }
+        });
     }
 
     function updateLangSwitcherUI(lang) {

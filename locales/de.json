@@ -1,8 +1,7 @@
 {
-    "pageTitle": "Bijektiver Basis-6-Rechner & Explorer",
+    "pageTitle": "Bijektiver Base-6 Rechner & Explorer",
     "pageDescription": "Ein interaktives Lehrmittel zum Berechnen und Erforschen des bijektiven Zahlensystems zur Basis 6, das keine Null hat. Mit Echtzeit-Konverter und Referenztabellen.",
-    "themeSwitcherLabel": "Thema umschalten",
-    "mainTitle": "Bijektiver Basis-6-Rechner & Explorer",
+    "mainTitle": "Bijektiver Base-6 Rechner & Explorer",
     "tabCalculator": "Rechner & Explorer",
     "tabTables": "Referenztabellen",
     "tabExplanations": "Erklärungen",
@@ -20,28 +19,20 @@
     "multiplicationTableTitle": "Multiplikationstabelle (1 bis 12)",
     "primerTitle": "Einführung in Zahlensysteme",
     "primerDesc1": "Die meisten von uns verwendeten Zahlensysteme sind <strong>positionell</strong>. Das bedeutet, der Wert einer Ziffer hängt von ihrer Position innerhalb einer Zahl ab. Die \"Basis\" eines Systems gibt an, wie viele eindeutige Ziffern verwendet werden. Der Wert jeder Position ist eine Potenz der Basis, beginnend bei 0 auf der rechten Seite.",
-    "primerList1": [
-        "<strong>Basis-10 (Dezimal):</strong> Wir verwenden zehn Ziffern (<code>0-9</code>). In der Zahl <code>345</code> ist der Wert <code>(3 * 10²) + (4 * 10¹) + (5 * 10⁰) = 345</code>.",
-        "<strong>Basis-2 (Binär):</strong> Computer verwenden zwei Ziffern (<code>0, 1</code>). In der Binärzahl <code>1101</code> ist der Wert <code>(1 * 2³) + (1 * 2²) + (0 * 2¹) + (1 * 2⁰) = 13</code>."
-    ],
     "primerDesc2": "In diesen Standardsystemen ist die Ziffer <strong>Null</strong> unerlässlich. Sie ist nicht nur eine Zahl, sondern ein fundamentaler <strong>Platzhalter</strong>. Sie kennzeichnet eine leere Position, wie die Zehnerstelle in <code>101</code>. Das bijektive System, das Sie hier erforschen, ist faszinierend, weil es ohne diesen Platzhalter auskommt.",
     "explanationTitle": "Das bijektive System verstehen",
     "explanationDesc1": "Dieses System ist eine <strong>bijektive Zahldarstellung zur Basis 6</strong>. Es ist positionell, aber mit zwei wesentlichen Unterschieden: Es hat keine Null, und seine Ziffern reichen von 1 bis 6. Da es keine Null als Platzhalter gibt, \"rollt\" das System anders über. Nach <code>6</code> ist die nächste Zahl <code>11</code>.",
     "algoTitle": "Der Konvertierungsalgorithmus erklärt",
     "algoDesc1": "Der Trick bei der Umwandlung von Dezimal in bijektive Basis 6 besteht darin, das Zahlensystem vorübergehend zu verschieben. Computer arbeiten natürlich mit Resten von 0 bis 5, aber unsere Ziffern sind 1 bis 6. Wir überbrücken diese Lücke, indem wir vor jeder Berechnung 1 subtrahieren.",
     "algoExampleTitle": "Lassen Sie uns die Dezimalzahl <strong>43</strong> umwandeln:",
-    "algoSteps": [
-        "<strong>Schritt 1:</strong> Beginnen Sie mit 43. Subtrahieren Sie 1: <code>43 - 1 = 42</code>. Finden Sie nun den Rest bei der Division durch 6. <code>42 % 6 = 0</code>. Die 0. Ziffer in unserem Zeichensatz <code>\"123456\"</code> ist \'1\'. Unsere erste Ergebnisziffer ist <strong>1</strong>. Die neue Zahl für den nächsten Schritt ist <code>(42 - 0) / 6 = 7</code>.",
-        "<strong>Schritt 2:</strong> Beginnen Sie mit 7. Subtrahieren Sie 1: <code>7 - 1 = 6</code>. Finden Sie nun den Rest. <code>6 % 6 = 0</code>. Die 0. Ziffer ist wieder \'1\'. Unsere zweite Ergebnisziffer ist <strong>1</strong>. Die neue Zahl ist <code>(6 - 0) / 6 = 1</code>.",
-        "<strong>Schritt 3:</strong> Beginnen Sie mit 1. Subtrahieren Sie 1: <code>1 - 1 = 0</code>. Finden Sie nun den Rest. <code>0 % 6 = 0</code>. Die 0. Ziffer ist wieder \'1\'. Unsere dritte Ergebnisziffer ist <strong>1</strong>. Die neue Zahl ist <code>(0 - 0) / 6 = 0</code>."
-    ],
+    "algoStep1": "<strong>Schritt 1:</strong> Beginnen Sie mit 43. Subtrahieren Sie 1: <code>43 - 1 = 42</code>. Finden Sie nun den Rest bei der Division durch 6. <code>42 % 6 = 0</code>. Die 0. Ziffer in unserem Zeichensatz <code>\\\"123456\\\"</code> ist \'1\'. Unsere erste Ergebnisziffer ist <strong>1</strong>. Die neue Zahl für den nächsten Schritt ist <code>(42 - 0) / 6 = 7</code>.",
+    "algoStep2": "<strong>Schritt 2:</strong> Beginnen Sie mit 7. Subtrahieren Sie 1: <code>7 - 1 = 6</code>. Finden Sie nun den Rest. <code>6 % 6 = 0</code>. Die 0. Ziffer ist wieder \'1\'. Unsere zweite Ergebnisziffer ist <strong>1</strong>. Die neue Zahl ist <code>(6 - 0) / 6 = 1</code>.",
+    "algoStep3": "<strong>Schritt 3:</strong> Beginnen Sie mit 1. Subtrahieren Sie 1: <code>1 - 1 = 0</code>. Finden Sie nun den Rest. <code>0 % 6 = 0</code>. Die 0. Ziffer ist wieder \'1\'. Unsere dritte Ergebnisziffer ist <strong>1</strong>. Die neue Zahl ist <code>(0 - 0) / 6 = 0</code>.",
     "algoResult": "Das Umkehren der Ziffern ergibt <code>111</code>. Somit ist 43 im Dezimalsystem 111 in der bijektiven Basis 6.",
     "applicationsTitle": "Praktische Anwendungen",
     "appDesc1": "Die bijektive Zahldarstellung ist mehr als eine mathematische Kuriosität; sie löst reale Probleme in der Informatik.",
-    "appList": [
-        "<strong>Tabellenkalkulationsspalten:</strong> Microsoft Excel und Google Sheets verwenden ein bijektives System zur Basis 26 (A-Z) für Spalten. Nach Z kommt AA, dann AB, AC und so weiter. Dies ist ein perfektes, intuitives Beispiel aus der realen Welt, bei dem es keine \"nullte\" Spalte gibt.",
-        "<strong>URL-Verkürzer:</strong> Dienste wie bit.ly müssen die kürzestmögliche eindeutige Zeichenfolge für Milliarden von Links erstellen. Ein bijektives System zur Basis 62 (<code>a-z, A-Z, 0-9</code>) kann eine riesige Datenbank-ID wie <code>2,183,401,055,849</code> als die kurze, saubere Zeichenfolge <code>`short`</code> darstellen."
-    ],
+    "appSpreadsheet": "<strong>Tabellenkalkulationsspalten:</strong> Microsoft Excel und Google Sheets verwenden ein bijektives System zur Basis 26 (A-Z) für Spalten. Nach Z kommt AA, dann AB, AC und so weiter. Dies ist ein perfektes, intuitives Beispiel aus der realen Welt, bei dem es keine \"nullte\" Spalte gibt.",
+    "appUrl": "<strong>URL-Verkürzer:</strong> Dienste wie bit.ly müssen die kürzestmögliche eindeutige Zeichenfolge für Milliarden von Links erstellen. Ein bijektives System zur Basis 62 (<code>a-z, A-Z, 0-9</code>) kann eine riesige Datenbank-ID wie <code>2,183,401,055,849</code> als die kurze, saubere Zeichenfolge <code>`short`</code> darstellen.",
     "advancedTitle": "Tiefere mathematische Zusammenhänge",
     "advFactorizationTitle": "Eine Anmerkung zu \"zusammengesetzten\" Ziffern und Faktorisierung",
     "advFactorizationDesc": "Ein scharfsinniger Beobachter der Multiplikationstabelle wird etwas Merkwürdiges feststellen: <code>2 × 3 = 6</code>, aber auch <code>1 × 6 = 6</code>. In unserem Standard-Zahlensystem hat die Zahl 6 eine eindeutige Primfaktorzerlegung (2 und 3). Im bijektiven System jedoch <strong>verhält sich die Ziffer <code>6</code> selbst wie eine zusammengesetzte Zahl</strong>. Die Ziffern <code>1, 2, 3, 4, 5</code> sind die \"Primzahlen\" dieser einstelligen Welt. Dies offenbart eine tiefe Eigenschaft: Die Menge der einzelnen Ziffern in einem bijektiven System bildet keinen <a href=\"https://en.wikipedia.org/wiki/Unique_factorization_domain\" target=\"_blank\">eindeutigen Faktorisierungsbereich</a>. Dies ist eine direkte Folge der Verwendung der Basis `k` als Ziffer anstelle von `0`. Es bricht das System nicht, sondern hebt seine einzigartige algebraische Struktur hervor.",

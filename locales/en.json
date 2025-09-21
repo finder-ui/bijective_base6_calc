@@ -31,7 +31,7 @@
     "algoDesc1": "The trick to converting from decimal to bijective base-6 is to temporarily shift the number system. Computers naturally work with remainders from 0 to 5, but our digits are 1 to 6. We bridge this gap by subtracting 1 before each calculation.",
     "algoExampleTitle": "Let's convert the decimal number <strong>43</strong>:",
     "algoSteps": [
-        "<strong>Step 1:</strong> Start with 43. Subtract 1: <code>43 - 1 = 42</code>. Now, find the remainder when dividing by 6. <code>42 % 6 = 0</code>. The 0th digit in our character set <code>\"123456\"</code> is '1'. Our first result digit is <strong>1</strong>. The new number for the next step is <code>(42 - 0) / 6 = 7</code>.",
+        "<strong>Step 1:</strong> Start with 43. Subtract 1: <code>43 - 1 = 42</code>. Now, find the remainder when dividing by 6. <code>42 % 6 = 0</code>. The 0th digit in our character set <code>\\\"123456\\\"</code> is '1'. Our first result digit is <strong>1</strong>. The new number for the next step is <code>(42 - 0) / 6 = 7</code>.",
         "<strong>Step 2:</strong> Start with 7. Subtract 1: <code>7 - 1 = 6</code>. Now, find the remainder. <code>6 % 6 = 0</code>. The 0th digit is again '1'. Our second result digit is <strong>1</strong>. The new number is <code>(6 - 0) / 6 = 1</code>.",
         "<strong>Step 3:</strong> Start with 1. Subtract 1: <code>1 - 1 = 0</code>. Now, find the remainder. <code>0 % 6 = 0</code>. The 0th digit is again '1'. Our third result digit is <strong>1</strong>. The new number is <code>(0 - 0) / 6 = 0</code>."
     ],
