@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            const data = await safeFetch("/convert-all", {
+            const data = await safeFetch("/convert", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ decimal_value: val })

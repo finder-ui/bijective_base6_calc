@@ -42,6 +42,9 @@ class AllOpsRequest(BaseModel):
     num1: str
     num2: str
 
+class ConversionRequest(BaseModel):
+    decimal_value: int
+
 # --- FastAPI Endpoints ---
 
 @app.get("/", response_class=HTMLResponse)
@@ -55,6 +58,23 @@ async def get_locale(lang: str):
     if os.path.exists(file_path):
         return FileResponse(file_path)
     return {"error": "Language not found"}, 404
+
+
+@app.post("/convert")
+async def convert_decimal(req: ConversionRequest):
+    try:
+        dec_val = req.decimal_value
+        if dec_val <= 0:
+            return {"error": "Please enter a positive number."}
+
+        return {
+            "decimal": dec_val,
+            "binary": bin(dec_val)[2:],
+            "hexadecimal": hex(dec_val)[2:].upper(),
+            "bijective_base6": to_bijective_base6(dec_val)
+        }
+    except Exception as e:
+        return {"error": f"An unexpected error occurred: {e}"}
 
 
 @app.post("/calculate-all")
