@@ -19,10 +19,9 @@ function getRainColor() {
 }
 
 function draw() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-    if (document.documentElement.getAttribute('data-theme') === 'light') {
-        ctx.fillStyle = 'rgba(248, 249, 250, 0.05)';
-    }
+    // Use a semi-transparent fill to create the fading trail effect
+    const theme = document.documentElement.getAttribute('data-theme');
+    ctx.fillStyle = theme === 'dark' ? 'rgba(10, 25, 47, 0.05)' : 'rgba(248, 249, 250, 0.05)';
     ctx.fillRect(0, 0, width, height);
 
     ctx.fillStyle = getRainColor();
@@ -32,6 +31,7 @@ function draw() {
         const text = chars[Math.floor(Math.random() * chars.length)];
         ctx.fillText(text, i * 20, drops[i] * 20);
 
+        // Reset drop to the top randomly to make the rain effect uneven
         if (drops[i] * 20 > height && Math.random() > 0.975) {
             drops[i] = 0;
         }
@@ -49,5 +49,5 @@ window.addEventListener('resize', () => {
     }
 });
 
-// Start the animation
+// Start the animation loop
 setInterval(draw, 33);
