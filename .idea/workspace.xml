@@ -5,7 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50350d4a-48f4-48cb-849b-1dff3eef744e" name="Changes" comment="stable">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/ar.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/de.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/de.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/es.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/es.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/fr.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/fr.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/he.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/he.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/locales/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/ru.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,23 +163,7 @@
       <updated>1757185942094</updated>
       <workItem from="1758425240653" duration="1916000" />
       <workItem from="1758427334375" duration="9393000" />
-      <workItem from="1758437221260" duration="8074000" />
-    </task>
-    <task id="LOCAL‎-00088" summary="dev">
-      <option name="closed" value="true" />
-      <created>1758432011215</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL‎-00088" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758432011215</updated>
-    </task>
-    <task id="LOCAL‎-00089" summary="dev">
-      <option name="closed" value="true" />
-      <created>1758432184362</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL‎-00089" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758432184362</updated>
+      <workItem from="1758437221260" duration="8405000" />
     </task>
     <task id="LOCAL‎-00090" summary="dev">
       <option name="closed" value="true" />
@@ -548,7 +541,23 @@
       <option name="project" value="LOCAL‎" />
       <updated>1758445339994</updated>
     </task>
-    <option name="localTasksCounter" value="137" />
+    <task id="LOCAL‎-00137" summary="stable">
+      <option name="closed" value="true" />
+      <created>1758445360899</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL‎-00137" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758445360899</updated>
+    </task>
+    <task id="LOCAL‎-00138" summary="stable">
+      <option name="closed" value="true" />
+      <created>1758445443648</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL‎-00138" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758445443648</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
