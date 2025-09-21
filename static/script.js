@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('language', lang);
             updateSeoTags(lang);
             updateLangSwitcher(lang);
+            updateDynamicComponents(); // Re-render components that need it
         } catch (error) {
             console.error(`Fatal error loading language file for ${lang}:`, error);
         }
@@ -80,6 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
             const key = el.getAttribute('data-i18n-aria-label');
             if (data[key]) el.setAttribute('aria-label', data[key]);
+        });
+        document.querySelectorAll('[data-i18n-list]').forEach(el => {
+            const key = el.getAttribute('data-i18n-list');
+            if (data[key] && Array.isArray(data[key])) el.innerHTML = data[key].map(item => `<li>${item}</li>`).join('');
         });
     }
 
@@ -267,6 +272,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const mathCheckbox = document.getElementById('quiz-type-math');
         let correctAnswer = '';
         let autoNextTimer = null;
+        // Store the state of the current quiz to allow for re-rendering on language change
+        let currentQuizState = {
+            question: null,
+            feedback: null,
+            isAnswered: false
+        };
 
         function generateQuestion() {
             const maxNum = parseInt(difficultySelector.value, 10) || 12;
@@ -290,17 +301,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const op = Math.random() > 0.5 ? '+' : '×';
                 correctAnswer = (op === '+') ? toBijective(num1 + num2) : toBijective(num1 * num2);
-                questionHTML = `${i18nData.quizQuestion || 'What is'} <code>${toBijective(num1)} ${op} ${toBijective(num2)}</code>?`;
+                currentQuizState.question = { type: 'math', num1: toBijective(num1), num2: toBijective(num2), op: op };
             } else {
                 const decimalToConvert = (Math.floor(Math.random() * 1000) % maxNum) + 1;
                 correctAnswer = toBijective(decimalToConvert);
-                questionHTML = `${i18nData.quizQuestion || 'What is'} <code>${decimalToConvert}</code> in bijective base-6?`;
+                currentQuizState.question = { type: 'conversion', decimal: decimalToConvert };
             }
-
-            container.innerHTML = `<div id="quiz-question">${questionHTML}</div><div class="input-group mt-3 mx-auto" style="max-width: 300px;"><input type="text" id="quiz-answer" class="form-control" placeholder="Answer..."><button id="quiz-submit" class="btn btn-primary">${i18nData.quizSubmitBtn || 'Submit'}</button></div><div id="quiz-feedback" class="mt-3 text-center"></div>`;
-            document.getElementById('quiz-submit').addEventListener('click', checkAnswer);
-            document.getElementById('quiz-answer').addEventListener('keypress', e => { if (e.key === 'Enter') checkAnswer(); });
+            currentQuizState.feedback = null;
+            currentQuizState.isAnswered = false;
+            renderQuiz();
         }
+
+        function renderQuiz() {
+            if (!currentQuizState.question) return;
+            let questionHTML = '';
+            const q = currentQuizState.question;
+            if (q.type === 'math') {
+                questionHTML = `${i18nData.quizQuestion || 'What is'} <code>${q.num1} ${q.op} ${q.num2}</code>?`;
+            } else {
+                questionHTML = `${i18nData.quizQuestion || 'What is'} <code>${q.decimal}</code> in bijective base-6?`;
+            }
+            container.innerHTML = `<div id="quiz-question">${questionHTML}</div><div class="input-group mt-3 mx-auto" style="max-width: 300px;"><input type="text" id="quiz-answer" class="form-control" placeholder="Answer..."><button id="quiz-submit" class="btn btn-primary">${i18nData.quizSubmitBtn || 'Submit'}</button></div><div id="quiz-feedback" class="mt-3 text-center"></div>`;
+            
+            if (currentQuizState.isAnswered) {
+                const feedbackEl = document.getElementById('quiz-feedback');
+                const nextBtn = document.createElement('button');
+                nextBtn.className = 'btn btn-secondary mt-3';
+                nextBtn.textContent = i18nData.quizNextBtn || 'Next Question';
+                nextBtn.onclick = () => { clearTimeout(autoNextTimer); generateQuestion(); };
+                feedbackEl.innerHTML = currentQuizState.feedback;
+                feedbackEl.appendChild(document.createElement('br'));
+                feedbackEl.appendChild(nextBtn);
+                document.getElementById('quiz-submit').disabled = true;
+            } else {
+                document.getElementById('quiz-submit').addEventListener('click', checkAnswer);
+                document.getElementById('quiz-answer').addEventListener('keypress', e => { if (e.key === 'Enter') checkAnswer(); });
+            }
+        }
+
         function checkAnswer() {
             const userAnswer = document.getElementById('quiz-answer').value.trim();
             const feedbackEl = document.getElementById('quiz-feedback');
@@ -315,19 +353,20 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             if (userAnswer.toUpperCase() === correctAnswer) {
-                feedbackEl.innerHTML = `<span class="feedback-correct">${i18nData.quizCorrectFeedback || 'Correct! 🎉'}</span>`;
+                currentQuizState.feedback = `<span class="feedback-correct">${i18nData.quizCorrectFeedback || 'Correct! 🎉'}</span>`;
                 autoNextTimer = setTimeout(generateQuestion, 5000); // Auto-advance after 5s
             } else {
-                feedbackEl.innerHTML = `<span class="feedback-incorrect">${i18nData.quizIncorrectFeedback || 'Not quite! The correct answer was'} <strong>${correctAnswer}</strong>.</span>`;
+                currentQuizState.feedback = `<span class="feedback-incorrect">${i18nData.quizIncorrectFeedback || 'Not quite! The correct answer was'} <strong>${correctAnswer}</strong>.</span>`;
             }
-            feedbackEl.appendChild(document.createElement('br'));
-            feedbackEl.appendChild(nextBtn);
+            currentQuizState.isAnswered = true;
+            renderQuiz();
         }
 
         difficultySelector.addEventListener('change', () => { clearTimeout(autoNextTimer); generateQuestion(); });
         conversionCheckbox.addEventListener('change', () => { clearTimeout(autoNextTimer); generateQuestion(); });
         mathCheckbox.addEventListener('change', () => { clearTimeout(autoNextTimer); generateQuestion(); });
         generateQuestion();
+        return { render: renderQuiz }; // Return the render function
     }
 
     // --- Initial Load ---
@@ -335,9 +374,16 @@ document.addEventListener('DOMContentLoaded', () => {
         createLangSwitcher();
         setupLiveConverter();
         setupVisualizer();
-        setupQuiz();
+        const quiz = setupQuiz();
+        window.dynamicComponents = { quiz }; // Store the quiz component globally
         const initialLang = localStorage.getItem('language') || 'en';
         await setLanguage(initialLang);
+    }
+
+    function updateDynamicComponents() {
+        if (window.dynamicComponents && window.dynamicComponents.quiz) {
+            window.dynamicComponents.quiz.render();
+        }
     }
 
     initialize();

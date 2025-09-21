@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.getElementById('matrix-background');
+    const canvas = document.getElementById('background-animation');
     const ctx = canvas.getContext('2d');
 
     // Set canvas to full screen
