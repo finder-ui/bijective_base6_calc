@@ -13,7 +13,7 @@
     --input-border-color: #ced4da;
     --final-answer-color: #28a745;
     --error-color: #dc3545;
-    --calc-btn-text-color: #ffffff;
+    --calc-btn-text-color: #ffffff; /* CORRECTED: White text for light theme button */
     --rain-color: var(--accent-color);
 }
 
@@ -32,7 +32,7 @@
     --input-border-color: #233554;
     --final-answer-color: #64ffda;
     --error-color: #ff7b72;
-    --calc-btn-text-color: #0a192f;
+    --calc-btn-text-color: #0a192f; /* Dark text for dark theme button */
     --rain-color: var(--accent-color);
 }
 
