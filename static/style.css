@@ -4,7 +4,7 @@
     --text-color: #B4BCCD; /* A softer, less bright grey for main text */
     --text-color-muted: #b0b0b0; /* A lighter, more neutral grey for hints */
     --section-bg-color: #454E5F; /* Brightened */
-    --header-color: #2A2E37; /* Brightened near-black */
+    --header-color: #ECEFF4; /* A bright, clean off-white for titles */
     --accent-color: #88C0D0;
     --accent-hover-color: #81A1C1;
     --border-color: #5D677C; /* Brightened */
@@ -147,7 +147,7 @@ footer a {
 .nav-tabs .nav-link {
     background-color: transparent;
     border-bottom-width: 2px;
-    color: var(--header-color);
+    color: var(--text-color-muted);
     font-weight: 500;
 }
 
