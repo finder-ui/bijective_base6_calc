@@ -38,7 +38,7 @@
     "appUrl": "<strong>URL Shorteners:</strong> Services like bit.ly use a bijective base-62 system (<code>a-z, A-Z, 0-9</code>) to create the shortest possible unique strings for billions of links.",
     "advancedTitle": "Deeper Mathematical Connections",
     "advFactorizationTitle": "A Note on 'Composite' Digits",
-    "advFactorizationDesc": "An astute observer will notice that <code>2 × 3 = 6</code>, but also <code>1 × 6 = 6</code>. In this system, the digit <strong><code>6</code></strong> itself acts like a composite number, and the digits <code>1, 2, 3, 4, 5</code> are its \"primes\". This is a direct consequence of using the base `k` as a digit instead of `0` and highlights the system's unique algebraic structure.",
+    "advFactorizationDesc": "An astute observer will notice that <code>2 × 3 = 6</code>, but also <code>1 × 6 = 6</code>. In this system, the digit <strong><code>6</code></strong> itself acts like a composite number, and the digits <code>1, 2, 3, 4, 5</code> are its \"primes\". This reveals a deep property: the set of single digits in a bijective system does not form a <a href=\"https://en.wikipedia.org/wiki/Unique_factorization_domain\" target=\"_blank\">Unique Factorization Domain</a>. This is a direct consequence of using the base `k` as a digit instead of `0` and highlights the system's unique algebraic structure.",
     "advFormalLangTitle": "Connection to Formal Language Theory",
     "advFormalLangDesc": "The bijective base-6 system is a perfect, ordered enumeration of all possible strings from the alphabet {1, 2, 3, 4, 5, 6}. This is a fundamental concept in computability theory for uniquely identifying any sequence of choices.",
     "advGeoTitle": "Geometric Interpretation: The Infinite Tree",
