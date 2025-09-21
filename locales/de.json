@@ -46,6 +46,8 @@
     "difficultyMedium": "Mittel (1-24)",
     "difficultyHard": "Schwer (1-50)",
     "quizQuestion": "Was ist",
+    "quizTypeConversion": "Umwandlung",
+    "quizTypeMath": "Mathe",
     "quizSubmitBtn": "Senden",
     "quizCorrectFeedback": "Richtig! 🎉",
     "quizIncorrectFeedback": "Nicht ganz! Die richtige Antwort war",

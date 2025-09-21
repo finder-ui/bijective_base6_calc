@@ -263,17 +263,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById('quiz-container');
         if (!container) return;
         const difficultySelector = document.getElementById('difficulty-range');
+        const conversionCheckbox = document.getElementById('quiz-type-conversion');
+        const mathCheckbox = document.getElementById('quiz-type-math');
         let correctAnswer = '';
         let autoNextTimer = null;
 
         function generateQuestion() {
             const maxNum = parseInt(difficultySelector.value, 10) || 12;
             let questionHTML = '';
+            
+            const problemTypes = [];
+            if (conversionCheckbox.checked) problemTypes.push('conversion');
+            if (mathCheckbox.checked) problemTypes.push('math');
 
-            // Randomly choose between a math problem and a conversion problem
-            if (Math.random() > 0.5) {
-                const num1 = (Math.floor(Math.random()) % maxNum) + 1;
-                const num2 = (Math.floor(Math.random()) % maxNum) + 1;
+            // If no types are selected, default to both to avoid an empty state, and check the boxes in the UI.
+            if (problemTypes.length === 0) {
+                conversionCheckbox.checked = true;
+                mathCheckbox.checked = true;
+                problemTypes.push('conversion', 'math');
+            }
+            const chosenType = problemTypes[Math.floor(Math.random() * problemTypes.length)];
+
+            if (chosenType === 'math') {
+                const num1 = Math.floor(Math.random() * maxNum) + 1;
+                const num2 = Math.floor(Math.random() * maxNum) + 1;
 
                 const op = Math.random() > 0.5 ? '+' : '×';
                 correctAnswer = (op === '+') ? toBijective(num1 + num2) : toBijective(num1 * num2);
@@ -312,6 +325,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         difficultySelector.addEventListener('change', () => { clearTimeout(autoNextTimer); generateQuestion(); });
+        conversionCheckbox.addEventListener('change', () => { clearTimeout(autoNextTimer); generateQuestion(); });
+        mathCheckbox.addEventListener('change', () => { clearTimeout(autoNextTimer); generateQuestion(); });
         generateQuestion();
     }
 

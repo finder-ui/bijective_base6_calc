@@ -46,6 +46,8 @@
     "difficultyMedium": "متوسط (1-24)",
     "difficultyHard": "صعب (1-50)",
     "quizQuestion": "ما هو",
+    "quizTypeConversion": "تحويل",
+    "quizTypeMath": "رياضيات",
     "quizSubmitBtn": "إرسال",
     "quizCorrectFeedback": "صحيح! 🎉",
     "quizIncorrectFeedback": "ليس تماما! الإجابة الصحيحة كانت",
