@@ -36,85 +36,82 @@
     --rain-color: var(--accent-color);
 }
 
+/* --- Base & Animation --- */
 body {
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
     font-family: 'Roboto', sans-serif;
-    line-height: 1.6;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    margin: 0;
-    padding: 10px;
     transition: background-color 0.3s, color 0.3s;
 }
 
 #background-animation {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     z-index: -1;
 }
 
-.container {
-    width: 100%;
-    max-width: 900px;
-    margin: 20px auto;
-    position: relative;
-    z-index: 1;
+.container { z-index: 1; position: relative; }
+
+/* --- Theming for Bootstrap Components --- */
+.nav-tabs .nav-link {
+    background-color: transparent;
+    border-color: var(--border-color);
+    color: var(--text-color-muted);
 }
 
-/* --- Header, Footer, Donation --- */
-header { text-align: center; padding-bottom: 20px; margin-bottom: 30px; }
-header h1 { color: var(--header-color); font-size: 2em; margin: 0; font-weight: 500; }
-footer, .donation-section { text-align: center; margin: 20px 0; }
-footer { padding: 10px; color: var(--text-color-muted); font-size: 0.9em; }
-footer a { color: var(--accent-color); text-decoration: none; }
-footer a:hover { text-decoration: underline; }
-.donation-button { display: inline-block; padding: 12px 25px; font-size: 1.1em; font-weight: bold; border: 2px solid var(--final-answer-color); border-radius: 5px; cursor: pointer; background-color: transparent; color: var(--final-answer-color); text-decoration: none; transition: all 0.2s; }
-.donation-button:hover { background-color: var(--final-answer-color); color: var(--section-bg-color); box-shadow: 0 0 15px var(--final-answer-color); }
-
-/* --- Theme Switcher & Tabs --- */
-#theme-switcher { position: fixed; top: 15px; left: 15px; width: 45px; height: 45px; background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.2em; z-index: 1000; }
-.tab-nav { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-.tab-link { padding: 8px 15px; cursor: pointer; border: 1px solid var(--border-color); border-radius: 5px; background-color: var(--section-bg-color); color: var(--text-color-muted); font-size: 0.9em; font-weight: 500; transition: all 0.2s; }
-.tab-link:hover { color: var(--accent-color); border-color: var(--accent-color); }
-.tab-link.active { color: var(--calc-btn-text-color); background-color: var(--accent-color); border-color: var(--accent-color); font-weight: bold; }
-.tab-content { display: none; }
-.tab-content.active { display: block; }
-
-section { background-color: var(--section-bg-color); padding: 20px; border-radius: 10px; border: 1px solid var(--border-color); margin-bottom: 30px; }
-h2 { font-size: 1.3em; color: var(--accent-color); font-family: var(--font-mono); margin-top: 0; margin-bottom: 20px; }
-
-/* --- Grids and Tables --- */
-.result-grid, #ops-results-grid { display: grid; gap: 15px; grid-template-columns: 1fr; }
-.table-container { overflow-x: auto; padding: 10px; background-color: var(--bg-color); border-radius: 5px; }
-table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); }
-table th, table td { padding: 4px 6px; text-align: center; border: 1px solid var(--border-color); font-size: 0.8em; }
-table th { background-color: var(--code-bg-color); color: var(--accent-color); }
-
-/* --- Media Query for Larger Screens --- */
-@media (min-width: 768px) {
-    body { padding: 20px; }
-    header h1 { font-size: 2.5em; }
-    .tab-link { padding: 10px 20px; font-size: 1em; }
-    .result-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-    #ops-results-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-    table th, table td { padding: 8px 12px; font-size: 0.9em; }
+.nav-tabs .nav-link.active {
+    background-color: var(--accent-color);
+    color: var(--calc-btn-text-color);
+    border-color: var(--accent-color);
 }
 
-/* Other styles from previous version... */
-code { background-color: var(--code-bg-color); color: var(--accent-color); padding: 4px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.95em; }
-.input-group, .converter-input-group { margin-bottom: 20px; }
-.input-group input, #decimal-input { width: 100%; padding: 12px; font-size: 1.1em; font-family: var(--font-mono); border: 1px solid var(--input-border-color); background-color: var(--input-bg-color); color: var(--text-color); border-radius: 5px; box-sizing: border-box; }
-.input-group input:focus, #decimal-input:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 25%, transparent); }
-#calculate-all-btn { width: 100%; padding: 12px 30px; font-size: 1.2em; font-weight: bold; border: 2px solid var(--accent-color); border-radius: 5px; cursor: pointer; background-color: var(--accent-color); color: var(--calc-btn-text-color); transition: background-color 0.2s, transform 0.1s; }
-#calculate-all-btn:hover { background-color: var(--accent-hover-color); border-color: var(--accent-hover-color); }
-#result-area { opacity: 0; }
-#result-area.visible { animation: fadeInUp 0.5s ease-out forwards; }
+.tab-content { background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-top: none; border-radius: 0 0 .25rem .25rem;}
+section { box-shadow: none; border: none; }
+
+.form-control {
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    border-color: var(--input-border-color);
+    font-family: var(--font-mono);
+}
+.form-control:focus { 
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 25%, transparent);
+}
+
+.btn-primary { 
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--calc-btn-text-color);
+}
+.btn-primary:hover { 
+    background-color: var(--accent-hover-color);
+    border-color: var(--accent-hover-color);
+}
+
+/* --- Custom Components & Styles --- */
+h1, h2 { color: var(--header-color); }
+h2 { color: var(--accent-color); font-family: var(--font-mono); }
+code { background-color: var(--code-bg-color); color: var(--accent-color); padding: .2em .4em; border-radius: .25rem; }
+
+#theme-switcher { position: fixed; top: 20px; left: 20px; width: 50px; height: 50px; background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.5em; z-index: 1000; }
+#theme-switcher:hover { box-shadow: 0 0 10px var(--accent-color); }
+
+#result-area { opacity: 0; transition: opacity 0.5s; }
+#result-area.visible { opacity: 1; }
+
 .op-result-item { background-color: var(--bg-color); padding: 15px; border-radius: 5px; border: 1px solid var(--border-color); text-align: center; }
-.op-problem { font-family: var(--font-mono); color: var(--text-color-muted); font-size: 1em; margin-bottom: 10px; }
-.op-answer { font-family: var(--font-mono); font-size: 1.6em; font-weight: bold; color: var(--final-answer-color); word-wrap: break-word; }
-#error-display { color: var(--error-color); font-weight: bold; font-size: 1.1em; text-align: center; }
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.op-problem { font-family: var(--font-mono); color: var(--text-color-muted); }
+.op-answer { font-family: var(--font-mono); font-size: 1.6em; font-weight: bold; color: var(--final-answer-color); }
+
+.donation-button { display: inline-block; padding: 12px 25px; font-size: 1.1em; font-weight: bold; border: 2px solid var(--final-answer-color); border-radius: 5px; color: var(--final-answer-color); text-decoration: none; transition: all 0.2s; }
+.donation-button:hover { background-color: var(--final-answer-color); color: var(--section-bg-color); }
+
+footer a { color: var(--accent-color); }
+/* Fix for general link colors */
+section a { color: var(--text-color); }
+
 .shake { animation: shake 0.5s ease-in-out; }
 @keyframes shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-10px); } 40%, 80% { transform: translateX(10px); } }
