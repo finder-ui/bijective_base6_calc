@@ -1,25 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
     const htmlElement = document.documentElement;
 
-    // --- Theme Switcher Logic (3-State Cycle) ---
+    // --- Theme Switcher Logic (with Null Check) ---
     const themeSwitcher = document.getElementById('theme-switcher');
-    const themes = ['light', 'dark', 'dark-green'];
-    // This object maps the CURRENT theme to the ICON that represents the NEXT theme.
-    const nextThemeIcons = { 'light': '🌙', 'dark': '🟢', 'dark-green': '☀️' };
+    if (themeSwitcher) {
+        const themes = ['light', 'dark', 'dark-green'];
+        const themeIcons = { 'light': '🌙', 'dark': '🟢', 'dark-green': '☀️' };
 
-    function setTheme(theme) {
-        htmlElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-        // The icon shows what you will switch TO.
-        themeSwitcher.innerHTML = nextThemeIcons[theme] || '🌙';
+        function setTheme(theme) {
+            htmlElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            const currentIndex = themes.indexOf(theme);
+            const nextIndex = (currentIndex + 1) % themes.length;
+            const nextTheme = themes[nextIndex];
+            themeSwitcher.innerHTML = themeIcons[nextTheme] || '🌙';
+        }
+
+        themeSwitcher.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
+            const currentIndex = themes.indexOf(currentTheme);
+            const nextIndex = (currentIndex + 1) % themes.length;
+            setTheme(themes[nextIndex]);
+        });
+
+        // Set initial theme on load
+        const initialTheme = localStorage.getItem('theme') || 'light';
+        setTheme(initialTheme);
     }
-
-    themeSwitcher.addEventListener('click', () => {
-        const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
-        const currentIndex = themes.indexOf(currentTheme);
-        const nextIndex = (currentIndex + 1) % themes.length;
-        setTheme(themes[nextIndex]);
-    });
 
     // --- Internationalization (i18n) Logic ---
     const supportedLangs = {
@@ -81,8 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setupLangSwitcher();
     const initialLang = localStorage.getItem('language') || 'en';
     setLanguage(initialLang);
-    const initialTheme = localStorage.getItem('theme') || 'light';
-    setTheme(initialTheme);
 
     // ... (rest of the calculator, table, and other logic remains the same) ...
 });
