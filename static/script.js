@@ -18,20 +18,24 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const response = await fetch(`/locales/${lang}.json`);
-        if (!response.ok) {
-            console.error(`Failed to load locale file for ${lang}`);
-            return;
-        }
-        const langData = await response.json();
-        
-        applyTranslations(langData);
-        
-        htmlElement.setAttribute('lang', lang);
-        htmlElement.dir = (lang === 'he' || lang === 'ar') ? 'rtl' : 'ltr';
+        try {
+            const response = await fetch(`/locales/${lang}.json`);
+            if (!response.ok) {
+                console.error(`Failed to load locale file for ${lang}`);
+                return;
+            }
+            const langData = await response.json();
+            
+            applyTranslations(langData);
+            
+            htmlElement.setAttribute('lang', lang);
+            htmlElement.dir = (lang === 'he' || lang === 'ar') ? 'rtl' : 'ltr';
 
-        localStorage.setItem('language', lang);
-        updateLangSwitcher(lang);
+            localStorage.setItem('language', lang);
+            updateLangSwitcher(lang);
+        } catch (error) {
+            console.error(`Error setting language to ${lang}:`, error);
+        }
     }
 
     function applyTranslations(data) {
@@ -51,9 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createLangSwitcher() {
         const langSwitcherContainer = document.getElementById('lang-switcher-container');
+        if (!langSwitcherContainer) return;
         langSwitcherContainer.innerHTML = ''; // Clear previous buttons
 
-        for (const [code, details] of Object.entries(supportedLangs)) {
+        for (const code in supportedLangs) {
+            const details = supportedLangs[code];
             const btn = document.createElement('span');
             btn.className = 'lang-btn';
             btn.textContent = details.flag;
@@ -61,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.setAttribute('role', 'button');
             btn.setAttribute('aria-label', `Switch to ${details.name}`);
             
-            // CORRECTED: Ensure event listener is added to every button
+            // CORRECTED: This ensures a new, correct event listener is created for each button.
             btn.addEventListener('click', () => {
                 setLanguage(code);
             });
@@ -91,17 +97,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Tab & Table Logic ---
     const tablesTab = document.getElementById('tables-tab');
     let tablesData = null;
-    tablesTab.addEventListener('shown.bs.tab', async () => {
-        if (!tablesData) {
-            const addContainer = document.getElementById('addition-table-container');
-            const mulContainer = document.getElementById('multiplication-table-container');
-            addContainer.innerHTML = '<p class="text-center">Loading...</p>';
-            const response = await fetch('/get-tables');
-            tablesData = await response.json();
-            renderTable(tablesData.header, tablesData.addition, addContainer);
-            renderTable(tablesData.header, tablesData.multiplication, mulContainer);
-        }
-    });
+    if (tablesTab) {
+        tablesTab.addEventListener('shown.bs.tab', async () => {
+            if (!tablesData) {
+                const addContainer = document.getElementById('addition-table-container');
+                const mulContainer = document.getElementById('multiplication-table-container');
+                addContainer.innerHTML = '<p class="text-center">Loading...</p>';
+                const response = await fetch('/get-tables');
+                tablesData = await response.json();
+                renderTable(tablesData.header, tablesData.addition, addContainer);
+                renderTable(tablesData.header, tablesData.multiplication, mulContainer);
+            }
+        });
+    }
 
     function renderTable(header, data, container) {
         let tableHTML = '<table class="table table-bordered table-hover"><thead><tr><th>#</th>';
@@ -112,19 +120,22 @@ document.addEventListener('DOMContentLoaded', () => {
             row.forEach(cell => tableHTML += `<td>${cell}</td>`);
             tableHTML += '</tr>';
         });
+        tableHTML += '</tbody></table>';
         container.innerHTML = tableHTML;
     }
 
     // --- Calculator & Converter Logic ---
     const decimalInput = document.getElementById('decimal-input');
     const conversionResults = document.getElementById('conversion-results');
-    decimalInput.addEventListener('input', async (e) => {
-        const decimalValue = parseInt(e.target.value, 10);
-        if (!decimalValue || decimalValue <= 0) { conversionResults.innerHTML = ''; return; }
-        const response = await fetch('/convert-all', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ decimal_value: decimalValue }) });
-        const data = await response.json();
-        conversionResults.innerHTML = data.error ? `<div class="text-danger">${data.error}</div>` : `<div class="result-grid"><div><strong>Decimal:</strong> <code>${data.decimal}</code></div><div><strong>Binary:</strong> <code>${data.binary}</code></div><div><strong>Hexadecimal:</strong> <code>${data.hexadecimal}</code></div><div><strong>Bijective Base-6:</strong> <code>${data.bijective_base6}</code></div></div>`;
-    });
+    if (decimalInput) {
+        decimalInput.addEventListener('input', async (e) => {
+            const decimalValue = parseInt(e.target.value, 10);
+            if (!decimalValue || decimalValue <= 0) { conversionResults.innerHTML = ''; return; }
+            const response = await fetch('/convert-all', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ decimal_value: decimalValue }) });
+            const data = await response.json();
+            conversionResults.innerHTML = data.error ? `<div class="text-danger">${data.error}</div>` : `<div class="result-grid"><div><strong>Decimal:</strong> <code>${data.decimal}</code></div><div><strong>Binary:</strong> <code>${data.binary}</code></div><div><strong>Hexadecimal:</strong> <code>${data.hexadecimal}</code></div><div><strong>Bijective Base-6:</strong> <code>${data.bijective_base6}</code></div></div>`;
+        });
+    }
 
     const num1Input = document.getElementById('num1');
     const num2Input = document.getElementById('num2');
@@ -133,32 +144,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const opsResultsGrid = document.getElementById('ops-results-grid');
     const errorDisplay = document.getElementById('error-display');
 
-    calculateAllBtn.addEventListener('click', () => {
-        const num1 = num1Input.value.trim();
-        const num2 = num2Input.value.trim();
-        clearCalculatorResults();
-        let hasError = false;
-        if (!num1) { triggerShake(num1Input); hasError = true; }
-        if (!num2) { triggerShake(num2Input); hasError = true; }
+    if (calculateAllBtn) {
+        calculateAllBtn.addEventListener('click', () => {
+            const num1 = num1Input.value.trim();
+            const num2 = num2Input.value.trim();
+            clearCalculatorResults();
+            let hasError = false;
+            if (!num1) { triggerShake(num1Input); hasError = true; }
+            if (!num2) { triggerShake(num2Input); hasError = true; }
 
-        setTimeout(async () => {
-            if (hasError) {
-                errorDisplay.textContent = 'Please enter both numbers.';
+            setTimeout(async () => {
+                if (hasError) {
+                    errorDisplay.textContent = 'Please enter both numbers.';
+                    resultArea.classList.add('visible');
+                    return;
+                }
+                const response = await fetch('/calculate-all', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ num1, num2 }) });
+                const data = await response.json();
+                if (data.error) {
+                    errorDisplay.textContent = `Error: ${data.error}`;
+                } else {
+                    displayAllOpsResults(num1, num2, data);
+                }
                 resultArea.classList.add('visible');
-                return;
-            }
-            const response = await fetch('/calculate-all', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ num1, num2 }) });
-            const data = await response.json();
-            if (data.error) {
-                errorDisplay.textContent = `Error: ${data.error}`;
-            } else {
-                displayAllOpsResults(num1, num2, data);
-            }
-            resultArea.classList.add('visible');
-        }, 10);
-    });
+            }, 10);
+        });
+    }
 
-    function clearCalculatorResults() { resultArea.classList.remove('visible'); opsResultsGrid.innerHTML = ''; errorDisplay.innerHTML = ''; }
+    function clearCalculatorResults() { if(resultArea) { resultArea.classList.remove('visible'); opsResultsGrid.innerHTML = ''; errorDisplay.innerHTML = ''; } }
     function triggerShake(element) { element.classList.add('shake'); setTimeout(() => { element.classList.remove('shake'); }, 500); }
 
     function displayAllOpsResults(num1, num2, data) {
