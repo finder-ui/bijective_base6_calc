@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50350d4a-48f4-48cb-849b-1dff3eef744e" name="Changes" comment="checkbox">
+    <list default="true" id="50350d4a-48f4-48cb-849b-1dff3eef744e" name="Changes" comment="רליז">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/ar.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/de.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/de.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/es.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/es.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/fr.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/fr.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/he.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/he.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/ru.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +44,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Python tests in test_app.py.executor&quot;: &quot;Run&quot;,
     &quot;Python.app.executor&quot;: &quot;Run&quot;,
     &quot;Python.desktop_app.executor&quot;: &quot;Run&quot;,
     &quot;Python.telegram_ai.executor&quot;: &quot;Run&quot;,
@@ -178,39 +173,7 @@
       <updated>1757185942094</updated>
       <workItem from="1758425240653" duration="1916000" />
       <workItem from="1758427334375" duration="9393000" />
-      <workItem from="1758437221260" duration="9608000" />
-    </task>
-    <task id="LOCAL‎-00098" summary="dev">
-      <option name="closed" value="true" />
-      <created>1758432971952</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL‎-00098" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758432971952</updated>
-    </task>
-    <task id="LOCAL‎-00099" summary="dev">
-      <option name="closed" value="true" />
-      <created>1758433044545</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL‎-00099" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758433044545</updated>
-    </task>
-    <task id="LOCAL‎-00100" summary="dev">
-      <option name="closed" value="true" />
-      <created>1758433150228</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL‎-00100" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758433150228</updated>
-    </task>
-    <task id="LOCAL‎-00101" summary="dev">
-      <option name="closed" value="true" />
-      <created>1758433194091</created>
-      <option name="number" value="00101" />
-      <option name="presentableId" value="LOCAL‎-00101" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758433194091</updated>
+      <workItem from="1758437221260" duration="10450000" />
     </task>
     <task id="LOCAL‎-00102" summary="dev">
       <option name="closed" value="true" />
@@ -572,7 +535,39 @@
       <option name="project" value="LOCAL‎" />
       <updated>1758446765830</updated>
     </task>
-    <option name="localTasksCounter" value="147" />
+    <task id="LOCAL‎-00147" summary="רליז">
+      <option name="closed" value="true" />
+      <created>1758446918251</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL‎-00147" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758446918251</updated>
+    </task>
+    <task id="LOCAL‎-00148" summary="רליז">
+      <option name="closed" value="true" />
+      <created>1758447033127</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL‎-00148" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758447033127</updated>
+    </task>
+    <task id="LOCAL‎-00149" summary="רליז">
+      <option name="closed" value="true" />
+      <created>1758447110137</created>
+      <option name="number" value="00149" />
+      <option name="presentableId" value="LOCAL‎-00149" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758447110137</updated>
+    </task>
+    <task id="LOCAL‎-00150" summary="רליז">
+      <option name="closed" value="true" />
+      <created>1758447184962</created>
+      <option name="number" value="00150" />
+      <option name="presentableId" value="LOCAL‎-00150" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758447184962</updated>
+    </task>
+    <option name="localTasksCounter" value="151" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -587,6 +582,10 @@
     <MESSAGE value="stable!" />
     <MESSAGE value="bg" />
     <MESSAGE value="checkbox" />
-    <option name="LAST_COMMIT_MESSAGE" value="checkbox" />
+    <MESSAGE value="רליז" />
+    <option name="LAST_COMMIT_MESSAGE" value="רליז" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/PythonProject$.coverage" NAME=" Coverage Results" MODIFIED="1758447187993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
