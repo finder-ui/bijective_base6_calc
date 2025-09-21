@@ -29,7 +29,7 @@
     "applicationsTitle": "Key Benefits & Applications",
     "appUnambiguous": "<strong>Unambiguous & Human-Friendly:</strong> Perfect for product codes, serial numbers, or URL shorteners that can never be mistyped due to a missing or extra zero.",
     "appCompact": "<strong>Compact but Readable:</strong> More compact than binary but often easier for humans to parse at a glance than hexadecimal.",
-    "appCrypto": "<strong>Natural Fit for Cryptography:</strong> Guarantees one-to-one mappings (canonical representation), which is critical for preventing subtle bugs and security vulnerabilities in data serialization and cryptographic systems.",
+    "appCrypto": "<strong>Natural Fit for Cryptography:</strong> Guarantees one-to-one mappings (canonical representation), which is critical for preventing subtle bugs and security vulnerabilities. In a theoretical computer built on this system, the classic 'null pointer exception' (an error from accessing address 0) wouldn't exist in the same way, as the first address is 1.",
     "donationBtn": "Support this Project",
     "githubLink": "Project source available on",
     "licenseLink": "Released under the"
