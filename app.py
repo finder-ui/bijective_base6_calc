@@ -89,8 +89,8 @@ async def calculate_all_ops(problem: AllOpsRequest):
     except Exception as e: return {"error": f"An unexpected error occurred: {e}"}
 
 
-@app.post("/convert-all")
-async def convert_all_systems(req: ConversionRequest):
+@app.post("/convert")
+async def convert_live(req: ConversionRequest):
     if req.decimal_value <= 0: return {"error": "Please enter a positive whole number."}
     try:
         decimal_val = req.decimal_value
