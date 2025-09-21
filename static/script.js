@@ -26,17 +26,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function applyTranslations(data) {
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (data[key]) el.innerHTML = data[key];
-        });
-        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-            const key = el.getAttribute('data-i18n-placeholder');
-            if (data[key]) el.placeholder = data[key];
-        });
-        document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
-            const key = el.getAttribute('data-i18n-aria-label');
-            if (data[key]) el.setAttribute('aria-label', data[key]);
+        const i18nAttributes = {
+            'data-i18n': (el, val) => { el.innerHTML = val; },
+            'data-i18n-placeholder': (el, val) => { el.placeholder = val; },
+            'data-i18n-aria-label': (el, val) => { el.setAttribute('aria-label', val); }
+        };
+
+        Object.entries(i18nAttributes).forEach(([attr, action]) => {
+            document.querySelectorAll(`[${attr}]`).forEach(el => {
+                const key = el.getAttribute(attr);
+                if (data[key]) {
+                    action(el, data[key]);
+                }
+            });
         });
     }
 
