@@ -1,13 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     const supportedLangs = {
-        'en': { flag: 'us', name: 'English' },
-        'ru': { flag: 'ru', name: 'Русский' },
-        'he': { flag: 'il', name: 'עברית' },
-        'es': { flag: 'es', name: 'Español' },
-        'fr': { flag: 'fr', name: 'Français' },
-        'de': { flag: 'de', name: 'Deutsch' },
-        'ar': { flag: 'sa', name: 'العربية' }
-    };
+         'en': { flag: 'us', name: 'English' },
+         'ru': { flag: 'ru', name: 'Русский' },
+         'es': { flag: 'es', name: 'Español' },
+         'fr': { flag: 'fr', name: 'Français' },
+         'de': { flag: 'de', name: 'Deutsch' },
+         'ar': { flag: 'sa', name: 'العربية' },
+         'he': { flag: 'il', name: 'עברית' },
+         'ja': { flag: 'jp', name: '日本語' },
+         'zh': { flag: 'cn', name: '中文' }
+     };
 
     const htmlElement = document.documentElement;
     let i18nData = {};

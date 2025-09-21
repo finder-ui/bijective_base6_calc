@@ -29,7 +29,7 @@ An interactive web app for exploring the **bijective base-6 number system**—a 
 - **Pros & Cons Analysis**: A dedicated tab that clearly explains the advantages and disadvantages of using a bijective system.
 - **In-Depth Learning**: Detailed explanations of the conversion algorithm, its connection to formal language theory, and its geometric interpretation as an infinite tree.
 - **Configurable Practice Mode**: Test your skills with math or conversion problems across Easy, Medium, and Hard difficulty levels.
-- **Full Internationalization**: Complete support for 7 languages, with a cross-browser compatible flag selector.
+- **Full Internationalization**: Complete support for 9 languages (including Japanese and Chinese), with a cross-browser compatible flag selector.
 - **Polished UI**: A clean, responsive "Nord" theme that's easy on the eyes, with subtle animations for a better user experience.
 
 ---
