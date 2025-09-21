@@ -138,18 +138,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Tab & Table Logic ---
     const tablesTab = document.getElementById('tables-tab');
-    let tablesData = null;
-    tablesTab.addEventListener('shown.bs.tab', async () => {
-        if (!tablesData) {
-            const addContainer = document.getElementById('addition-table-container');
-            const mulContainer = document.getElementById('multiplication-table-container');
-            addContainer.innerHTML = `<p class="text-center">${i18nData.ui_loading || 'Loading...'}</p>`;
-            const response = await fetch('/get-tables');
-            tablesData = await response.json();
-            renderTable(tablesData.header, tablesData.addition, addContainer);
-            renderTable(tablesData.header, tablesData.multiplication, mulContainer);
+    if (tablesTab) {
+        let tablesData = null;
+        tablesTab.addEventListener('shown.bs.tab', async () => {
+            if (!tablesData) {
+                const addContainer = document.getElementById('addition-table-container');
+                const mulContainer = document.getElementById('multiplication-table-container');
+                if (addContainer) addContainer.innerHTML = `<p class="text-center">${i18nData.ui_loading || 'Loading...'}</p>`;
+                const response = await fetch('/get-tables');
+                tablesData = await response.json();
+                if (addContainer) renderTable(tablesData.header, tablesData.addition, addContainer);
+                if (mulContainer) renderTable(tablesData.header, tablesData.multiplication, mulContainer);
+            }
+        });
+    }
+
+    function setupTabMemory() {
+        const tabButtons = document.querySelectorAll('#myTab button[data-bs-toggle="tab"]');
+        tabButtons.forEach(tab => {
+            tab.addEventListener('shown.bs.tab', (event) => {
+                localStorage.setItem('lastActiveTab', event.target.dataset.bsTarget);
+            });
+        });
+
+        const lastTabId = localStorage.getItem('lastActiveTab');
+        if (lastTabId) {
+            const lastTab = document.querySelector(`button[data-bs-target="${lastTabId}"]`);
+            if (lastTab) {
+                new bootstrap.Tab(lastTab).show();
+            }
         }
-    });
+    }
 
     function renderTable(header, data, container) {
         let tableHTML = '<table class="table table-bordered table-hover table-sm"><thead><tr><th>#</th>';
@@ -448,6 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Initial Load ---
     async function initialize() {
         createLangSwitcher();
+        setupTabMemory();
         setupLiveConverter();
         setupVisualizer();
         const quiz = setupQuiz();
