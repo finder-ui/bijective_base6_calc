@@ -3,13 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Bijective Base-6 Calculator & Explorer</title>
-    <meta name="google-site-verification" content="706qdfPXFXzI_yp0C5jQIii19fSxhf616nNb_4VpdUM" />
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="An interactive educational tool to explore, calculate, and understand the bijective base-6 number system, a system without a zero.">
     <meta name="keywords" content="bijective, base-6, numeration, number system, calculator, cryptography, positional notation, base conversion">
+    <link rel="canonical" href="https://bijective-base6-calc.onrender.com/" />
 
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Bijective Base-6 Calculator & Explorer">
+    <meta property="og:description" content="An interactive tool to learn and experiment with a number system that has no zero.">
+    <meta property="og:url" content="https://bijective-base6-calc.onrender.com/">
+    <meta property="og:image" content="https://raw.githubusercontent.com/tripping-alien/bijective_base6_calc/main/assets/screenshot.png">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
+    
+    <!-- Fonts and Styles -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
@@ -75,27 +87,20 @@
 
         <div id="tab-explanations" class="tab-content">
             <section id="primer">
-                <h2>Understanding the Number System</h2>
-                <p>This system is a bijective base-6 numeration. Unlike our standard decimal (base-10) system, it uses six digits, but it has no zero. The digits are 1, 2, 3, 4, 5, 6.</p>
-                <p>Counting proceeds as follows: After reaching 6, the next number is not 10, but 11. Think of it like rolling over an odometer that has no zero.</p>
+                <h2>A Primer on Numerical Systems</h2>
+                <p>Most number systems we use are <strong>positional</strong>. This means a digit's value depends on its position within a number. The "base" of a system tells us how many unique digits are used. The value of each position is an exponent of the base, starting from 0 on the right.</p>
+            </section>
+            <section id="explanation">
+                <h2>Understanding the Bijective System</h2>
+                <p>This system is a <strong>bijective base-6 numeration</strong>. It is positional, but with two key differences: it has no zero, and its digits run from 1 to 6. Because there is no zero to act as a placeholder, the system "rolls over" differently. After <code>6</code>, the next number is <code>11</code>.</p>
             </section>
             <section id="applications">
-                <h2>Practical Applications & Scientific Context</h2>
-                <p>While it might seem like a mathematical curiosity, bijective numeration (number systems without a zero) has significant advantages in computer science, particularly for data encoding and generating unique identifiers.</p>
-                <ul>
-                    <li><strong>Unambiguous Identifiers:</strong> In standard number systems, a number can have multiple representations (e.g., 7, 07, 007). Bijective systems eliminate this by having only one unique string for each number. This is crucial in systems where identifiers must be canonical and fixed-length.</li>
-                    <li><strong>Efficient Data Encoding:</strong> Bijective numeration is related to variable-length quantity (VLQ) encodings. These are used in data serialization formats (like Google's Protocol Buffers) to store integers using a smaller number of bytes for smaller numbers. This saves significant space in large-scale data systems.</li>
-                    <li><strong>Human-Readable & URL-Safe IDs:</strong> Systems like URL shorteners (e.g., bit.ly) or video platforms (e.g., YouTube) use a similar principle. They need to generate short, unique, easy-to-type IDs. A base-62 system (using a-z, A-Z, 0-9) is a bijective system that can represent massive numbers in just a few characters, without the ambiguity of leading zeros. Our base-6 system is a smaller-scale example of this powerful concept.</li>
-                </ul>
+                <h2>Practical Applications</h2>
+                <p>Bijective numeration has significant advantages in computer science for data encoding and generating unique, human-readable identifiers.</p>
             </section>
              <section id="advanced-concepts">
-                <h2>Advanced Concepts & Further Applications</h2>
-                <p>The properties of bijective numeration extend into more complex areas of computer science and mathematics:</p>
-                <ul>
-                    <li><strong>Cryptographic Hashing & Key Representation:</strong> A hash function (like SHA-256) produces a very large integer. To use this hash in a URL or a configuration file, it must be encoded as a string. Using a bijective system (like base-58, which is used by Bitcoin addresses) creates the shortest possible string representation that is also URL-safe and has no ambiguous characters (like 0/O or 1/l). This is not about making the hash *algorithm* better, but about making its *output* compact and reliable.</li>
-                    <li><strong>Canonical Forms in Abstract Algebra:</strong> In advanced cryptography, such as Elliptic Curve Cryptography (ECC), calculations are performed on abstract mathematical objects (like points on a curve). For these systems to be secure and interoperable, every object must have a single, universally agreed-upon representation, known as a canonical form. Bijective systems are a perfect way to enforce this, ensuring that a specific cryptographic key or signature has one, and only one, valid string representation.</li>
-                    <li><strong>Algorithmic Enumeration:</strong> Because there is a perfect one-to-one mapping between the positive integers and the strings in a bijective system, it is ideal for algorithms that need to work with every possible combination of a set of items. It provides a natural and predictable way to list, or enumerate, all permutations without gaps or duplicates.</li>
-                </ul>
+                <h2>Advanced Concepts</h2>
+                <p>The properties of bijective numeration extend into more complex areas of computer science and mathematics, such as cryptography and algorithmic enumeration.</p>
             </section>
         </div>
 
