@@ -5,7 +5,7 @@
 [![Python](https://img.shields.io/badge/Python-3.8+-blue?style=flat-square)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-An interactive web app for exploring the **bijective base-6 number system**—a system with no zero. This educational tool features a hands-on calculator, a live number system converter, and detailed explanations of the system's advantages for data encoding, URL-safe identifiers, and cryptography.
+An interactive web app for exploring the **bijective base-6 number system**—a system with no zero. This educational tool features a hands-on calculator, a live number system converter, detailed explanations, and a configurable practice mode, all presented in a clean, Nord-inspired dark theme.
 
 ### [➡️ View the Live Demo](https://bijective-base6-calc.onrender.com)
 
@@ -26,10 +26,11 @@ An interactive web app for exploring the **bijective base-6 number system**—a 
 
 - **Live Conversion Explorer**: Instantly see any decimal number represented in Decimal, Binary, Hexadecimal, and Bijective Base-6.
 - **All-in-One Calculator**: Enter two bijective numbers and get the results for Addition, Subtraction, Multiplication, and Division at once.
-- **Reference Tables**: View pre-calculated 12x12 Addition and Multiplication tables to easily see patterns.
-- **Themed UI**: Switch between a clean light mode and a "digital rain" dark mode, with your preference saved locally.
-- **Detailed Explanations**: In-depth articles on numerical systems, the bijective conversion algorithm, and its practical applications in computer science.
-- **Modern & Responsive**: Built with a mobile-first approach and includes subtle animations for a better user experience.
+- **Pros & Cons Analysis**: A dedicated tab that clearly explains the advantages and disadvantages of using a bijective system.
+- **In-Depth Learning**: Detailed explanations of the conversion algorithm, its connection to formal language theory, and its geometric interpretation as an infinite tree.
+- **Configurable Practice Mode**: Test your skills with math or conversion problems across Easy, Medium, and Hard difficulty levels.
+- **Full Internationalization**: Complete support for 7 languages, with a cross-browser compatible flag selector.
+- **Polished UI**: A clean, responsive "Nord" theme that's easy on the eyes, with subtle animations for a better user experience.
 
 ---
 
@@ -48,10 +49,12 @@ Counting proceeds like an odometer that can't show zero. After `6`, the next num
 
 | Technology | Purpose |
 | :--- | :--- |
-| **Python** | The core language for all backend logic. |
+| **Python** | The core language for all backend logic and data generation. |
 | **FastAPI** | A modern, high-performance web framework for building the API endpoints. |
+| **slowapi** | Provides rate limiting to protect API endpoints from abuse. |
+| **pytest** | Used for robust unit and integration testing of the backend logic. |
 | **Uvicorn** | The ASGI server that runs the FastAPI application. |
-| **HTML5 / CSS3** | Used for the structure and styling of the user interface. |
+| **HTML5 / CSS3** | For the structure and styling of the user interface, following modern best practices. |
 | **Vanilla JavaScript** | Powers all client-side interactivity, including theme switching, API calls, and dynamic content rendering. |
 | **Render** | The cloud platform used for free, continuous deployment directly from GitHub. |
 
