@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch(`/locales/${lang}.json`);
             if (!response.ok) {
-                console.error(`Failed to load locale file for ${lang}`);
+                console.error(`Failed to load locale file for ${lang}. Status: ${response.status}`);
                 return;
             }
             const langData = await response.json();
@@ -34,22 +34,22 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('language', lang);
             updateLangSwitcherUI(lang);
         } catch (error) {
-            console.error(`Error setting language to ${lang}:`, error);
+            console.error(`Error processing language file for ${lang}:`, error);
         }
     }
 
     function applyTranslations(data) {
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
-            if (data[key]) el.innerHTML = data[key];
+            if (data[key] !== undefined) el.innerHTML = data[key];
         });
         document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
             const key = el.getAttribute('data-i18n-placeholder');
-            if (data[key]) el.placeholder = data[key];
+            if (data[key] !== undefined) el.placeholder = data[key];
         });
         document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
             const key = el.getAttribute('data-i18n-aria-label');
-            if (data[key]) el.setAttribute('aria-label', data[key]);
+            if (data[key] !== undefined) el.setAttribute('aria-label', data[key]);
         });
     }
 
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!langSwitcherContainer) return;
         langSwitcherContainer.innerHTML = ''; // Clear previous buttons
 
-        // Use a more robust loop and event delegation pattern
+        // Use a robust loop and event delegation pattern
         for (const [code, details] of Object.entries(supportedLangs)) {
             const btn = document.createElement('span');
             btn.className = 'lang-btn';
