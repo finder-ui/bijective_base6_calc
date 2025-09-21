@@ -2,7 +2,7 @@
     /* Nord-Inspired Theme */
     --bg-color: #383E4A; /* Brightened */
     --text-color: #B4BCCD; /* A softer, less bright grey for main text */
-    --text-color-muted: #9EADCC; /* A slightly darker muted grey */
+    --text-color-muted: #b0b0b0; /* A lighter, more neutral grey for hints */
     --section-bg-color: #454E5F; /* Brightened */
     --header-color: #2A2E37; /* Brightened near-black */
     --accent-color: #88C0D0;
@@ -183,6 +183,10 @@ section {
 .form-control:focus {
     box-shadow: none !important;
     border-color: var(--accent-color);
+}
+
+.form-control::placeholder {
+    color: var(--text-color-muted);
 }
 
 .btn {
