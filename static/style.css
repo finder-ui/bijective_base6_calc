@@ -1,15 +1,15 @@
 :root {
     /* Light Theme (Default) */
-    --bg-color: #f8f9fa;
-    --text-color: #333;
+    --bg-color: #e9ecef;
+    --text-color: #212529;
     --text-color-muted: #6c757d;
-    --section-bg-color: #ffffff;
-    --header-color: #343a40;
-    --accent-color: #0d6efd; /* Bootstrap Blue */
-    --accent-hover-color: #0b5ed7;
-    --border-color: #dee2e6;
-    --code-bg-color: #e9ecef;
-    --input-bg-color: #ffffff;
+    --section-bg-color: #f8f9fa;
+    --header-color: #212529;
+    --accent-color: #0056b3; /* A deeper, more muted blue */
+    --accent-hover-color: #004494;
+    --border-color: #ced4da;
+    --code-bg-color: #dee2e6;
+    --input-bg-color: #f8f9fa;
     --input-border-color: #ced4da;
     --final-answer-color: #28a745;
     --error-color: #dc3545;
