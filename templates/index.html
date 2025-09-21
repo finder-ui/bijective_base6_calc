@@ -3,32 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta name="description" content="An interactive educational tool to calculate and explore the bijective base-6 number system, which has no zero. Features a live converter and reference tables.">
     <title>Bijective Base-6 Calculator & Explorer</title>
-
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="An interactive educational tool to explore, calculate, and understand the bijective base-6 number system, a system without a zero.">
-    <meta name="keywords" content="bijective, base-6, numeration, number system, calculator, cryptography, positional notation, base conversion">
-    <link rel="canonical" href="https://bijective-base6-calc.onrender.com/" />
-
-    <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="Bijective Base-6 Calculator & Explorer">
-    <meta property="og:description" content="An interactive tool to learn and experiment with a number system that has no zero.">
-    <meta property="og:url" content="https://bijective-base6-calc.onrender.com/">
-    <meta property="og:image" content="https://raw.githubusercontent.com/tripping-alien/bijective_base6_calc/main/assets/screenshot.png">
-    <meta property="og:type" content="website">
-
-    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
-    
-    <!-- Fonts and Styles -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <canvas id="matrix-background"></canvas>
+    <canvas id="background-animation"></canvas>
     <div id="theme-switcher"></div>
 
     <div class="container">
@@ -47,7 +31,7 @@
         <div id="tab-calculator" class="tab-content active">
             <section id="live-converter">
                 <h2>Live Conversion Explorer</h2>
-                <p>To understand what makes the bijective system unique, it helps to see it in context. Enter a standard decimal number below to see how it's represented across different systems in real-time.</p>
+                <p>Enter a standard decimal number to see how it's represented across different systems in real-time.</p>
                 <div class="converter-input-group">
                     <label for="decimal-input">Enter a Decimal Number:</label>
                     <input type="number" id="decimal-input" placeholder="e.g., 25" min="1">
@@ -88,60 +72,35 @@
         <div id="tab-explanations" class="tab-content">
             <section id="primer">
                 <h2>A Primer on Numerical Systems</h2>
-                <p>Most number systems we use are <strong>positional</strong>. This means a digit's value depends on its position within a number. The "base" of a system tells us how many unique digits are used. The value of each position is an exponent of the base, starting from 0 on the right.</p>
-                <ul>
-                    <li><strong>Base-10 (Decimal):</strong> We use ten digits (<code>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</code>). In the number <code>345</code>, the '3' is in the 10² (hundreds) place, the '4' is in the 10¹ (tens) place, and the '5' is in the 10⁰ (ones) place. The total value is <code>(3 * 100) + (4 * 10) + (5 * 1) = 345</code>.</li>
-                    <li><strong>Base-2 (Binary):</strong> Computers use two digits (<code>0, 1</code>). In the binary number <code>1101</code>, the digits (from right to left) are in the 2⁰, 2¹, 2², and 2³ places. The total value is <code>(1 * 8) + (1 * 4) + (0 * 2) + (1 * 1) = 13</code> in decimal.</li>
-                </ul>
-                <p>In these standard systems, the digit <strong>zero</strong> is essential. It is not just a number, but a fundamental <strong>placeholder</strong>. It signifies an empty position, like the tens place in <code>101</code>. The bijective system you are exploring is fascinating because it works without this placeholder.</p>
+                <p>Most number systems we use are <strong>positional</strong>, meaning a digit's value depends on its position. The "base" tells us how many unique digits are used. The value of each position is an exponent of the base, starting from 0 on the right.</p>
             </section>
-
             <section id="explanation">
                 <h2>Understanding the Bijective System</h2>
                 <p>This system is a <strong>bijective base-6 numeration</strong>. It is positional, but with two key differences: it has no zero, and its digits run from 1 to 6. Because there is no zero to act as a placeholder, the system "rolls over" differently. After <code>6</code>, the next number is <code>11</code>.</p>
-                <h4>The Conversion Algorithm Explained</h4>
-                <p>The trick to converting from decimal to bijective base-6 is to temporarily shift the number system. Computers naturally work with remainders from 0 to 5, but our digits are 1 to 6. We bridge this gap by subtracting 1 before each calculation.</p>
-                <p>Let's convert the decimal number <strong>43</strong>:</p>
-                <ol>
-                    <li><strong>Step 1:</strong> Start with 43. Subtract 1: <code>43 - 1 = 42</code>. Now, find the remainder when dividing by 6. <code>42 % 6 = 0</code>. The 0th digit in our character set <code>"123456"</code> is '1'. Our first result digit is <strong>1</strong>. The new number for the next step is <code>42 / 6 = 7</code>.</li>
-                    <li><strong>Step 2:</strong> Start with 7. Subtract 1: <code>7 - 1 = 6</code>. Now, find the remainder. <code>6 % 6 = 0</code>. The 0th digit is again '1'. Our second result digit is <strong>1</strong>. The new number is <code>6 / 6 = 1</code>.</li>
-                    <li><strong>Step 3:</strong> Start with 1. Subtract 1: <code>1 - 1 = 0</code>. Now, find the remainder. <code>0 % 6 = 0</code>. The 0th digit is again '1'. Our third result digit is <strong>1</strong>. The new number is <code>0 / 6 = 0</code>.</li>
-                    <li><strong>Step 4:</strong> The number is 0, so we stop. Reverse the digits we found: <code>111</code>.</li>
-                </ol>
-                <p>Thus, the decimal number 43 is represented as <code>111</code> in bijective base-6.</p>
             </section>
-
             <section id="applications">
                 <h2>Practical Applications</h2>
-                <p>Bijective numeration is more than a curiosity; it solves real-world problems in computer science.</p>
-                <ul>
-                    <li><strong>Spreadsheet Columns:</strong> Microsoft Excel and Google Sheets use a bijective base-26 system (A-Z) for columns. After Z comes AA, then AB, AC, and so on. This is a perfect, intuitive real-world example where there is no "zeroth" column.</li>
-                    <li><strong>URL Shorteners:</strong> Services like bit.ly need to create the shortest possible unique string for billions of links. A bijective base-62 system (<code>a-z, A-Z, 0-9</code>) can represent a massive database ID like <code>2,183,401,055,849</code> as the short, clean string <code>`short`</code>.</li>
-                    <li><strong>Data Serialization:</strong> In formats like Google's Protocol Buffers, variable-length integers (varints) use a related concept to save space. Instead of using a fixed 4 or 8 bytes for every number, small numbers are stored in a single byte, saving immense amounts of data at scale.</li>
-                </ul>
+                <p>Bijective numeration has significant advantages in computer science for data encoding and generating unique, human-readable identifiers.</p>
             </section>
-
              <section id="advanced-concepts">
                 <h2>Advanced Concepts</h2>
-                <p>The properties of bijective numeration extend into more complex areas of computer science and mathematics:</p>
-                <ul>
-                    <li><strong>Cryptographic Key Representation:</strong> Bitcoin addresses use Base58Check, which is a bijective system that also excludes visually confusing characters (0, O, I, l). This ensures that when a user copies a long address, they are less likely to make a mistake. The bijective property guarantees the shortest possible representation for a given number of characters.</li>
-                    <li><strong>Canonical Forms in Cryptography:</strong> In advanced cryptography like Elliptic Curve Cryptography (ECC), it is absolutely critical that every unique public key has one, and only one, valid byte representation. If two different strings could represent the same key, it could allow an attacker to create a different-looking but mathematically valid signature for a transaction, leading to bugs or security vulnerabilities. Bijective systems provide a mathematical guarantee of this <strong>canonical representation</strong>.</li>
-                    <li><strong>Algorithmic Enumeration:</strong> Because there is a perfect one-to-one mapping between the positive integers and the strings in a bijective system, it is ideal for algorithms that need to work with every possible combination of a set of items. It provides a natural and predictable way to list, or enumerate, all permutations without gaps or duplicates.</li>
-                </ul>
+                <p>The properties of bijective numeration extend into more complex areas of computer science and mathematics, such as cryptography and algorithmic enumeration.</p>
             </section>
         </div>
 
+        <div class="donation-section">
+            <a href="https://www.paypal.com/donate/?business=dr.lopukhov@gmail.com&no_recurring=0&currency_code=USD" class="donation-button" target="_blank">Support this Project</a>
+        </div>
+
         <footer>
-            <p>Released under the MIT License. <a href="https://github.com/tripping-alien/bijective_base6_calc/blob/main/LICENSE" target="_blank">View License</a></p>
-            <p><a href="https://github.com/tripping-alien/bijective_base6_calc" target="_blank">View Source on GitHub</a></p>
-            <div class="donation-section">
-                <a href="https://www.paypal.com/donate/?business=dr.lopukhov@gmail.com&no_recurring=0&currency_code=USD" class="donation-button" target="dr.lopukhov@gmail.com">Support this Project</a>
-            </div>
+            <p>
+                Project source available on <a href="https://github.com/tripping-alien/bijective_base6_calc" target="_blank">GitHub</a>. 
+                Released under the <a href="https://github.com/tripping-alien/bijective_base6_calc/blob/main/LICENSE" target="_blank">MIT License</a>.
+            </p>
         </footer>
 
     </div>
-    <script src="/static/background.js"></script>
     <script src="/static/script.js"></script>
+    <script src="/static/animation.js" defer></script>
 </body>
 </html>
