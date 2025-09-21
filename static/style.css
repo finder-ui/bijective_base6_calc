@@ -42,7 +42,7 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
-    padding: 10px; /* Reduced padding for mobile */
+    padding: 10px;
     transition: background-color 0.3s, color 0.3s;
 }
 
@@ -64,42 +64,42 @@ body {
 }
 
 /* --- Header, Footer, Donation --- */
-header h1 { color: var(--header-color); font-size: 2em; /* Reduced for mobile */ margin: 0; font-weight: 500; }
+header h1 { color: var(--header-color); font-size: 2em; margin: 0; font-weight: 500; text-align: center; padding-bottom: 20px; }
 footer, .donation-section { text-align: center; margin: 20px 0; }
 footer { padding: 10px; color: var(--text-color-muted); font-size: 0.9em; }
-footer a { color: var(--accent-color); text-decoration: none; }
-.donation-button { display: inline-block; padding: 12px 25px; font-size: 1.1em; font-weight: bold; border: 2px solid var(--final-answer-color); border-radius: 5px; cursor: pointer; background-color: transparent; color: var(--final-answer-color); text-decoration: none; transition: all 0.2s; }
+footer a, .donation-button { color: var(--accent-color); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+.donation-button { display: inline-block; padding: 12px 25px; font-size: 1.1em; font-weight: bold; border: 2px solid var(--final-answer-color); border-radius: 5px; cursor: pointer; background-color: transparent; color: var(--final-answer-color); transition: all 0.2s; }
 .donation-button:hover { background-color: var(--final-answer-color); color: var(--section-bg-color); box-shadow: 0 0 15px var(--final-answer-color); }
 
 /* --- Theme Switcher & Tabs --- */
 #theme-switcher { position: fixed; top: 15px; left: 15px; width: 45px; height: 45px; background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.2em; z-index: 1000; }
-.tab-nav { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; /* Allow tabs to wrap on small screens */ }
-.tab-link { padding: 8px 15px; font-size: 0.9em; }
+.tab-nav { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.tab-link { padding: 8px 15px; cursor: pointer; border: 1px solid var(--border-color); border-radius: 5px; background-color: var(--section-bg-color); color: var(--text-color-muted); font-size: 0.9em; font-weight: 500; transition: all 0.2s; }
+.tab-link:hover { color: var(--accent-color); border-color: var(--accent-color); }
+.tab-link.active { color: var(--calc-btn-text-color); background-color: var(--accent-color); border-color: var(--accent-color); font-weight: bold; }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
 section { background-color: var(--section-bg-color); padding: 20px; border-radius: 10px; border: 1px solid var(--border-color); margin-bottom: 30px; }
-h2 { font-size: 1.3em; }
+h2 { font-size: 1.3em; color: var(--accent-color); font-family: var(--font-mono); margin-top: 0; margin-bottom: 20px; }
 
 /* --- Grids and Tables --- */
-.result-grid, #ops-results-grid { grid-template-columns: 1fr; /* Stack grids on mobile */ }
+.result-grid, #ops-results-grid { display: grid; gap: 15px; grid-template-columns: 1fr; }
 .table-container { overflow-x: auto; }
-table th, table td { padding: 4px 6px; font-size: 0.8em; }
+table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); }
+table th, table td { padding: 4px 6px; text-align: center; border: 1px solid var(--border-color); font-size: 0.8em; }
+table th { background-color: var(--code-bg-color); color: var(--accent-color); }
 
 /* --- Media Query for Larger Screens --- */
 @media (min-width: 768px) {
     body { padding: 20px; }
     header h1 { font-size: 2.5em; }
     .tab-link { padding: 10px 20px; font-size: 1em; }
-    .result-grid, #ops-results-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .result-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
     #ops-results-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
     table th, table td { padding: 8px 12px; font-size: 0.9em; }
 }
-
-/* Other styles remain largely the same, but are now overridden by the media query on larger screens */
-.tab-link { cursor: pointer; border: 1px solid var(--border-color); border-radius: 5px; background-color: var(--section-bg-color); color: var(--text-color-muted); font-weight: 500; transition: all 0.2s; }
-.tab-link:hover { color: var(--accent-color); border-color: var(--accent-color); }
-.tab-link.active { color: var(--calc-btn-text-color); background-color: var(--accent-color); border-color: var(--accent-color); font-weight: bold; }
 
 /* Other styles from previous version... */
 code { background-color: var(--code-bg-color); color: var(--accent-color); padding: 4px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.95em; }
