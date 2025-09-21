@@ -1,9 +1,8 @@
 {
     "pageTitle": "Bijective Base-6 Calculator & Explorer",
     "pageDescription": "An interactive educational tool to calculate and explore the bijective base-6 number system. Features interactive tools, reference tables, and a practice mode.",
-    "themeSwitcherLabel": "Toggle theme",
     "mainTitle": "Bijective Base-6 Calculator & Explorer",
-    "tabExplore": "Explore & Convert",
+    "tabCalculator": "Calculator",
     "tabTables": "Reference Tables",
     "tabLearn": "Learn",
     "tabPractice": "Practice",
