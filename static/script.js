@@ -19,8 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            // Add a timestamp to prevent browser caching of the language files
-            const response = await fetch(`/locales/${lang}.json?t=${new Date().getTime()}`);
+            const response = await fetch(`/locales/${lang}.json`);
             if (!response.ok) {
                 console.error(`Failed to load locale file for ${lang}. Status: ${response.status}`);
                 return;
@@ -59,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!langSwitcherContainer) return;
         langSwitcherContainer.innerHTML = ''; // Clear previous buttons
 
-        // Create all buttons first
+        // Create and append all buttons
         for (const [code, details] of Object.entries(supportedLangs)) {
             const btn = document.createElement('span');
             btn.className = 'lang-btn';
@@ -70,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             langSwitcherContainer.appendChild(btn);
         }
 
-        // THEN, add a single, reliable event listener to the container (Event Delegation)
+        // Add a single, reliable event listener to the container
         langSwitcherContainer.addEventListener('click', (event) => {
             const clickedButton = event.target.closest('.lang-btn');
             if (clickedButton && clickedButton.dataset.lang) {
