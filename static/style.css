@@ -37,19 +37,8 @@
 }
 
 /* --- Base & Animation --- */
-body {
-    background-color: var(--bg-color) !important;
-    color: var(--text-color) !important;
-    font-family: 'Roboto', sans-serif;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-#background-animation {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -1;
-}
-
+body { background-color: var(--bg-color) !important; color: var(--text-color) !important; font-family: 'Roboto', sans-serif; transition: background-color 0.3s, color 0.3s; }
+#background-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 .container { z-index: 1; position: relative; }
 
 /* --- Header, Footer, Donation --- */
@@ -62,10 +51,13 @@ footer a, section a { color: var(--accent-color); }
 
 /* --- Theme & Language Switchers --- */
 #theme-switcher { position: fixed; top: 20px; left: 20px; width: 45px; height: 45px; background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.4em; z-index: 1000; }
-#lang-switcher-container { position: fixed; top: 20px; right: 20px; z-index: 1000; display: flex; gap: 8px; background-color: var(--section-bg-color); padding: 5px; border-radius: 25px; border: 1px solid var(--border-color); }
-.lang-btn { cursor: pointer; font-size: 1.5em; padding: 0 5px; opacity: 0.6; transition: opacity 0.2s, transform 0.2s; }
-.lang-btn:hover { opacity: 1; transform: scale(1.1); }
-.lang-btn.active { opacity: 1; text-shadow: 0 0 10px var(--accent-color); }
+.lang-switcher-container { position: fixed; top: 20px; right: 20px; z-index: 1000; }
+.lang-btn-main { background-color: var(--section-bg-color) !important; border: 1px solid var(--border-color) !important; border-radius: 50% !important; width: 45px; height: 45px; font-size: 1.4em; display: flex; justify-content: center; align-items: center; padding: 0; }
+.lang-btn-main::after { display: none; } /* Hide Bootstrap's default dropdown arrow */
+.dropdown-menu { background-color: var(--section-bg-color); border-color: var(--border-color); }
+.dropdown-item { color: var(--text-color); display: flex; align-items: center; gap: 10px; }
+.dropdown-item:hover { background-color: var(--accent-color); color: var(--calc-btn-text-color); }
+.dropdown-item .flag { font-size: 1.5em; }
 
 /* --- Bootstrap Component Theming --- */
 .nav-tabs { border-bottom-color: var(--border-color); }
