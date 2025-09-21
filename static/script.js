@@ -1,26 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const htmlElement = document.documentElement;
-
-    // --- Theme Switcher Logic (Simplified 2-State Toggle) ---
-    const themeSwitcher = document.getElementById('theme-switcher');
-    
-    function setTheme(theme) {
-        htmlElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-        if (themeSwitcher) {
-            themeSwitcher.innerHTML = theme === 'dark' ? '☀️' : '🌙';
-        }
-    }
-
-    if (themeSwitcher) {
-        themeSwitcher.addEventListener('click', () => {
-            const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            setTheme(newTheme);
-        });
-    }
-
-    // --- Internationalization (i18n) Logic ---
     const supportedLangs = {
         'en': { flag: '🇺🇸', name: 'English' },
         'ru': { flag: '🇷🇺', name: 'Русский' },
@@ -33,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
         'ja': { flag: '🇯🇵', name: '日本語' }
     };
 
+    const htmlElement = document.documentElement;
+
+    // --- Internationalization (i18n) Logic ---
     async function setLanguage(lang) {
         if (!supportedLangs[lang]) return;
         try {
@@ -80,6 +61,24 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mainBtn && supportedLangs[lang]) {
             mainBtn.innerHTML = supportedLangs[lang].flag;
         }
+    }
+
+    // --- Theme Switcher Logic (Simplified 2-State Toggle) ---
+    const themeSwitcher = document.getElementById('theme-switcher');
+    function setTheme(theme) {
+        htmlElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        if (themeSwitcher) {
+            themeSwitcher.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+        }
+    }
+
+    if (themeSwitcher) {
+        themeSwitcher.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
     }
 
     // --- Tab & Table Logic ---
