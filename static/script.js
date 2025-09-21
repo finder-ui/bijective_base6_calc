@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const response = await fetch(`/locales/${lang}.json?v=2`); // Added cache-busting query
+            const response = await fetch(`/locales/${lang}.json`);
             if (!response.ok) {
                 console.error(`Failed to load locale file for ${lang}. Status: ${response.status}`);
                 return;
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('language', lang);
             updateLangSwitcherUI(lang);
         } catch (error) {
-            console.error(`Error setting language to ${lang}:`, error);
+            console.error(`Error processing language file for ${lang}:`, error);
         }
     }
 
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!langSwitcherContainer) return;
         langSwitcherContainer.innerHTML = ''; // Clear previous buttons
 
-        // Create all buttons first
+        // Use a more robust loop and event delegation pattern
         for (const [code, details] of Object.entries(supportedLangs)) {
             const btn = document.createElement('span');
             btn.className = 'lang-btn';
@@ -69,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
             langSwitcherContainer.appendChild(btn);
         }
 
-        // THEN, add a single, reliable event listener to the container
         langSwitcherContainer.addEventListener('click', (event) => {
             const clickedButton = event.target.closest('.lang-btn');
             if (clickedButton && clickedButton.dataset.lang) {
