@@ -13,14 +13,23 @@
 <body>
     <canvas id="background-animation"></canvas>
     <div id="theme-switcher" role="button" data-i18n-aria-label="themeSwitcherLabel"></div>
-    <div id="lang-switcher-container"></div>
+    
+    <!-- Language Switcher Dropdown -->
+    <div class="lang-switcher-container dropdown">
+        <button class="btn dropdown-toggle lang-btn-main" type="button" id="lang-switcher-btn" data-bs-toggle="dropdown" aria-expanded="false">
+            <!-- Current flag will be populated by JS -->
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" id="lang-switcher-menu" aria-labelledby="lang-switcher-btn">
+            <!-- Options will be populated by JS -->
+        </ul>
+    </div>
 
     <div class="container my-4">
         <header class="text-center mb-5">
             <h1 class="display-4" data-i18n="mainTitle"></h1>
         </header>
 
-        <!-- Tabs Navigation RESTORED -->
+        <!-- Tabs Navigation -->
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="calculator-tab" data-bs-toggle="tab" data-bs-target="#tab-calculator" type="button" role="tab" data-i18n="tabCalculator"></button>
@@ -33,21 +42,17 @@
             </li>
         </ul>
 
-        <!-- Tab Content RESTORED -->
+        <!-- Tab Content -->
         <div class="tab-content p-4" id="myTabContent">
             <div class="tab-pane fade show active" id="tab-calculator" role="tabpanel">
-                <!-- Content for Calculator & Explorer -->
+                <!-- All content for this tab will be populated by JS -->
             </div>
             <div class="tab-pane fade" id="tab-tables" role="tabpanel">
-                <!-- Content for Reference Tables -->
+                <!-- All content for this tab will be populated by JS -->
             </div>
             <div class="tab-pane fade" id="tab-explanations" role="tabpanel">
-                <!-- Content for Explanations -->
+                <!-- All content for this tab will be populated by JS -->
             </div>
-        </div>
-
-        <div class="donation-section text-center my-5">
-            <a href="https://www.paypal.com/donate/?business=dr.lopukhov@gmail.com&no_recurring=0&currency_code=USD" class="donation-button" target="_blank" data-i18n="donationBtn"></a>
         </div>
 
         <footer class="text-center py-3">
