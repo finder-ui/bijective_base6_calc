@@ -275,5 +275,5 @@ document.addEventListener("DOMContentLoaded", () => {
     setupCalculator();
 
     setLanguage(localStorage.getItem("language") || "en");
-    setTheme(localStorage.getItem("theme") || "light");
+    setTheme(localStorage.getItem("theme") || "dark");
 });
