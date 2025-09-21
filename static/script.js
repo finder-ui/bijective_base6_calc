@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     const supportedLangs = {
-        'en': { flag: '🇺🇸', name: 'English' },
-        'ru': { flag: '🇷🇺', name: 'Русский' },
-        'he': { flag: '🇮🇱', name: 'עברית' },
-        'es': { flag: '🇪🇸', name: 'Español' },
-        'fr': { flag: '🇫🇷', name: 'Français' },
-        'de': { flag: '🇩🇪', name: 'Deutsch' },
-        'ar': { flag: '🇸🇦', name: 'العربية' }
+        'en': { flag: 'us', name: 'English' },
+        'ru': { flag: 'ru', name: 'Русский' },
+        'he': { flag: 'he', name: 'עברית' },
+        'es': { flag: 'es', name: 'Español' },
+        'fr': { flag: 'fr', name: 'Français' },
+        'de': { flag: 'de', name: 'Deutsch' },
+        'ar': { flag: 'sa', name: 'العربية' }
     };
 
     const htmlElement = document.documentElement;
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!langSwitcherContainer) return;
         langSwitcherContainer.innerHTML = ''; // Clear previous buttons
 
-        // Use a robust loop and event delegation pattern
+        // Use a more robust loop and event delegation pattern
         for (const [code, details] of Object.entries(supportedLangs)) {
             const btn = document.createElement('span');
             btn.className = 'lang-btn';
