@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!langSwitcherContainer) return;
         langSwitcherContainer.innerHTML = ''; // Clear previous buttons
 
-        // Create and append all buttons
+        // Use a more robust loop and event delegation pattern
         for (const [code, details] of Object.entries(supportedLangs)) {
             const btn = document.createElement('span');
             btn.className = 'lang-btn';
@@ -69,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
             langSwitcherContainer.appendChild(btn);
         }
 
-        // Add a single, reliable event listener to the container
         langSwitcherContainer.addEventListener('click', (event) => {
             const clickedButton = event.target.closest('.lang-btn');
             if (clickedButton && clickedButton.dataset.lang) {
