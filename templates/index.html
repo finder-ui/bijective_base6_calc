@@ -13,7 +13,14 @@
 <body>
     <canvas id="background-animation"></canvas>
     <div id="theme-switcher" role="button" data-i18n-aria-label="themeSwitcherLabel"></div>
-    <div id="lang-switcher-container"></div>
+    <div class="lang-switcher-container dropdown">
+        <button class="btn dropdown-toggle lang-btn-main" type="button" id="lang-switcher-btn" data-bs-toggle="dropdown" aria-expanded="false">
+            🇺🇸
+        </button>
+        <ul class="dropdown-menu" id="lang-switcher-menu" aria-labelledby="lang-switcher-btn">
+            <!-- Options will be populated by JavaScript -->
+        </ul>
+    </div>
 
     <div class="container my-4">
         <header class="text-center mb-5">
