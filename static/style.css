@@ -1,95 +1,41 @@
-/* ==========================================================================
-   Root Theme Variables (Nord-Inspired)
-   ========================================================================== */
 :root {
-    /* Colors */
-    --bg-color: #383E4A;
-    --text-color: #B4BCCD;
-    --text-color-muted: #B0B0B0;
-    --section-bg-color: #454E5F;
-    --header-color: #2A2E37;
+    /* Nord-Inspired Theme */
+    --bg-color: #383E4A; /* Brightened */
+    --text-color: #B4BCCD; /* A softer, less bright grey for main text */
+    --text-color-muted: #b0b0b0; /* A lighter, more neutral grey for hints */
+    --section-bg-color: #454E5F; /* Brightened */
+    --header-color: #2A2E37; /* Brightened near-black */
     --accent-color: #88C0D0;
     --accent-hover-color: #81A1C1;
-    --border-color: #5D677C;
-    --code-bg-color: #525A6C;
+    --border-color: #5D677C; /* Brightened */
+    --code-bg-color: #525A6C; /* Brightened */
     --code-text-color: #EBCB8B;
-    --input-bg-color: #383E4A;
-    --input-border-color: #5D677C;
+    --input-bg-color: #383E4A; /* Brightened */
+    --input-border-color: #5D677C; /* Brightened */
     --final-answer-color: #A3BE8C;
     --error-color: #BF616A;
-    --btn-text-color: #2E3440;
-    --rain-color: #5E81AC;
+    --btn-text-color: #2E3440; /* Dark text for light buttons */
+    --rain-color: #5E81AC; /* A cool blue from the Nord palette */
 
-    /* Typography & Layout */
-    --font-sans: 'Roboto', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    --font-mono: 'Fira Code', 'Consolas', 'Courier New', monospace;
+    /* Fonts & Sizing */
+    --font-sans: 'Roboto', sans-serif;
+    --font-mono: 'Fira Code', monospace;
     --border-radius: 0.25rem;
-    --line-height: 1.6;
-    --transition-speed: 0.3s;
-}
-
-/* Dark mode aware (respects user preference) */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-color: #2E3440;
-        --text-color: #D8DEE9;
-        --header-color: #ECEFF4;
-    }
 }
 
 /* ==========================================================================
-   Global Reset / Base Styles
+   Base & Global Styles
    ========================================================================== */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-html {
-    font-size: 100%;
-    -webkit-text-size-adjust: 100%;
-}
-
 body {
-    margin: 0;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
     font-family: var(--font-sans);
-    line-height: var(--line-height);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
-/* Provide focus outline for accessibility */
-:focus-visible {
-    outline: 2px solid var(--accent-color);
-    outline-offset: 2px;
-}
-
-/* ==========================================================================
-   Typography
-   ========================================================================== */
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-mono);
-    line-height: 1.2;
-    margin: 0.5em 0;
-}
-
-h2 {
-    color: var(--accent-color);
-}
-
-p {
-    margin: 0 0 1rem;
-}
-
-/* ==========================================================================
-   Layout Containers
-   ========================================================================== */
 #background-animation {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     z-index: -1;
@@ -98,56 +44,45 @@ p {
 .container {
     z-index: 1;
     position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
 }
 
-/* ==========================================================================
-   Code & Inline Elements
-   ========================================================================== */
+h2 {
+    color: var(--accent-color);
+    font-family: var(--font-mono);
+}
+
 code {
     background-color: var(--code-bg-color);
     color: var(--code-text-color);
     padding: .2em .4em;
     border-radius: var(--border-radius);
     font-family: var(--font-mono);
-    font-size: 0.95em;
-    white-space: pre-wrap;
-    word-break: break-word;
 }
 
-a {
+section a {
     color: var(--accent-color);
-    text-decoration: none;
-    transition: color var(--transition-speed) ease;
-}
-
-a:hover,
-a:focus {
-    color: var(--accent-hover-color);
 }
 
 /* ==========================================================================
-   Header & Footer
+   Header, Footer & Language Switcher
    ========================================================================== */
 header h1 {
     color: var(--header-color);
-    font-size: clamp(2em, 5vw, 2.5em);
+    font-size: 2.5em;
     font-weight: 500;
     text-shadow: 0 0 5px rgba(0,0,0,0.2);
 }
 
 footer {
-    color: var(--header-color);
+    color: var(--header-color) !important;
     font-size: 0.9em;
     padding: 1rem 0;
-    text-align: center;
 }
 
-/* ==========================================================================
-   Language Switcher
-   ========================================================================== */
+footer a {
+    color: var(--accent-color);
+}
+
 .lang-switcher-container {
     position: fixed;
     top: 20px;
@@ -156,9 +91,9 @@ footer {
 }
 
 .lang-btn-main {
-    background-color: var(--section-bg-color);
-    border: 1px solid var(--border-color);
-    border-radius: 50%;
+    background-color: var(--section-bg-color) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 50% !important;
     width: 45px;
     height: 45px;
     font-size: 1.4em;
@@ -166,47 +101,88 @@ footer {
     justify-content: center;
     align-items: center;
     padding: 0;
-    transition: background var(--transition-speed) ease;
 }
 
-.lang-btn-main:hover {
-    background-color: var(--accent-hover-color);
+.lang-btn-main::after {
+    display: none;
 }
 
 .dropdown-menu {
     background-color: var(--section-bg-color);
-    border: 1px solid var(--border-color);
+    border-color: var(--border-color);
 }
 
 .dropdown-item {
-    color: var(--text-color);
+    color: var(--text-color) !important;
     display: flex;
     align-items: center;
     gap: 10px;
-    transition: background var(--transition-speed);
 }
 
 .dropdown-item:hover {
-    background-color: var(--accent-hover-color);
-    color: var(--btn-text-color);
+    background-color: var(--accent-hover-color) !important;
+    color: var(--btn-text-color) !important;
 }
 
+.lang-btn-main .fi {
+    font-size: 2em;
+    border-radius: 50%;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.dropdown-item .fi {
+    font-size: 1.5em;
+    border-radius: 3px;
+}
+
+
 /* ==========================================================================
-   Forms & Buttons
+   Bootstrap Component Overrides
    ========================================================================== */
+.nav-tabs {
+    border-bottom-color: var(--border-color);
+}
+
+.nav-tabs .nav-link {
+    background-color: transparent;
+    border-bottom-width: 2px;
+    color: var(--header-color);
+    font-weight: 500;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: var(--section-bg-color);
+    color: var(--accent-color);
+    border-color: var(--border-color) var(--border-color) var(--section-bg-color);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.tab-content {
+    background-color: var(--section-bg-color);
+    border: 1px solid var(--border-color);
+    border-top: none;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+section {
+    box-shadow: none !important;
+    border: none !important;
+    background-color: transparent !important;
+    padding: 2rem 0;
+}
+
 .form-control {
-    background-color: var(--input-bg-color);
-    color: var(--text-color);
-    border: 1px solid var(--input-border-color);
+    background-color: var(--input-bg-color) !important;
+    color: var(--text-color) !important;
+    border-color: var(--input-border-color) !important;
     font-family: var(--font-mono);
     border-radius: var(--border-radius);
-    padding: 0.5rem;
-    transition: border-color var(--transition-speed), background var(--transition-speed);
 }
 
 .form-control:focus {
+    box-shadow: none !important;
     border-color: var(--accent-color);
-    outline: none;
 }
 
 .form-control::placeholder {
@@ -216,29 +192,118 @@ footer {
 .btn {
     border-radius: var(--border-radius);
     font-weight: bold;
-    cursor: pointer;
-    transition: background var(--transition-speed), transform var(--transition-speed);
 }
 
 .btn-primary {
-    background-color: var(--accent-color);
-    border: 1px solid var(--accent-color);
-    color: var(--btn-text-color);
+    background-color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+    color: var(--btn-text-color) !important;
 }
 
-.btn-primary:hover {
-    background-color: var(--accent-hover-color);
-    transform: translateY(-1px);
-}
 
 /* ==========================================================================
-   Animations (Reduced motion safe)
+   Custom Component Styles
    ========================================================================== */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        transition: none !important;
-        animation: none !important;
-    }
+
+/* --- Calculator & Results --- */
+#result-area {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+#result-area.visible {
+    opacity: 1;
+}
+
+.op-result-item {
+    background-color: var(--bg-color);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.op-result-item .op-title {
+    font-weight: 500;
+    color: var(--text-color-muted);
+    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 0.5px;
+}
+
+.op-problem {
+    font-family: var(--font-mono);
+    color: var(--text-color-muted);
+}
+
+.op-step {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    color: var(--text-color-muted);
+}
+
+.op-answer {
+    font-family: var(--font-mono);
+    font-size: 1.6em;
+    font-weight: bold;
+    color: var(--final-answer-color);
+}
+
+/* --- Tables --- */
+.table-responsive {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+}
+
+.table-bordered th {
+    background-color: var(--section-bg-color);
+    color: var(--text-color);
+}
+
+.table-bordered tbody tr:nth-child(even) {
+    background-color: var(--section-bg-color);
+}
+
+/* --- Algorithm Visualizer --- */
+#visualizer-steps {
+    min-height: 100px;
+}
+
+.vis-step {
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.5s;
+    transform: translateY(20px);
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-left: 3px solid var(--accent-color);
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+}
+
+.vis-step.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Quiz Mode --- */
+#quiz-question {
+    font-size: 1.5em;
+    font-family: var(--font-mono);
+    margin-bottom: 1rem;
+}
+
+#quiz-feedback {
+    min-height: 50px;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.feedback-correct {
+    color: var(--final-answer-color);
+}
+
+.feedback-incorrect {
+    color: var(--error-color);
 }
 
 .shake {
