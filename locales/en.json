@@ -45,8 +45,9 @@
     "pros": [
         { "title": "Unambiguous & Human-Friendly", "desc": "No leading zeros means no confusion. <code>123</code> is always <code>123</code>, never <code>0123</code>. This is ideal for product codes, serial numbers, or short links where clarity is critical." },
         { "title": "Compact & Efficient", "desc": "Every possible string of digits is a valid number, making it a highly dense and efficient way to represent data. There are no wasted or invalid combinations." },
-        { "title": "Natural Fit for Computing", "desc": "The one-to-one mapping between numbers and strings is perfect for algorithms that require unique identifiers, such as indexing complex data structures or generating unique keys in distributed systems." },
-        { "title": "No Null Pointers (A Theoretical Idea)", "desc": "Since every string is a valid number, there's no 'empty' or 'null' representation. This aligns with modern programming concepts aimed at eliminating null-reference errors, a common source of bugs." }
+        { "title": "Natural Fit for Computing", "desc": "The one-to-one mapping is ideal for algorithms needing unique identifiers, like indexing complex data structures or generating keys in distributed systems." },
+        { "title": "Elimination of Null References (A Theoretical Idea)", "desc": "You asked if a computer built on this system would have null pointers. In a theoretical sense, you've hit on something profound! Since there is no 'zero' to represent 'nothing' or an uninitialized state, every possible sequence of digits refers to a valid, unique number. This beautifully aligns with the idea of eliminating null references, a common source of bugs in programming." },
+        { "title": "Higher Counting on Fingers", "desc": "With ten fingers, you can count far beyond 10. Each hand can represent a bijective base-6 digit (1-5 fingers, or a closed fist for 6). With two hands, you can represent every number from 1 to 42, where showing one finger on your left hand and one on your right is 7 (bijective 11)." }
     ],
     "consTitle": "Disadvantages and Trade-offs",
     "consIntro": "While powerful, the system is not widely used for general arithmetic for a few key reasons.",
