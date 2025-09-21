@@ -1,6 +1,7 @@
 {
     "pageTitle": "Calculatrice et Explorateur Bijective Base-6",
     "pageDescription": "Un outil éducatif interactif pour calculer et explorer le système numérique bijectif en base 6, qui n'a pas de zéro. Comprend un convertisseur en temps réel et des tables de référence.",
+    "themeSwitcherLabel": "Changer de thème",
     "mainTitle": "Calculatrice et Explorateur Bijective Base-6",
     "tabCalculator": "Calculatrice & Explorateur",
     "tabTables": "Tables de Référence",
@@ -19,20 +20,28 @@
     "multiplicationTableTitle": "Table de Multiplication (1 à 12)",
     "primerTitle": "Introduction aux Systèmes Numériques",
     "primerDesc1": "La plupart des systèmes numériques que nous utilisons sont <strong>positionnels</strong>. Cela signifie que la valeur d'un chiffre dépend de sa position dans un nombre. La \"base\" d'un système nous indique combien de chiffres uniques sont utilisés. La valeur de chaque position est une puissance de la base, en commençant par 0 à droite.",
+    "primerList1": [
+        "<strong>Base 10 (Décimal) :</strong> Nous utilisons dix chiffres (<code>0-9</code>). Dans le nombre <code>345</code>, la valeur est <code>(3 * 10²) + (4 * 10¹) + (5 * 10⁰) = 345</code>.",
+        "<strong>Base 2 (Binaire) :</strong> Les ordinateurs utilisent deux chiffres (<code>0, 1</code>). Dans le nombre binaire <code>1101</code>, la valeur est <code>(1 * 2³) + (1 * 2²) + (0 * 2¹) + (1 * 2⁰) = 13</code>."
+    ],
     "primerDesc2": "Dans ces systèmes standard, le chiffre <strong>zéro</strong> est essentiel. Ce n'est pas seulement un nombre, mais un <strong>espace réservé</strong> fondamental. Il signifie une position vide, comme la place des dizaines dans <code>101</code>. Le système bijectif que vous explorez est fascinant car il fonctionne sans cet espace réservé.",
     "explanationTitle": "Comprendre le Système Bijectif",
     "explanationDesc1": "Ce système est une <strong>numération bijective en base 6</strong>. Il est positionnel, mais avec deux différences clés : il n'a pas de zéro et ses chiffres vont de 1 à 6. Comme il n'y a pas de zéro pour servir d'espace réservé, le système \"passe au suivant\" différemment. Après <code>6</code>, le nombre suivant est <code>11</code>.",
     "algoTitle": "Explication de l'Algorithme de Conversion",
     "algoDesc1": "L'astuce pour convertir du décimal à la base 6 bijective est de décaler temporairement le système numérique. Les ordinateurs travaillent naturellement avec des restes de 0 à 5, mais nos chiffres sont de 1 à 6. Nous comblons cet écart en soustrayant 1 avant chaque calcul.",
     "algoExampleTitle": "Convertissons le nombre décimal <strong>43</strong> :",
-    "algoStep1": "<strong>Étape 1 :</strong> Commencez avec 43. Soustrayez 1 : <code>43 - 1 = 42</code>. Maintenant, trouvez le reste de la division par 6. <code>42 % 6 = 0</code>. Le 0ème chiffre dans notre jeu de caractères <code>\"123456\"</code> est \'1\'. Notre premier chiffre de résultat est <strong>1</strong>. Le nouveau nombre pour l'étape suivante est <code>(42 - 0) / 6 = 7</code>.",
-    "algoStep2": "<strong>Étape 2 :</strong> Commencez avec 7. Soustrayez 1 : <code>7 - 1 = 6</code>. Maintenant, trouvez le reste. <code>6 % 6 = 0</code>. Le 0ème chiffre est à nouveau \'1\'. Notre deuxième chiffre de résultat est <strong>1</strong>. Le nouveau nombre est <code>(6 - 0) / 6 = 1</code>.",
-    "algoStep3": "<strong>Étape 3 :</strong> Commencez avec 1. Soustrayez 1 : <code>1 - 1 = 0</code>. Maintenant, trouvez le reste. <code>0 % 6 = 0</code>. Le 0ème chiffre est à nouveau \'1\'. Notre troisième chiffre de résultat est <strong>1</strong>. Le nouveau nombre est <code>(0 - 0) / 6 = 0</code>.",
+    "algoSteps": [
+        "<strong>Étape 1 :</strong> Commencez avec 43. Soustrayez 1 : <code>43 - 1 = 42</code>. Maintenant, trouvez le reste de la division par 6. <code>42 % 6 = 0</code>. Le 0ème chiffre dans notre jeu de caractères <code>\"123456\"</code> est \'1\'. Notre premier chiffre de résultat est <strong>1</strong>. Le nouveau nombre pour l'étape suivante est <code>(42 - 0) / 6 = 7</code>.",
+        "<strong>Étape 2 :</strong> Commencez avec 7. Soustrayez 1 : <code>7 - 1 = 6</code>. Maintenant, trouvez le reste. <code>6 % 6 = 0</code>. Le 0ème chiffre est à nouveau \'1\'. Notre deuxième chiffre de résultat est <strong>1</strong>. Le nouveau nombre est <code>(6 - 0) / 6 = 1</code>.",
+        "<strong>Étape 3 :</strong> Commencez avec 1. Soustrayez 1 : <code>1 - 1 = 0</code>. Maintenant, trouvez le reste. <code>0 % 6 = 0</code>. Le 0ème chiffre est à nouveau \'1\'. Notre troisième chiffre de résultat est <strong>1</strong>. Le nouveau nombre est <code>(0 - 0) / 6 = 0</code>."
+    ],
     "algoResult": "En inversant les chiffres, on obtient <code>111</code>. Ainsi, 43 en décimal est 111 en base 6 bijective.",
     "applicationsTitle": "Applications Pratiques",
     "appDesc1": "La numération bijective est plus qu'une curiosité mathématique ; elle résout des problèmes concrets en informatique.",
-    "appSpreadsheet": "<strong>Colonnes de tableur :</strong> Microsoft Excel et Google Sheets utilisent un système bijectif en base 26 (A-Z) pour les colonnes. Après Z vient AA, puis AB, AC, et ainsi de suite. C'est un exemple parfait et intuitif du monde réel où il n'y a pas de colonne \"zéro\".",
-    "appUrl": "<strong>Raccourcisseurs d'URL :</strong> Des services comme bit.ly doivent créer la chaîne unique la plus courte possible pour des milliards de liens. Un système bijectif en base 62 (<code>a-z, A-Z, 0-9</code>) peut représenter un ID de base de données massif comme <code>2,183,401,055,849</code> sous la forme de la chaîne courte et propre <code>`short`</code>.",
+    "appList": [
+        "<strong>Colonnes de tableur :</strong> Microsoft Excel et Google Sheets utilisent un système bijectif en base 26 (A-Z) pour les colonnes. Après Z vient AA, puis AB, AC, et ainsi de suite. C'est un exemple parfait et intuitif du monde réel où il n'y a pas de colonne \"zéro\".",
+        "<strong>Raccourcisseurs d'URL :</strong> Des services comme bit.ly doivent créer la chaîne unique la plus courte possible pour des milliards de liens. Un système bijectif en base 62 (<code>a-z, A-Z, 0-9</code>) peut représenter un ID de base de données massif comme <code>2,183,401,055,849</code> sous la forme de la chaîne courte et propre <code>`short`</code>."
+    ],
     "advancedTitle": "Connexions Mathématiques Approfondies",
     "advFactorizationTitle": "Note sur les chiffres \"composés\" et la factorisation",
     "advFactorizationDesc": "Un observateur astucieux de la table de multiplication remarquera quelque chose de curieux : <code>2 × 3 = 6</code>, mais aussi <code>1 × 6 = 6</code>. Dans notre système numérique standard, le nombre 6 a une factorisation en nombres premiers unique (2 et 3). Cependant, dans le système bijectif, <strong>le chiffre <code>6</code> lui-même agit comme un nombre composé</strong>. Les chiffres <code>1, 2, 3, 4, 5</code> sont les \"nombres premiers\" de ce monde à un seul chiffre. Cela révèle une propriété profonde : l'ensemble des chiffres uniques dans un système bijectif ne forme pas un <a href=\"https://en.wikipedia.org/wiki/Unique_factorization_domain\" target=\"_blank\">anneau factoriel</a>. C'est une conséquence directe de l'utilisation de la base `k` comme chiffre au lieu de `0`. Cela ne casse pas le système ; cela met plutôt en évidence sa structure algébrique unique.",
