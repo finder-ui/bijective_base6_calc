@@ -38,17 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const key = el.getAttribute('data-i18n-aria-label');
             if (data[key]) el.setAttribute('aria-label', data[key]);
         });
-        document.querySelectorAll('[data-i18n-list]').forEach(ul => {
-            const key = ul.getAttribute('data-i18n-list');
-            if (data[key] && Array.isArray(data[key])) {
-                ul.innerHTML = '';
-                data[key].forEach(item => {
-                    const li = document.createElement('li');
-                    li.innerHTML = item;
-                    ul.appendChild(li);
-                });
-            }
-        });
     }
 
     function createLangSwitcher() {
