@@ -35,41 +35,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function setupLangSwitcher() {
-        const container = document.getElementById('lang-switcher-container');
-        if (!container) return;
-        container.innerHTML = ''; // Clear previous buttons
+        const mainBtn = document.getElementById('lang-switcher-btn');
+        const menu = document.getElementById('lang-switcher-menu');
+        if (!mainBtn || !menu) return;
+
+        menu.innerHTML = ''; // Clear any existing options
         for (const [code, details] of Object.entries(supportedLangs)) {
-            const btn = document.createElement('span');
-            btn.className = 'lang-btn';
-            btn.textContent = details.flag;
-            btn.dataset.lang = code;
-            btn.setAttribute('role', 'button');
-            btn.setAttribute('aria-label', `Switch to ${details.name}`);
-            container.appendChild(btn);
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.className = 'dropdown-item';
+            a.href = '#';
+            a.dataset.lang = code;
+            a.innerHTML = `<span class="flag">${details.flag}</span> ${details.name}`;
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                setLanguage(code);
+            });
+            li.appendChild(a);
+            menu.appendChild(li);
         }
-        container.addEventListener('click', (event) => {
-            const clickedButton = event.target.closest('.lang-btn');
-            if (clickedButton && clickedButton.dataset.lang) {
-                setLanguage(clickedButton.dataset.lang);
-            }
-        });
     }
 
     function updateLangSwitcherUI(lang) {
-        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+        const mainBtn = document.getElementById('lang-switcher-btn');
+        if (mainBtn && supportedLangs[lang]) {
+            mainBtn.innerHTML = supportedLangs[lang].flag;
+        }
     }
 
-    // --- Theme Switcher Logic ---
+    // --- Theme Switcher Logic (Simplified 2-State Toggle) ---
     const themeSwitcher = document.getElementById('theme-switcher');
     function setTheme(theme) {
         htmlElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
-        if(themeSwitcher) themeSwitcher.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+        if (themeSwitcher) {
+            themeSwitcher.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+        }
     }
+
     if (themeSwitcher) {
         themeSwitcher.addEventListener('click', () => {
             const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
-            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
         });
     }
 
