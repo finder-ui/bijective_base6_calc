@@ -27,7 +27,7 @@
     "algoDesc1": "L'astuce pour convertir du décimal à la base 6 bijective est de décaler temporairement le système numérique. Les ordinateurs travaillent naturellement avec des restes de 0 à 5, mais nos chiffres sont de 1 à 6. Nous comblons cet écart en soustrayant 1 avant chaque calcul.",
     "algoExampleTitle": "Convertissons le nombre décimal <strong>43</strong> :",
     "algoSteps": [
-        "<strong>Étape 1 :</strong> <code>(43 - 1) % 6 = 0</code>. Le 0ème chiffre dans <code>\\\"123456\\\"</code> est \'1\'. Résultat : <strong>1</strong>. Nombre suivant : <code>(43 - 1) / 6 = 7</code>.",
+        "<strong>Étape 1 :</strong> <code>(43 - 1) % 6 = 0</code>. Le 0ème chiffre dans <code>\"123456\"</code> est '1'. Résultat : <strong>1</strong>. Nombre suivant : <code>(43 - 1) / 6 = 7</code>.",
         "<strong>Étape 2 :</strong> <code>(7 - 1) % 6 = 0</code>. Le 0ème chiffre est \'1\'. Résultat : <strong>1</strong>. Nombre suivant : <code>(7 - 1) / 6 = 1</code>.",
         "<strong>Étape 3 :</strong> <code>(1 - 1) % 6 = 0</code>. Le 0ème chiffre est \'1\'. Résultat : <strong>1</strong>. Nombre suivant : <code>(1 - 1) / 6 = 0</code>."
     ],

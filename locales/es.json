@@ -27,7 +27,7 @@
     "algoDesc1": "El truco para convertir de decimal a base 6 biyectiva es cambiar temporalmente el sistema numérico. Las computadoras trabajan naturalmente con restos de 0 a 5, pero nuestros dígitos son de 1 a 6. Salvamos esta brecha restando 1 antes de cada cálculo.",
     "algoExampleTitle": "Convirtamos el número decimal <strong>43</strong>:",
     "algoSteps": [
-        "<strong>Paso 1:</strong> <code>(43 - 1) % 6 = 0</code>. El 0º dígito en <code>\\\"123456\\\"</code> es \'1\'. Resultado: <strong>1</strong>. Siguiente número: <code>(43 - 1) / 6 = 7</code>.",
+        "<strong>Paso 1:</strong> <code>(43 - 1) % 6 = 0</code>. El 0º dígito en <code>\"123456\"</code> es '1'. Resultado: <strong>1</strong>. Siguiente número: <code>(43 - 1) / 6 = 7</code>.",
         "<strong>Paso 2:</strong> <code>(7 - 1) % 6 = 0</code>. El 0º dígito es \'1\'. Resultado: <strong>1</strong>. Siguiente número: <code>(7 - 1) / 6 = 1</code>.",
         "<strong>Paso 3:</strong> <code>(1 - 1) % 6 = 0</code>. El 0º dígito es \'1\'. Resultado: <strong>1</strong>. Siguiente número: <code>(1 - 1) / 6 = 0</code>."
     ],
