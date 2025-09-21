@@ -50,6 +50,7 @@
     "practiceDesc": "¡Pon a prueba tus habilidades contra el reloj! Elige una dificultad y resuelve los problemas.",
     "difficultyLabel": "Dificultad:",
     "difficultyEasy": "Fácil (1-12)",
+    "difficultyMedium": "Medio (1-24)",
     "difficultyHard": "Difícil (1-50)",
     "quizQuestion": "¿Qué es",
     "quizSubmitBtn": "Enviar",

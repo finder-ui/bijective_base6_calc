@@ -49,6 +49,7 @@
     "practiceDesc": "اختبر مهاراتك ضد الساعة! اختر مستوى صعوبة وحل المشكلات.",
     "difficultyLabel": "مستوى الصعوبة:",
     "difficultyEasy": "سهل (1-12)",
+    "difficultyMedium": "متوسط (1-24)",
     "difficultyHard": "صعب (1-50)",
     "quizQuestion": "ما هو",
     "quizSubmitBtn": "إرسال",

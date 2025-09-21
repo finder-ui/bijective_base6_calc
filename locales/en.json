@@ -39,6 +39,7 @@
     "practiceDesc": "Test your skills against the clock! Choose a difficulty and solve the problems.",
     "difficultyLabel": "Difficulty:",
     "difficultyEasy": "Easy (1-12)",
+    "difficultyMedium": "Medium (1-24)",
     "difficultyHard": "Hard (1-50)",
     "quizSubmitBtn": "Submit",
     "quizNextBtn": "Next Question",
