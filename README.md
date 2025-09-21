@@ -10,7 +10,7 @@ An interactive web app exploring bijective base-6, a number system with no zero 
 
 ## 📸 Screenshot
 
-![App Screenshot](https://raw.githubusercontent.com/tripping-alien/bijective_base6_calc/main/assets/screenshot.png)
+![App Screenshot](https://github.com/tripping-alien/bijective_base6_calc/blob/main/assets/screenshot.jpg)
 *(Replace the placeholder above with a screenshot of your running application)*
 
 ## ✨ Features
