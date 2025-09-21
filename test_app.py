@@ -11,8 +11,8 @@ client = TestClient(app)
     (6, "6"),
     (7, "11"),
     (43, "111"),
-    (12, "26"),
-    (216, "666"),
+    (12, "16"),
+    (216, "556"),
 ])
 def test_to_bijective_base6(decimal_input, expected_bijective):
     """Tests the conversion from decimal to bijective base-6."""
@@ -23,8 +23,8 @@ def test_to_bijective_base6(decimal_input, expected_bijective):
     ("6", 6),
     ("11", 7),
     ("111", 43),
-    ("26", 12),
-    ("666", 216),
+    ("16", 12),
+    ("556", 216),
 ])
 def test_from_bijective_base6(bijective_input, expected_decimal):
     """Tests the conversion from bijective base-6 to decimal."""
