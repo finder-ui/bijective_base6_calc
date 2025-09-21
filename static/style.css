@@ -7,13 +7,13 @@
     --header-color: #343a40;
     --accent-color: #007bff;
     --accent-hover-color: #0056b3;
-    --btn-text-color: #ffffff;
     --border-color: #dee2e6;
     --code-bg-color: #e9ecef;
     --input-bg-color: #ffffff;
     --input-border-color: #ced4da;
     --final-answer-color: #28a745;
     --error-color: #dc3545;
+    --calc-btn-text-color: #ffffff;
 }
 
 [data-theme="dark"] {
@@ -25,13 +25,13 @@
     --header-color: #ccd6f6;
     --accent-color: #64ffda;
     --accent-hover-color: #64ffda;
-    --btn-text-color: #0a192f; /* Dark text for light green button */
     --border-color: #233554;
     --code-bg-color: #0a192f;
     --input-bg-color: #0a192f;
     --input-border-color: #233554;
     --final-answer-color: #64ffda;
     --error-color: #ff7b72;
+    --calc-btn-text-color: #0a192f;
 }
 
 body {
@@ -44,13 +44,13 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-#matrix-background {
+#background-animation {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Sit behind all content */
+    z-index: -1;
 }
 
 /* --- Theme Switcher --- */
@@ -81,7 +81,7 @@ body {
 .container {
     max-width: 900px;
     margin: 20px auto;
-    position: relative; /* Needed for z-index stacking */
+    position: relative;
     z-index: 1;
 }
 
@@ -123,7 +123,7 @@ header h1 {
 }
 
 .tab-link.active {
-    color: var(--btn-text-color);
+    color: var(--calc-btn-text-color);
     background-color: var(--accent-color);
     border-color: var(--accent-color);
     font-weight: bold;
@@ -149,7 +149,16 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* --- Calculator & Results --- */
+code {
+    background-color: var(--code-bg-color);
+    color: var(--accent-color);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.95em;
+}
+
+/* --- Input & Button Styles --- */
 #calculate-all-btn {
     width: 100%;
     padding: 12px 30px;
@@ -159,28 +168,70 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     background-color: var(--accent-color);
-    color: var(--btn-text-color);
+    color: var(--calc-btn-text-color);
     transition: background-color 0.2s, transform 0.1s;
 }
 
-#calculate-all-btn:hover { background-color: var(--accent-hover-color); border-color: var(--accent-hover-color); }
-#calculate-all-btn:active { transform: translateY(2px); }
+#calculate-all-btn:hover {
+    background-color: var(--accent-hover-color);
+    border-color: var(--accent-hover-color);
+}
 
-#result-area { opacity: 0; }
-#result-area.visible { animation: fadeInUp 0.5s ease-out forwards; }
+/* --- Result & Table Styles --- */
+.op-result-item {
+    background-color: var(--bg-color);
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
 
-#ops-results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-.op-result-item { background-color: var(--bg-color); padding: 15px; border-radius: 5px; border: 1px solid var(--border-color); text-align: center; }
-.op-title { font-weight: bold; font-size: 1.2em; color: var(--accent-color); margin-bottom: 15px; }
-.op-step { color: var(--text-color-muted); margin-bottom: 10px; font-size: 0.9em; }
-.op-answer { font-family: var(--font-mono); font-size: 1.6em; font-weight: bold; color: var(--final-answer-color); }
+.op-problem {
+    font-family: var(--font-mono);
+    color: var(--text-color-muted);
+    font-size: 1em;
+    margin-bottom: 10px;
+}
 
-/* --- Footer --- */
+.op-answer {
+    font-family: var(--font-mono);
+    font-size: 1.6em;
+    font-weight: bold;
+    color: var(--final-answer-color);
+    word-wrap: break-word;
+}
+
+/* --- Donation & Footer --- */
+.donation-section {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.donation-button {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: 2px solid var(--final-answer-color);
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--final-answer-color);
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.donation-button:hover {
+    background-color: var(--final-answer-color);
+    color: var(--section-bg-color);
+    box-shadow: 0 0 15px var(--final-answer-color);
+}
+
 footer {
     text-align: center;
     padding: 20px;
-    font-size: 0.9em;
     color: var(--text-color-muted);
+    font-size: 0.9em;
 }
 
 footer a {
@@ -188,18 +239,6 @@ footer a {
     text-decoration: none;
 }
 
-footer a:hover { text-decoration: underline; }
-
-/* Other styles remain the same */
-code { background-color: var(--code-bg-color); color: var(--accent-color); padding: 4px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.95em; }
-.input-group input, #decimal-input { width: 100%; padding: 12px; font-size: 1.1em; font-family: var(--font-mono); border: 1px solid var(--input-border-color); background-color: var(--input-bg-color); color: var(--text-color); border-radius: 5px; box-sizing: border-box; }
-.input-group input:focus, #decimal-input:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 25%, transparent); }
-.result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; font-size: 1.1em; }
-.table-container { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); }
-table th, table td { padding: 6px 8px; text-align: center; border: 1px solid var(--border-color); font-size: 0.9em; }
-table th { background-color: var(--section-bg-color); color: var(--accent-color); }
-#error-display { color: var(--error-color); font-weight: bold; font-size: 1.1em; text-align: center; }
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-.shake { animation: shake 0.5s ease-in-out; }
-@keyframes shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-10px); } 40%, 80% { transform: translateX(10px); } }
+footer a:hover {
+    text-decoration: underline;
+}
