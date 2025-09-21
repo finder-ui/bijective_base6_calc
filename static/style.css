@@ -67,5 +67,5 @@ footer a, section a { color: var(--accent-color); }
 
 /* --- RTL Alignment Fix --- */
 [dir="rtl"] .nav-tabs {
-    padding-right: 0; /* Reset Bootstrap padding for RTL */
+    padding-right: 0;
 }
