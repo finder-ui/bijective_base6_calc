@@ -36,7 +36,8 @@ footer a, section a { color: var(--accent-color); }
 .dropdown-menu { background-color: var(--section-bg-color); border-color: var(--border-color); }
 .dropdown-item { color: var(--text-color) !important; display: flex; align-items: center; gap: 10px; }
 .dropdown-item:hover { background-color: var(--accent-hover-color) !important; color: var(--btn-text-color) !important; }
-.dropdown-item .flag { font-size: 1.5em; }
+.lang-btn-main .fi { font-size: 2em; border-radius: 50%; line-height: 1; vertical-align: middle; }
+.dropdown-item .fi { font-size: 1.5em; border-radius: 3px; }
 
 /* --- Bootstrap Component Theming --- */
 .nav-tabs { border-bottom-color: var(--border-color); }

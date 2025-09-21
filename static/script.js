@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     const supportedLangs = {
-        'en': { flag: '🇺🇸', name: 'English' },
-        'ru': { flag: '🇷🇺', name: 'Русский' },
-        'he': { flag: '🇮🇱', name: 'עברית' },
-        'es': { flag: '🇪🇸', name: 'Español' },
-        'fr': { flag: '🇫🇷', name: 'Français' },
-        'de': { flag: '🇩🇪', name: 'Deutsch' },
-        'ar': { flag: '🇸🇦', name: 'العربية' }
+        'en': { flag: 'us', name: 'English' },
+        'ru': { flag: 'ru', name: 'Русский' },
+        'he': { flag: 'il', name: 'עברית' },
+        'es': { flag: 'es', name: 'Español' },
+        'fr': { flag: 'fr', name: 'Français' },
+        'de': { flag: 'de', name: 'Deutsch' },
+        'ar': { flag: 'sa', name: 'العربية' }
     };
 
     const htmlElement = document.documentElement;
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             a.className = 'dropdown-item';
             a.href = '#';
             a.dataset.lang = code;
-            a.innerHTML = `<span class="flag">${details.flag}</span> ${details.name}`;
+            a.innerHTML = `<span class="fi fi-${details.flag} fis"></span> ${details.name}`;
             a.addEventListener('click', (e) => { e.preventDefault(); setLanguage(code); });
             li.appendChild(a);
             menu.appendChild(li);
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateLangSwitcher(lang) {
         const mainBtn = document.getElementById('lang-switcher-btn');
-        if (mainBtn && supportedLangs[lang]) mainBtn.innerHTML = supportedLangs[lang].flag;
+        if (mainBtn && supportedLangs[lang]) mainBtn.innerHTML = `<span class="fi fi-${supportedLangs[lang].flag} fis"></span>`;
     }
 
     // --- Tab & Table Logic ---
