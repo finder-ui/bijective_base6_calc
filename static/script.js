@@ -52,28 +52,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function setupLangSwitcher() {
-        const container = document.getElementById('lang-switcher-container');
-        if (!container) return;
-        container.innerHTML = '';
+        const mainBtn = document.getElementById('lang-switcher-btn');
+        const menu = document.getElementById('lang-switcher-menu');
+        if (!mainBtn || !menu) return;
+
+        menu.innerHTML = ''; // Clear any existing options
         for (const [code, details] of Object.entries(supportedLangs)) {
-            const btn = document.createElement('span');
-            btn.className = 'lang-btn';
-            btn.textContent = details.flag;
-            btn.dataset.lang = code;
-            btn.setAttribute('role', 'button');
-            btn.setAttribute('aria-label', `Switch to ${details.name}`);
-            container.appendChild(btn);
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.className = 'dropdown-item';
+            a.href = '#';
+            a.dataset.lang = code;
+            a.innerHTML = `<span class="flag">${details.flag}</span> ${details.name}`;
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                setLanguage(code);
+            });
+            li.appendChild(a);
+            menu.appendChild(li);
         }
-        container.addEventListener('click', (event) => {
-            const clickedButton = event.target.closest('.lang-btn');
-            if (clickedButton && clickedButton.dataset.lang) {
-                setLanguage(clickedButton.dataset.lang);
-            }
-        });
     }
 
     function updateLangSwitcherUI(lang) {
-        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+        const mainBtn = document.getElementById('lang-switcher-btn');
+        if (mainBtn && supportedLangs[lang]) {
+            mainBtn.innerHTML = supportedLangs[lang].flag;
+        }
     }
 
     // --- Initial Load ---
@@ -83,5 +87,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const initialTheme = localStorage.getItem('theme') || 'light';
     setTheme(initialTheme);
 
-    // ... (rest of the calculator, table, and other logic remains the same) ...
+    // --- Tab Content Population (Example for Calculator Tab) ---
+    const calculatorTab = document.getElementById('tab-calculator');
+    if(calculatorTab) {
+        calculatorTab.innerHTML = `
+            <section>
+                <div class="row g-5">
+                    <div class="col-lg-6">
+                        <h2 data-i18n="liveConverterTitle"></h2>
+                        <p data-i18n="liveConverterDesc"></p>
+                        <div class="mb-3">
+                            <label for="decimal-input" class="form-label" data-i18n="decimalInputLabel"></label>
+                            <input type="number" class="form-control" id="decimal-input" data-i18n-placeholder="decimalInputPlaceholder" min="1">
+                        </div>
+                        <div id="conversion-results"></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <h2 data-i18n="calculatorTitle"></h2>
+                        <p data-i18n="calculatorDesc"></p>
+                        <div class="row g-2 mb-3">
+                            <div class="col-sm-6"><input type="text" class="form-control" id="num1" data-i18n-placeholder="num1Placeholder"></div>
+                            <div class="col-sm-6"><input type="text" class="form-control" id="num2" data-i18n-placeholder="num2Placeholder"></div>
+                        </div>
+                        <div class="d-grid">
+                            <button id="calculate-all-btn" class="btn btn-primary" data-i18n="calculateBtn"></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="result-area" class="mt-4">
+                <h3 data-i18n="resultsTitle"></h3>
+                <div id="ops-results-grid" class="row row-cols-1 row-cols-md-2 g-3"></div>
+                <div id="error-display" class="mt-3 text-center"></div>
+            </section>
+        `;
+    }
+    // NOTE: Similar population logic would be needed for other tabs if they were not static
 });

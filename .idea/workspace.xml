@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50350d4a-48f4-48cb-849b-1dff3eef744e" name="Changes" comment="themes" />
+    <list default="true" id="50350d4a-48f4-48cb-849b-1dff3eef744e" name="Changes" comment="lang">
+      <change beforePath="$PROJECT_DIR$/static/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/script.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -170,22 +172,6 @@
       <workItem from="1758425240653" duration="1916000" />
       <workItem from="1758427334375" duration="9393000" />
       <workItem from="1758437221260" duration="10450000" />
-    </task>
-    <task id="LOCAL‎-00161" summary="תרגום">
-      <option name="closed" value="true" />
-      <created>1758450440249</created>
-      <option name="number" value="00161" />
-      <option name="presentableId" value="LOCAL‎-00161" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758450440249</updated>
-    </task>
-    <task id="LOCAL‎-00162" summary="תרגום">
-      <option name="closed" value="true" />
-      <created>1758450512550</created>
-      <option name="number" value="00162" />
-      <option name="presentableId" value="LOCAL‎-00162" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758450512550</updated>
     </task>
     <task id="LOCAL‎-00163" summary="תרגום">
       <option name="closed" value="true" />
@@ -563,7 +549,23 @@
       <option name="project" value="LOCAL‎" />
       <updated>1758494238583</updated>
     </task>
-    <option name="localTasksCounter" value="210" />
+    <task id="LOCAL‎-00210" summary="lang">
+      <option name="closed" value="true" />
+      <created>1758494657002</created>
+      <option name="number" value="00210" />
+      <option name="presentableId" value="LOCAL‎-00210" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758494657002</updated>
+    </task>
+    <task id="LOCAL‎-00211" summary="lang">
+      <option name="closed" value="true" />
+      <created>1758494670367</created>
+      <option name="number" value="00211" />
+      <option name="presentableId" value="LOCAL‎-00211" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758494670367</updated>
+    </task>
+    <option name="localTasksCounter" value="212" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -585,7 +587,8 @@
     <MESSAGE value="release" />
     <MESSAGE value="tel" />
     <MESSAGE value="themes" />
-    <option name="LAST_COMMIT_MESSAGE" value="themes" />
+    <MESSAGE value="lang" />
+    <option name="LAST_COMMIT_MESSAGE" value="lang" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PythonProject$.coverage" NAME=" Coverage Results" MODIFIED="1758447187993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
