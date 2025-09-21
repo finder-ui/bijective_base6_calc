@@ -11,6 +11,10 @@ An interactive web app for exploring the **bijective base-6 number system**—a 
 
 ---
 
+![Application Screenshot](assets/screenshot.jpg)
+
+---
+
 ## Table of Contents
 
 - [Features](#-features)
