@@ -28,8 +28,8 @@
     "algoExampleTitle": "Convertissons le nombre décimal <strong>43</strong> :",
     "algoSteps": [
         "<strong>Étape 1 :</strong> <code>(43 - 1) % 6 = 0</code>. Le 0ème chiffre dans <code>\"123456\"</code> est '1'. Résultat : <strong>1</strong>. Nombre suivant : <code>(43 - 1) / 6 = 7</code>.",
-        "<strong>Étape 2 :</strong> <code>(7 - 1) % 6 = 0</code>. Le 0ème chiffre est \'1\'. Résultat : <strong>1</strong>. Nombre suivant : <code>(7 - 1) / 6 = 1</code>.",
-        "<strong>Étape 3 :</strong> <code>(1 - 1) % 6 = 0</code>. Le 0ème chiffre est \'1\'. Résultat : <strong>1</strong>. Nombre suivant : <code>(1 - 1) / 6 = 0</code>."
+        "<strong>Étape 2 :</strong> <code>(7 - 1) % 6 = 0</code>. Le 0ème chiffre est '1'. Résultat : <strong>1</strong>. Nombre suivant : <code>(7 - 1) / 6 = 1</code>.",
+        "<strong>Étape 3 :</strong> <code>(1 - 1) % 6 = 0</code>. Le 0ème chiffre est '1'. Résultat : <strong>1</strong>. Nombre suivant : <code>(1 - 1) / 6 = 0</code>."
     ],
     "algoResult": "En inversant les chiffres, on obtient <code>111</code>. Ainsi, 43 en décimal est 111 en base 6 bijective.",
     "applicationsTitle": "Applications Pratiques",

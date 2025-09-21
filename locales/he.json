@@ -28,8 +28,8 @@
     "algoExampleTitle": "בואו נמיר את המספר העשרוני <strong>43</strong>:",
     "algoSteps": [
         "<strong>שלב 1:</strong> <code>(43 - 1) % 6 = 0</code>. הספרה במקום ה-0 ב-<code>\"123456\"</code> היא '1'. תוצאה: <strong>1</strong>. המספר הבא: <code>(43 - 1) / 6 = 7</code>.",
-        "<strong>שלב 2:</strong> <code>(7 - 1) % 6 = 0</code>. הספרה במקום ה-0 היא \'1\'. תוצאה: <strong>1</strong>. המספר הבא: <code>(7 - 1) / 6 = 1</code>.",
-        "<strong>שלב 3:</strong> <code>(1 - 1) % 6 = 0</code>. הספרה במקום ה-0 היא \'1\'. תוצאה: <strong>1</strong>. המספר הבא: <code>(1 - 1) / 6 = 0</code>."
+        "<strong>שלב 2:</strong> <code>(7 - 1) % 6 = 0</code>. הספרה במקום ה-0 היא '1'. תוצאה: <strong>1</strong>. המספר הבא: <code>(7 - 1) / 6 = 1</code>.",
+        "<strong>שלב 3:</strong> <code>(1 - 1) % 6 = 0</code>. הספרה במקום ה-0 היא '1'. תוצאה: <strong>1</strong>. המספר הבא: <code>(1 - 1) / 6 = 0</code>."
     ],
     "algoResult": "היפוך הספרות נותן <code>111</code>. לפיכך, 43 במערכת עשרונית הוא 111 במערכת ספירה ביאקטיבית בבסיס 6.",
     "applicationsTitle": "יישומים מעשיים",

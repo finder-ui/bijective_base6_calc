@@ -28,8 +28,8 @@
     "algoExampleTitle": "Convirtamos el número decimal <strong>43</strong>:",
     "algoSteps": [
         "<strong>Paso 1:</strong> <code>(43 - 1) % 6 = 0</code>. El 0º dígito en <code>\"123456\"</code> es '1'. Resultado: <strong>1</strong>. Siguiente número: <code>(43 - 1) / 6 = 7</code>.",
-        "<strong>Paso 2:</strong> <code>(7 - 1) % 6 = 0</code>. El 0º dígito es \'1\'. Resultado: <strong>1</strong>. Siguiente número: <code>(7 - 1) / 6 = 1</code>.",
-        "<strong>Paso 3:</strong> <code>(1 - 1) % 6 = 0</code>. El 0º dígito es \'1\'. Resultado: <strong>1</strong>. Siguiente número: <code>(1 - 1) / 6 = 0</code>."
+        "<strong>Paso 2:</strong> <code>(7 - 1) % 6 = 0</code>. El 0º dígito es '1'. Resultado: <strong>1</strong>. Siguiente número: <code>(7 - 1) / 6 = 1</code>.",
+        "<strong>Paso 3:</strong> <code>(1 - 1) % 6 = 0</code>. El 0º dígito es '1'. Resultado: <strong>1</strong>. Siguiente número: <code>(1 - 1) / 6 = 0</code>."
     ],
     "algoResult": "Invirtiendo los dígitos se obtiene <code>111</code>. Por lo tanto, 43 en decimal es 111 en base 6 biyectiva.",
     "applicationsTitle": "Aplicaciones Prácticas",
