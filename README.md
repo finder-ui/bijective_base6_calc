@@ -8,11 +8,6 @@ An interactive web app exploring bijective base-6, a number system with no zero 
 
 ### [➡️ View the Live Demo](https://bijective-base6-calc.onrender.com)
 
-## 📸 Screenshot
-
-![App Screenshot](https://github.com/tripping-alien/bijective_base6_calc/blob/main/assets/screenshot.jpg)
-*(Replace the placeholder above with a screenshot of your running application)*
-
 ## ✨ Features
 
 *   **Interactive Calculator**: Perform addition, subtraction, multiplication, and division on bijective base-6 numbers.
