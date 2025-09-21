@@ -32,7 +32,6 @@
     "appCrypto": "<strong>Natural Fit for Cryptography:</strong> Guarantees one-to-one mappings (canonical representation), which is critical for preventing subtle bugs and security vulnerabilities. In a theoretical computer built on this system, the classic 'null pointer exception' (an error from accessing address 0) wouldn't exist in the same way, as the first address is 1.",
     "darkSecretTitle": "The Philosophical Implication of a Zero-less World",
     "darkSecretDesc": "The absence of zero is not just a curiosity; it has profound philosophical implications. In our mathematics, zero represents both a quantity (nothing) and a concept (the origin). A bijective system has no symbol for nothingness. The number zero is represented by the empty string—the absence of symbols. This implies a universe where the concept of 'nothing' isn't a state to be represented, but a true void. In computation, this means there is no 'null' address, potentially eliminating an entire class of common programming errors at a fundamental level.",
-    "donationBtn": "Support this Project",
     "githubLink": "Project source available on",
     "licenseLink": "Released under the"
 }
