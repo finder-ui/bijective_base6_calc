@@ -171,22 +171,6 @@
       <workItem from="1758427334375" duration="9393000" />
       <workItem from="1758437221260" duration="10450000" />
     </task>
-    <task id="LOCAL‎-00169" summary="תרגום">
-      <option name="closed" value="true" />
-      <created>1758451418398</created>
-      <option name="number" value="00169" />
-      <option name="presentableId" value="LOCAL‎-00169" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758451418398</updated>
-    </task>
-    <task id="LOCAL‎-00170" summary="תרגום">
-      <option name="closed" value="true" />
-      <created>1758451988820</created>
-      <option name="number" value="00170" />
-      <option name="presentableId" value="LOCAL‎-00170" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758451988820</updated>
-    </task>
     <task id="LOCAL‎-00171" summary="תרגום">
       <option name="closed" value="true" />
       <created>1758451995495</created>
@@ -563,7 +547,23 @@
       <option name="project" value="LOCAL‎" />
       <updated>1758496375353</updated>
     </task>
-    <option name="localTasksCounter" value="218" />
+    <task id="LOCAL‎-00218" summary="commit">
+      <option name="closed" value="true" />
+      <created>1758496524411</created>
+      <option name="number" value="00218" />
+      <option name="presentableId" value="LOCAL‎-00218" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758496524411</updated>
+    </task>
+    <task id="LOCAL‎-00219" summary="commit">
+      <option name="closed" value="true" />
+      <created>1758496608585</created>
+      <option name="number" value="00219" />
+      <option name="presentableId" value="LOCAL‎-00219" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758496608585</updated>
+    </task>
+    <option name="localTasksCounter" value="220" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
