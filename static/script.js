@@ -11,6 +11,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const htmlElement = document.documentElement;
 
+    // --- Utility Functions ---
+    /**
+     * Debounce function to limit the rate at which a function gets called.
+     * @param {Function} func The function to debounce.
+     * @param {number} delay The delay in milliseconds.
+     * @returns {Function} The debounced function.
+     */
+    function debounce(func, delay) {
+        let timeout;
+        return function(...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), delay);
+        };
+    }
+
     // --- Internationalization (i18n) Logic ---
     async function setLanguage(lang) {
         if (!supportedLangs[lang]) {
@@ -25,9 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             const langData = await response.json();
-            
+
             applyTranslations(langData);
-            
+
             htmlElement.setAttribute('lang', lang);
             htmlElement.dir = (lang === 'he' || lang === 'ar') ? 'rtl' : 'ltr';
 
@@ -58,13 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!langSwitcherContainer) return;
         langSwitcherContainer.innerHTML = ''; // Clear previous buttons
 
-        // Use a more robust loop and event delegation pattern
         for (const [code, details] of Object.entries(supportedLangs)) {
-            const btn = document.createElement('span');
+            // ENHANCEMENT: Use a <button> for better semantics and accessibility.
+            const btn = document.createElement('button');
             btn.className = 'lang-btn';
             btn.textContent = details.flag;
             btn.dataset.lang = code;
-            btn.setAttribute('role', 'button');
             btn.setAttribute('aria-label', `Switch to ${details.name}`);
             langSwitcherContainer.appendChild(btn);
         }
@@ -121,6 +135,9 @@ document.addEventListener('DOMContentLoaded', () => {
             row.forEach(cell => tableHTML += `<td>${cell}</td>`);
             tableHTML += '</tr>';
         });
+        // NOTE: Using innerHTML is safe here because the data is coming from a trusted
+        // server endpoint. Avoid this method when rendering user-generated content
+        // to prevent Cross-Site Scripting (XSS) vulnerabilities.
         container.innerHTML = tableHTML;
     }
 
@@ -128,13 +145,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const decimalInput = document.getElementById('decimal-input');
     const conversionResults = document.getElementById('conversion-results');
     if (decimalInput) {
-        decimalInput.addEventListener('input', async (e) => {
+        const handleConversion = async (e) => {
             const decimalValue = parseInt(e.target.value, 10);
             if (!decimalValue || decimalValue <= 0) { conversionResults.innerHTML = ''; return; }
             const response = await fetch('/convert-all', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ decimal_value: decimalValue }) });
             const data = await response.json();
             conversionResults.innerHTML = data.error ? `<div class="text-danger">${data.error}</div>` : `<div class="result-grid"><div><strong>Decimal:</strong> <code>${data.decimal}</code></div><div><strong>Binary:</strong> <code>${data.binary}</code></div><div><strong>Hexadecimal:</strong> <code>${data.hexadecimal}</code></div><div><strong>Bijective Base-6:</strong> <code>${data.bijective_base6}</code></div></div>`;
-        });
+        };
+        // ENHANCEMENT: Debounce the input to avoid sending too many requests.
+        decimalInput.addEventListener('input', debounce(handleConversion, 300));
     }
 
     const num1Input = document.getElementById('num1');
@@ -197,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Initial Load ---
     setupLangSwitcher();
-    const initialLang = localStorage.getItem('language') || 'en';
+    const initialLang = localStorage.getItem('language') || navigator.language.split('-')[0] || 'en';
     setLanguage(initialLang);
     const initialTheme = localStorage.getItem('theme') || 'light';
     setTheme(initialTheme);
