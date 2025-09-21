@@ -147,7 +147,7 @@ footer a {
 .nav-tabs .nav-link {
     background-color: transparent;
     border-bottom-width: 2px;
-    color: var(--text-color-muted);
+    color: var(--header-color);
     font-weight: 500;
 }
 
