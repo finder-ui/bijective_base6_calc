@@ -78,6 +78,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const key = el.getAttribute('data-i18n-placeholder');
             if (data[key]) el.placeholder = data[key];
         });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (data[key]) el.placeholder = data[key];
+        });
         document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
             const key = el.getAttribute('data-i18n-aria-label');
             if (data[key]) el.setAttribute('aria-label', data[key]);
@@ -282,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function setupQuiz() {
+      function setupQuiz() {
         const container = document.getElementById('quiz-container');
         if (!container) return;
         const difficultySelector = document.getElementById('difficulty-range');
@@ -290,6 +294,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const mathCheckbox = document.getElementById('quiz-type-math');
         let correctAnswer = '';
         let autoNextTimer = null;
+        let recentQuestions = []; // Array to store recent question identifiers
+        const RECENTS_TO_AVOID = 10; // Avoid repeating the last 10 questions
+
+        // Load saved settings from localStorage
+        const savedDifficulty = localStorage.getItem('quizDifficulty');
+        if (savedDifficulty) {
+            difficultySelector.value = savedDifficulty;
+        }
+
+        const savedConvChecked = localStorage.getItem('quizConvChecked');
+        if (savedConvChecked !== null) {
+            conversionCheckbox.checked = (savedConvChecked === 'true');
+        }
+
+        const savedMathChecked = localStorage.getItem('quizMathChecked');
+        if (savedMathChecked !== null) {
+            mathCheckbox.checked = (savedMathChecked === 'true');
+        }
+
         // Store the state of the current quiz to allow for re-rendering on language change
         let currentQuizState = {
             question: null,
@@ -298,33 +321,55 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         function generateQuestion() {
-            const maxNum = parseInt(difficultySelector.value, 10) || 12;
-            let questionHTML = '';
-            
-            const problemTypes = [];
-            if (conversionCheckbox.checked) problemTypes.push('conversion');
-            if (mathCheckbox.checked) problemTypes.push('math');
+            let uniqueIdentifier = '';
+            let isNewQuestion = false;
+            let safetyCounter = 0; // Prevents infinite loops if all questions have been seen recently
 
-            // If no types are selected, default to both to avoid an empty state, and check the boxes in the UI.
-            if (problemTypes.length === 0) {
-                conversionCheckbox.checked = true;
-                mathCheckbox.checked = true;
-                problemTypes.push('conversion', 'math');
+            while (!isNewQuestion && safetyCounter < 50) {
+                const maxNum = parseInt(difficultySelector.value, 10) || 13;
+                const problemTypes = [];
+                if (conversionCheckbox.checked) problemTypes.push('conversion');
+                if (mathCheckbox.checked) problemTypes.push('math');
+
+                if (problemTypes.length === 0) {
+                    conversionCheckbox.checked = true;
+                    mathCheckbox.checked = true;
+                    problemTypes.push('conversion', 'math');
+                }
+                const chosenType = problemTypes[Math.floor(Math.random() * problemTypes.length)];
+
+                if (chosenType === 'math') {
+                    const num1 = Math.floor(Math.random() * maxNum) + 1;
+                    const num2 = Math.floor(Math.random() * maxNum) + 1;
+                    const op = Math.random() > 0.5 ? '+' : '×';
+                    // Create a canonical identifier to treat "1+2" and "2+1" as the same question
+                    const sortedNums = [num1, num2].sort((a, b) => a - b);
+                    uniqueIdentifier = `m_${sortedNums[0]}_${sortedNums[1]}_${op}`;
+
+                    if (!recentQuestions.includes(uniqueIdentifier)) {
+                        correctAnswer = (op === '+') ? toBijective(num1 + num2) : toBijective(num1 * num2);
+                        currentQuizState.question = { type: 'math', num1: toBijective(num1), num2: toBijective(num2), op: op };
+                        isNewQuestion = true;
+                    }
+                } else { // Conversion
+                    const decimalToConvert = Math.floor(Math.random() * maxNum) + 1;
+                    uniqueIdentifier = `c_${decimalToConvert}`;
+
+                    if (!recentQuestions.includes(uniqueIdentifier)) {
+                        correctAnswer = toBijective(decimalToConvert);
+                        currentQuizState.question = { type: 'conversion', decimal: decimalToConvert };
+                        isNewQuestion = true;
+                    }
+                }
+                safetyCounter++;
             }
-            const chosenType = problemTypes[Math.floor(Math.random() * problemTypes.length)];
 
-            if (chosenType === 'math') {
-                const num1 = Math.floor(Math.random() * maxNum) + 1;
-                const num2 = Math.floor(Math.random() * maxNum) + 1;
-
-                const op = Math.random() > 0.5 ? '+' : '×';
-                correctAnswer = (op === '+') ? toBijective(num1 + num2) : toBijective(num1 * num2);
-                currentQuizState.question = { type: 'math', num1: toBijective(num1), num2: toBijective(num2), op: op };
-            } else {
-                const decimalToConvert = (Math.floor(Math.random() * 1000) % maxNum) + 1;
-                correctAnswer = toBijective(decimalToConvert);
-                currentQuizState.question = { type: 'conversion', decimal: decimalToConvert };
+            // Add the new question to our memory and trim the list
+            recentQuestions.push(uniqueIdentifier);
+            if (recentQuestions.length > RECENTS_TO_AVOID) {
+                recentQuestions.shift();
             }
+
             currentQuizState.feedback = null;
             currentQuizState.isAnswered = false;
             renderQuiz();
@@ -337,10 +382,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (q.type === 'math') {
                 questionHTML = `${i18nData.quizQuestion || 'What is'} <code>${q.num1} ${q.op} ${q.num2}</code>?`;
             } else {
-                questionHTML = `${i18nData.quizQuestion || 'What is'} <code>${q.decimal}</code> in bijective base-6?`;
+                questionHTML = `${i18nData.quizQuestion || 'What is'} <code>${q.decimal}</code> ${i18nData.quizQuestionConversionSuffix || 'in Bijective Base-6?'}`;
             }
-            container.innerHTML = `<div id="quiz-question">${questionHTML}</div><div class="input-group mt-3 mx-auto" style="max-width: 300px;"><input type="text" id="quiz-answer" class="form-control" placeholder="Answer..."><button id="quiz-submit" class="btn btn-primary">${i18nData.quizSubmitBtn || 'Submit'}</button></div><div id="quiz-feedback" class="mt-3 text-center"></div>`;
-            
+            container.innerHTML = `<div id="quiz-question">${questionHTML}</div><div class="input-group mt-3 mx-auto" style="max-width: 300px;"><input type="text" id="quiz-answer" class="form-control" placeholder="${i18nData.quizAnswerPlaceholder || 'Your answer...'}"><button id="quiz-submit" class="btn btn-primary">${i18nData.quizSubmitBtn || 'Submit'}</button></div><div id="quiz-feedback" class="mt-3 text-center"></div>`;
+
             if (currentQuizState.isAnswered) {
                 const feedbackEl = document.getElementById('quiz-feedback');
                 const nextBtn = document.createElement('button');
@@ -358,7 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function checkAnswer() {
-            const userAnswer = document.getElementById('quiz-answer').value.trim();
+            const userAnswer = document.getElementById('quiz-answer').value.trim().toUpperCase();
             const feedbackEl = document.getElementById('quiz-feedback');
             document.getElementById('quiz-submit').disabled = true;
 
@@ -370,7 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 generateQuestion();
             };
 
-            if (userAnswer.toUpperCase() === correctAnswer) {
+            if (userAnswer === correctAnswer) {
                 currentQuizState.feedback = `<span class="feedback-correct">${i18nData.quizCorrectFeedback || 'Correct! 🎉'}</span>`;
                 autoNextTimer = setTimeout(generateQuestion, 5000); // Auto-advance after 5s
             } else {
@@ -380,13 +425,24 @@ document.addEventListener('DOMContentLoaded', () => {
             renderQuiz();
         }
 
-        difficultySelector.addEventListener('change', () => { clearTimeout(autoNextTimer); generateQuestion(); });
-        conversionCheckbox.addEventListener('change', () => { clearTimeout(autoNextTimer); generateQuestion(); });
-        mathCheckbox.addEventListener('change', () => { clearTimeout(autoNextTimer); generateQuestion(); });
+        difficultySelector.addEventListener('change', () => {
+            localStorage.setItem('quizDifficulty', difficultySelector.value);
+            clearTimeout(autoNextTimer);
+            generateQuestion();
+        });
+        conversionCheckbox.addEventListener('change', () => {
+            localStorage.setItem('quizConvChecked', conversionCheckbox.checked);
+            clearTimeout(autoNextTimer);
+            generateQuestion();
+        });
+        mathCheckbox.addEventListener('change', () => {
+            localStorage.setItem('quizMathChecked', mathCheckbox.checked);
+            clearTimeout(autoNextTimer);
+            generateQuestion();
+        });
         generateQuestion();
-        return { render: renderQuiz }; // Return the render function
+        return { render: renderQuiz };
     }
-
     // --- Initial Load ---
     async function initialize() {
         createLangSwitcher();
