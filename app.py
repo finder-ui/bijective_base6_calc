@@ -1,4 +1,3 @@
-
 import uvicorn
 import os
 from fastapi import FastAPI, Request
@@ -6,8 +5,16 @@ from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 from starlette.staticfiles import StaticFiles
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
+
+# --- Initialize Rate Limiter ---
+limiter = Limiter(key_func=get_remote_address)
 
 app = FastAPI()
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # --- Mount static files and templates ---
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -61,7 +68,8 @@ async def get_locale(lang: str):
 
 
 @app.post("/calculate-all")
-async def calculate_all_ops(problem: AllOpsRequest):
+@limiter.limit("15/minute")
+async def calculate_all_ops(request: Request, problem: AllOpsRequest):
     try:
         n1 = from_bijective_base6(problem.num1)
         n2 = from_bijective_base6(problem.num2)
@@ -90,7 +98,8 @@ async def calculate_all_ops(problem: AllOpsRequest):
 
 
 @app.post("/convert")
-async def convert_live(req: ConversionRequest):
+@limiter.limit("45/minute")
+async def convert_live(request: Request, req: ConversionRequest):
     if req.decimal_value <= 0: return {"error": "Please enter a positive whole number."}
     try:
         decimal_val = req.decimal_value
