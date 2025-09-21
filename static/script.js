@@ -30,10 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.add('active');
 
             tabContents.forEach(content => {
+                content.classList.remove('active');
                 if (content.id === tabId) {
                     content.classList.add('active');
-                } else {
-                    content.classList.remove('active');
                 }
             });
 
