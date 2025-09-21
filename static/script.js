@@ -1,19 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
     const supportedLangs = {
-        'en': { name: 'English', flag: '🇺🇸' },
-        'de': { name: 'Deutsch', flag: '🇩🇪' },
-        'es': { name: 'Español', flag: '🇪🇸' },
-        'fr': { name: 'Français', flag: '🇫🇷' },
-        'he': { name: 'עברית', flag: '🇮🇱' },
-        'ru': { name: 'Русский', flag: '🇷🇺' }
+        'en': { flag: '🇺🇸', name: 'English' },
+        'ru': { flag: '🇷🇺', name: 'Русский' },
+        'he': { flag: '🇮🇱', name: 'עברית' },
+        'es': { flag: '🇪🇸', name: 'Español' },
+        'fr': { flag: '🇫🇷', name: 'Français' },
+        'de': { flag: '🇩🇪', name: 'Deutsch' },
+        'ar': { flag: '🇸🇦', name: 'العربية' }
     };
 
     const htmlElement = document.documentElement;
 
-    // --- Language Switcher Logic ---
-    const langSwitcherContainer = document.getElementById('lang-switcher-container');
-    let langMenu;
-
+    // --- Internationalization (i18n) Logic ---
     async function setLanguage(lang) {
         const response = await fetch(`/locales/${lang}.json`);
         const langData = await response.json();
@@ -21,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         applyTranslations(langData);
         
         htmlElement.setAttribute('lang', lang);
-        htmlElement.setAttribute('dir', lang === 'he' ? 'rtl' : 'ltr');
+        document.dir = (lang === 'he' || lang === 'ar') ? 'rtl' : 'ltr';
 
         localStorage.setItem('language', lang);
         updateLangSwitcher(lang);
@@ -36,49 +34,31 @@ document.addEventListener('DOMContentLoaded', () => {
             const key = el.getAttribute('data-i18n-placeholder');
             if (data[key]) el.placeholder = data[key];
         });
-        document.title = data.pageTitle;
-        document.querySelector('meta[name="description"]').setAttribute('content', data.pageDescription);
-    }
-
-    function createLangSwitcher() {
-        const switcherBtn = document.createElement('div');
-        switcherBtn.className = 'lang-switcher-btn';
-        switcherBtn.id = 'lang-switcher-btn';
-        switcherBtn.setAttribute('role', 'button');
-        switcherBtn.setAttribute('aria-label', 'Select language');
-        langSwitcherContainer.appendChild(switcherBtn);
-
-        langMenu = document.createElement('div');
-        langMenu.className = 'lang-menu';
-        langSwitcherContainer.appendChild(langMenu);
-
-        for (const [code, lang] of Object.entries(supportedLangs)) {
-            const option = document.createElement('div');
-            option.className = 'lang-option';
-            option.dataset.lang = code;
-            option.innerHTML = `<span class="flag-icon">${lang.flag}</span> ${lang.name}`;
-            option.addEventListener('click', () => {
-                setLanguage(code);
-                langMenu.classList.remove('show');
-            });
-            langMenu.appendChild(option);
-        }
-
-        switcherBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            langMenu.classList.toggle('show');
+        document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+            const key = el.getAttribute('data-i18n-aria-label');
+            if (data[key]) el.setAttribute('aria-label', data[key]);
         });
     }
 
-    function updateLangSwitcher(lang) {
-        const switcherBtn = document.getElementById('lang-switcher-btn');
-        if (switcherBtn) {
-            switcherBtn.innerHTML = supportedLangs[lang].flag;
+    function createLangSwitcher() {
+        const langSwitcherContainer = document.getElementById('lang-switcher-container');
+        for (const [code, details] of Object.entries(supportedLangs)) {
+            const btn = document.createElement('span');
+            btn.className = 'lang-btn';
+            btn.textContent = details.flag;
+            btn.dataset.lang = code;
+            btn.setAttribute('role', 'button');
+            btn.setAttribute('aria-label', `Switch to ${details.name}`);
+            btn.addEventListener('click', () => setLanguage(code));
+            langSwitcherContainer.appendChild(btn);
         }
     }
 
-    window.addEventListener('click', () => { if (langMenu && langMenu.classList.contains('show')) langMenu.classList.remove('show'); });
-    createLangSwitcher();
+    function updateLangSwitcher(lang) {
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+    }
 
     // --- Theme Switcher Logic ---
     const themeSwitcher = document.getElementById('theme-switcher');
@@ -92,21 +72,14 @@ document.addEventListener('DOMContentLoaded', () => {
         setTheme(currentTheme === 'dark' ? 'light' : 'dark');
     });
 
-    // --- Initial Load ---
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
-    const savedLang = localStorage.getItem('language') || 'en';
-    setLanguage(savedLang);
-
-    // --- Calculator & Other Logic ---
+    // --- Tab & Table Logic (Corrected for Bootstrap) ---
     const tablesTab = document.getElementById('tables-tab');
     let tablesData = null;
     tablesTab.addEventListener('shown.bs.tab', async () => {
         if (!tablesData) {
             const addContainer = document.getElementById('addition-table-container');
             const mulContainer = document.getElementById('multiplication-table-container');
-            addContainer.innerHTML = '<p class="text-center">Loading tables...</p>';
-            mulContainer.innerHTML = '';
+            addContainer.innerHTML = '<p class="text-center">Loading...</p>';
             const response = await fetch('/get-tables');
             tablesData = await response.json();
             renderTable(tablesData.header, tablesData.addition, addContainer);
@@ -115,11 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function renderTable(header, data, container) {
-        let tableHTML = '<table class="table table-bordered table-hover"><thead><tr><th scope="col">#</th>';
-        header.forEach(h => tableHTML += `<th scope="col">${h}</th>`);
+        let tableHTML = '<table class="table table-bordered table-hover"><thead><tr><th>#</th>';
+        header.forEach(h => tableHTML += `<th>${h}</th>`);
         tableHTML += '</tr></thead><tbody>';
         data.forEach((row, rowIndex) => {
-            tableHTML += `<tr><th scope="row">${header[rowIndex]}</th>`;
+            tableHTML += `<tr><th>${header[rowIndex]}</th>`;
             row.forEach(cell => tableHTML += `<td>${cell}</td>`);
             tableHTML += '</tr>';
         });
@@ -127,25 +100,15 @@ document.addEventListener('DOMContentLoaded', () => {
         container.innerHTML = tableHTML;
     }
 
+    // --- Calculator & Converter Logic ---
     const decimalInput = document.getElementById('decimal-input');
     const conversionResults = document.getElementById('conversion-results');
     decimalInput.addEventListener('input', async (e) => {
         const decimalValue = parseInt(e.target.value, 10);
-        if (!decimalValue || decimalValue <= 0) {
-            conversionResults.innerHTML = '';
-            return;
-        }
-        const response = await fetch('/convert-all', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ decimal_value: decimalValue }),
-        });
+        if (!decimalValue || decimalValue <= 0) { conversionResults.innerHTML = ''; return; }
+        const response = await fetch('/convert-all', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ decimal_value: decimalValue }) });
         const data = await response.json();
-        if (data.error) {
-            conversionResults.innerHTML = `<div class="text-danger">${data.error}</div>`;
-        } else {
-            conversionResults.innerHTML = `<div class="result-grid"><div><strong>Decimal:</strong> <code>${data.decimal}</code></div><div><strong>Binary:</strong> <code>${data.binary}</code></div><div><strong>Hexadecimal:</strong> <code>${data.hexadecimal}</code></div><div><strong>Bijective Base-6:</strong> <code>${data.bijective_base6}</code></div></div>`;
-        }
+        conversionResults.innerHTML = data.error ? `<div class="text-danger">${data.error}</div>` : `<div class="result-grid"><div><strong>Decimal:</strong> <code>${data.decimal}</code></div><div><strong>Binary:</strong> <code>${data.binary}</code></div><div><strong>Hexadecimal:</strong> <code>${data.hexadecimal}</code></div><div><strong>Bijective Base-6:</strong> <code>${data.bijective_base6}</code></div></div>`;
     });
 
     const num1Input = document.getElementById('num1');
@@ -169,11 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 resultArea.classList.add('visible');
                 return;
             }
-            const response = await fetch('/calculate-all', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ num1, num2 }),
-            });
+            const response = await fetch('/calculate-all', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ num1, num2 }) });
             const data = await response.json();
             if (data.error) {
                 errorDisplay.textContent = `Error: ${data.error}`;
@@ -201,10 +160,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="op-title">${opName.charAt(0).toUpperCase() + opName.slice(1)}</div>
                     <div class="op-problem">${problemBijective}</div>
                     <div class="op-step">${decimalStep}</div>
-                    <div class="op-answer">${opData.decimal !== null ? opData.bijective : '&nbsp;' }</div>
+                    <div class="op-answer">${opData.decimal !== null ? opData.bijective : '&nbsp;'}</div>
                 </div>
             `;
             opsResultsGrid.appendChild(resultItem);
         }
     }
+
+    // --- Initial Load ---
+    createLangSwitcher();
+    const initialLang = localStorage.getItem('language') || 'en';
+    setLanguage(initialLang);
+    const initialTheme = localStorage.getItem('theme') || 'light';
+    setTheme(initialTheme);
 });
