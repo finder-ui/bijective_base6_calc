@@ -272,8 +272,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Randomly choose between a math problem and a conversion problem
             if (Math.random() > 0.5) {
-                const num1 = (Math.floor(Math.random() * 1000) % maxNum);
-                const num2 = (Math.floor(Math.random() * 1000) % maxNum);
+                const num1 = (Math.floor(Math.random() * 1000) % maxNum) + 1;
+                const num2 = (Math.floor(Math.random() * 1000) % maxNum) + 1;
 
                 const op = Math.random() > 0.5 ? '+' : '×';
                 correctAnswer = (op === '+') ? toBijective(num1 + num2) : toBijective(num1 * num2);
