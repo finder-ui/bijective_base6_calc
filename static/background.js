@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const accentColor = bodyStyles.getPropertyValue('--accent-color');
 
         // Create a semi-transparent background to create the fading trail effect
-        ctx.fillStyle = `rgba(${hexToRgb(bgColor)}, 0.05)`;
+        ctx.fillStyle = `rgba(${hexToRgb(bgColor)}, 0.1)`;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         // Set the color for the letters
@@ -74,13 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         startAnimation();
-    });
-
-    // Also restart animation when theme changes
-    const themeSwitcher = document.getElementById('theme-switcher');
-    themeSwitcher.addEventListener('click', () => {
-        // We need a small delay for the CSS variables to update
-        setTimeout(startAnimation, 50);
     });
 
     // Initial start
