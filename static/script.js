@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             htmlElement.dir = (lang === 'he' || lang === 'ar') ? 'rtl' : 'ltr';
 
             localStorage.setItem('language', lang);
-            updateLangSwitcher(lang);
+            updateLangSwitcherUI(lang);
         } catch (error) {
             console.error(`Error setting language to ${lang}:`, error);
         }
@@ -53,30 +53,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function createLangSwitcher() {
+    function setupLangSwitcher() {
         const langSwitcherContainer = document.getElementById('lang-switcher-container');
         if (!langSwitcherContainer) return;
         langSwitcherContainer.innerHTML = ''; // Clear previous buttons
 
-        for (const code in supportedLangs) {
-            const details = supportedLangs[code];
+        // Create and append all buttons
+        for (const [code, details] of Object.entries(supportedLangs)) {
             const btn = document.createElement('span');
             btn.className = 'lang-btn';
             btn.textContent = details.flag;
             btn.dataset.lang = code;
             btn.setAttribute('role', 'button');
             btn.setAttribute('aria-label', `Switch to ${details.name}`);
-            
-            // CORRECTED: This ensures a new, correct event listener is created for each button.
-            btn.addEventListener('click', () => {
-                setLanguage(code);
-            });
-            
             langSwitcherContainer.appendChild(btn);
         }
+
+        // Add a single event listener to the container (Event Delegation)
+        langSwitcherContainer.addEventListener('click', (event) => {
+            const clickedButton = event.target.closest('.lang-btn');
+            if (clickedButton && clickedButton.dataset.lang) {
+                setLanguage(clickedButton.dataset.lang);
+            }
+        });
     }
 
-    function updateLangSwitcher(lang) {
+    function updateLangSwitcherUI(lang) {
         document.querySelectorAll('.lang-btn').forEach(btn => {
             btn.classList.toggle('active', btn.dataset.lang === lang);
         });
@@ -120,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
             row.forEach(cell => tableHTML += `<td>${cell}</td>`);
             tableHTML += '</tr>';
         });
-        tableHTML += '</tbody></table>';
         container.innerHTML = tableHTML;
     }
 
@@ -196,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Initial Load ---
-    createLangSwitcher();
+    setupLangSwitcher();
     const initialLang = localStorage.getItem('language') || 'en';
     setLanguage(initialLang);
     const initialTheme = localStorage.getItem('theme') || 'light';
