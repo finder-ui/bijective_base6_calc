@@ -44,12 +44,7 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-#background-animation {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -1;
-}
-
+#background-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 .container { z-index: 1; position: relative; }
 
 /* --- Theming for Bootstrap Components --- */
@@ -74,11 +69,11 @@ section { box-shadow: none !important; border: none !important; background-color
     border-color: var(--input-border-color) !important;
     font-family: var(--font-mono);
 }
-.form-control:focus {
+.form-control:focus { 
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 25%, transparent) !important;
 }
 
-.btn-primary {
+.btn-primary { 
     background-color: var(--accent-color) !important;
     border-color: var(--accent-color) !important;
     color: var(--calc-btn-text-color) !important;
@@ -90,8 +85,14 @@ h1, h2 { color: var(--header-color); }
 h2 { color: var(--accent-color); font-family: var(--font-mono); }
 code { background-color: var(--code-bg-color); color: var(--accent-color); padding: .2em .4em; border-radius: .25rem; }
 
-#theme-switcher { position: fixed; top: 20px; left: 20px; width: 50px; height: 50px; background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.5em; z-index: 1000; }
-#theme-switcher:hover { box-shadow: 0 0 10px var(--accent-color); }
+#theme-switcher { position: fixed; top: 20px; left: 20px; width: 45px; height: 45px; background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.5em; z-index: 1001; }
+#lang-switcher-container { position: fixed; top: 20px; right: 20px; z-index: 1001; }
+#lang-switcher-btn { width: 45px; height: 45px; background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.8em; padding-bottom: 2px; }
+#lang-menu { display: none; position: absolute; top: 55px; right: 0; background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-radius: 5px; list-style: none; padding: 5px; margin: 0; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+#lang-menu.show { display: block; }
+#lang-menu li { padding: 8px 12px; cursor: pointer; border-radius: 3px; display: flex; align-items: center; gap: 10px; }
+#lang-menu li:hover { background-color: var(--bg-color); }
+.flag-icon { font-size: 1.5em; }
 
 #result-area { opacity: 0; transition: opacity 0.5s; }
 #result-area.visible { opacity: 1; }

@@ -1,36 +1,101 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Theme Switcher Logic ---
-    const themeSwitcher = document.getElementById('theme-switcher');
+    const supportedLangs = {
+        'en': 'English',
+        'ru': 'Русский',
+        'he': 'עברית',
+        'es': 'Español',
+        'fr': 'Français',
+        'de': 'Deutsch'
+    };
+
+    // --- Internationalization (i18n) Logic ---
+    const langSwitcherContainer = document.getElementById('lang-switcher-container');
     const htmlElement = document.documentElement;
 
+    async function setLanguage(lang) {
+        const response = await fetch(`/locales/${lang}.json`);
+        const langData = await response.json();
+        
+        applyTranslations(langData);
+        
+        // Handle RTL languages
+        if (lang === 'he') {
+            htmlElement.setAttribute('dir', 'rtl');
+        } else {
+            htmlElement.setAttribute('dir', 'ltr');
+        }
+
+        localStorage.setItem('language', lang);
+        updateLangSwitcher(lang);
+    }
+
+    function applyTranslations(data) {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (data[key]) {
+                el.innerHTML = data[key];
+            }
+        });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (data[key]) {
+                el.placeholder = data[key];
+            }
+        });
+    }
+
+    function createLangSwitcher() {
+        const select = document.createElement('select');
+        select.className = 'lang-select';
+        for (const [code, name] of Object.entries(supportedLangs)) {
+            const option = document.createElement('option');
+            option.value = code;
+            option.textContent = name;
+            select.appendChild(option);
+        }
+        langSwitcherContainer.appendChild(select);
+
+        select.addEventListener('change', (e) => {
+            setLanguage(e.target.value);
+        });
+    }
+
+    function updateLangSwitcher(lang) {
+        const select = langSwitcherContainer.querySelector('select');
+        if (select) {
+            select.value = lang;
+        }
+    }
+
+    createLangSwitcher();
+    const savedLang = localStorage.getItem('language') || 'en';
+    setLanguage(savedLang);
+
+    // --- Theme Switcher Logic ---
+    const themeSwitcher = document.getElementById('theme-switcher');
     function setTheme(theme) {
         htmlElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
         themeSwitcher.innerHTML = theme === 'dark' ? '☀️' : '🌙';
     }
-
     themeSwitcher.addEventListener('click', () => {
         const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
         setTheme(currentTheme === 'dark' ? 'light' : 'dark');
     });
-
     const savedTheme = localStorage.getItem('theme') || 'light';
     setTheme(savedTheme);
 
-    // --- Tab & Table Logic (Corrected for Bootstrap) ---
+    // --- Existing Calculator & Other Logic ---
     const tablesTab = document.getElementById('tables-tab');
-    let tablesData = null; // Cache for the table data
-
+    let tablesData = null;
     tablesTab.addEventListener('shown.bs.tab', async () => {
         if (!tablesData) {
             const addContainer = document.getElementById('addition-table-container');
             const mulContainer = document.getElementById('multiplication-table-container');
             addContainer.innerHTML = '<p class="text-center">Loading tables...</p>';
             mulContainer.innerHTML = '';
-            
             const response = await fetch('/get-tables');
             tablesData = await response.json();
-
             renderTable(tablesData.header, tablesData.addition, addContainer);
             renderTable(tablesData.header, tablesData.multiplication, mulContainer);
         }
@@ -49,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
         container.innerHTML = tableHTML;
     }
 
-    // --- Live Conversion Explorer Logic ---
     const decimalInput = document.getElementById('decimal-input');
     const conversionResults = document.getElementById('conversion-results');
     decimalInput.addEventListener('input', async (e) => {
@@ -71,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Bijective Calculator Logic ---
     const num1Input = document.getElementById('num1');
     const num2Input = document.getElementById('num2');
     const calculateAllBtn = document.getElementById('calculate-all-btn');
@@ -113,11 +176,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function displayAllOpsResults(num1, num2, data) {
         const ops = { addition: '+', subtraction: '-', multiplication: '×', division: '÷' };
-        opsResultsGrid.innerHTML = ''; // Clear previous results
+        opsResultsGrid.innerHTML = '';
         for (const opName in data.results) {
             const opData = data.results[opName];
             const resultItem = document.createElement('div');
-            resultItem.classList.add('col'); // Bootstrap grid column
+            resultItem.classList.add('col');
             const problemBijective = `${num1} ${ops[opName]} ${num2}`;
             const decimalStep = opData.decimal !== null ? `${data.n1_decimal} ${ops[opName]} ${data.n2_decimal} = ${opData.decimal}` : opData.bijective;
             resultItem.innerHTML = `
@@ -125,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="op-title">${opName.charAt(0).toUpperCase() + opName.slice(1)}</div>
                     <div class="op-problem">${problemBijective}</div>
                     <div class="op-step">${decimalStep}</div>
-                    <div class="op-answer">${opData.decimal !== null ? opData.bijective : '&nbsp;'}</div>
+                    <div class="op-answer">${opData.decimal !== null ? opData.bijective : '&nbsp;' }</div>
                 </div>
             `;
             opsResultsGrid.appendChild(resultItem);
