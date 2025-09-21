@@ -31,10 +31,12 @@ body { background-color: var(--bg-color); color: var(--text-color); font-family:
 #background-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.5; }
 .container { z-index: 1; position: relative; }
 
-/* --- Header, Footer --- */
+/* --- Header, Footer, Donation --- */
 header h1 { color: var(--header-color); font-weight: 500; }
 footer { color: var(--text-color-muted) !important; }
 footer a, section a { color: var(--accent-color); }
+.donation-button { border-color: var(--final-answer-color); color: var(--final-answer-color); text-decoration: none; }
+.donation-button:hover { background-color: var(--final-answer-color); color: var(--section-bg-color); }
 
 /* --- Theme & Language Switchers --- */
 #theme-switcher { position: fixed; top: 20px; left: 20px; width: 45px; height: 45px; background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.4em; z-index: 1000; }
@@ -51,7 +53,7 @@ footer a, section a { color: var(--accent-color); }
 .nav-tabs .nav-link { color: var(--text-color-muted); border-bottom-color: transparent; }
 .nav-tabs .nav-link.active { background-color: transparent; color: var(--accent-color); border-color: transparent transparent var(--accent-color); }
 .tab-content { background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-top: none; border-radius: 0 0 .25rem .25rem;}
-section { background-color: transparent !important; }
+section { background-color: transparent !important; padding: 2rem; }
 .form-control { background-color: var(--input-bg-color); color: var(--text-color); border-color: var(--border-color); font-family: var(--font-mono); }
 .form-control:focus { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 25%, transparent); border-color: var(--accent-color); }
 .btn-primary { background-color: var(--accent-color); border-color: var(--accent-color); color: var(--calc-btn-text-color); font-weight: bold; }
@@ -63,12 +65,6 @@ code { background-color: color-mix(in srgb, var(--text-color) 5%, transparent); 
 .op-problem { font-family: var(--font-mono); color: var(--text-color-muted); }
 .op-answer { font-family: var(--font-mono); font-size: 1.6em; font-weight: bold; color: var(--final-answer-color); }
 .table-responsive { border: 1px solid var(--border-color); border-radius: .25rem; }
-
-/* --- Practice Tab --- */
-#quiz-question { font-size: 1.5em; font-family: var(--font-mono); margin-bottom: 1rem; }
-#quiz-feedback { min-height: 50px; margin-top: 1rem; font-weight: bold; }
-.feedback-correct { color: var(--final-answer-color); }
-.feedback-incorrect { color: var(--error-color); }
 
 /* --- RTL Alignment Fix --- */
 [dir="rtl"] .nav-tabs { justify-content: flex-start !important; }
