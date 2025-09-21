@@ -127,6 +127,27 @@ document.addEventListener('DOMContentLoaded', () => {
         container.innerHTML = tableHTML;
     }
 
+    const decimalInput = document.getElementById('decimal-input');
+    const conversionResults = document.getElementById('conversion-results');
+    decimalInput.addEventListener('input', async (e) => {
+        const decimalValue = parseInt(e.target.value, 10);
+        if (!decimalValue || decimalValue <= 0) {
+            conversionResults.innerHTML = '';
+            return;
+        }
+        const response = await fetch('/convert-all', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ decimal_value: decimalValue }),
+        });
+        const data = await response.json();
+        if (data.error) {
+            conversionResults.innerHTML = `<div class="text-danger">${data.error}</div>`;
+        } else {
+            conversionResults.innerHTML = `<div class="result-grid"><div><strong>Decimal:</strong> <code>${data.decimal}</code></div><div><strong>Binary:</strong> <code>${data.binary}</code></div><div><strong>Hexadecimal:</strong> <code>${data.hexadecimal}</code></div><div><strong>Bijective Base-6:</strong> <code>${data.bijective_base6}</code></div></div>`;
+        }
+    });
+
     const num1Input = document.getElementById('num1');
     const num2Input = document.getElementById('num2');
     const calculateAllBtn = document.getElementById('calculate-all-btn');
