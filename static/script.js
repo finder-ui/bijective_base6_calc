@@ -4,20 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Theme Switcher Logic (3-State Cycle) ---
     const themeSwitcher = document.getElementById('theme-switcher');
     const themes = ['light', 'dark', 'dark-green'];
-    const themeIcons = { 'light': '🌙', 'dark': '🟢', 'dark-green': '☀️' };
+    const themeIcons = { 'light': '☀️', 'dark': '🌙', 'dark-green': '🟢' };
 
     function setTheme(theme) {
         htmlElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
-        // The icon shows what you will switch TO
-        const currentIndex = themes.indexOf(theme);
-        const nextIndex = (currentIndex + 1) % themes.length;
-        const nextTheme = themes[nextIndex];
-        for(const t in themeIcons){
-            if(nextTheme == t){
-                themeSwitcher.innerHTML = themeIcons[t];
-            }
-        }
+        // The icon shows the CURRENT theme's icon
+        themeSwitcher.innerHTML = themeIcons[theme] || '☀️';
     }
 
     themeSwitcher.addEventListener('click', () => {
