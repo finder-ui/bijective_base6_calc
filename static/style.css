@@ -1,21 +1,21 @@
 :root {
     /* Nord-Inspired Theme */
-    --bg-color: #2E3440;
+    --bg-color: #383E4A; /* Brightened */
     --text-color: #B4BCCD; /* A softer, less bright grey for main text */
     --text-color-muted: #9EADCC; /* A slightly darker muted grey */
-    --section-bg-color: #3B4252;
-    --header-color: #1D2027; /* A very dark, near-black color for the main title */
+    --section-bg-color: #454E5F; /* Brightened */
+    --header-color: #2A2E37; /* Brightened near-black */
     --accent-color: #88C0D0;
     --accent-hover-color: #81A1C1;
-    --border-color: #4C566A;
-    --code-bg-color: #434C5E;
+    --border-color: #5D677C; /* Brightened */
+    --code-bg-color: #525A6C; /* Brightened */
     --code-text-color: #EBCB8B;
-    --input-bg-color: #2E3440;
-    --input-border-color: #4C566A;
+    --input-bg-color: #383E4A; /* Brightened */
+    --input-border-color: #5D677C; /* Brightened */
     --final-answer-color: #A3BE8C;
     --error-color: #BF616A;
     --btn-text-color: #2E3440; /* Dark text for light buttons */
-    --rain-color: #434C5E;
+    --rain-color: #5E81AC; /* A cool blue from the Nord palette */
 
     /* Fonts & Sizing */
     --font-sans: 'Roboto', sans-serif;
