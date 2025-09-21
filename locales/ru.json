@@ -65,7 +65,7 @@
     "quizQuestion": "Что такое",
     "quizTypeConversion": "Преобразование",
     "quizTypeMath": "Математика",
-    "quizQuestionConversionSuffix": "в биективной системе Base-6?",
+    "quizQuestionConversionSuffix": "в биективной системе счисления по основанию 6?",
     "quizAnswerPlaceholder": "Ваш ответ...",
     "quizSubmitBtn": "Ответить",
     "quizCorrectFeedback": "Правильно! 🎉",
