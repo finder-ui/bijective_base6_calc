@@ -1,65 +1,53 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.getElementById('background-animation');
-    if (!canvas) return;
+const canvas = document.getElementById('background-animation');
+const ctx = canvas.getContext('2d');
 
-    const ctx = canvas.getContext('2d');
+let width = canvas.width = window.innerWidth;
+let height = canvas.height = window.innerHeight;
 
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
+let columns = Math.floor(width / 20);
+let drops = [];
 
-    const letters = '123456'.split('');
-    const fontSize = 16;
-    const columns = Math.floor(width / fontSize);
+for (let x = 0; x < columns; x++) {
+    drops[x] = 1;
+}
 
-    const drops = [];
-    for (let i = 0; i < columns; i++) {
-        drops[i] = 1;
+const chars = "123456abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+function getRainColor() {
+    const styles = getComputedStyle(document.documentElement);
+    return styles.getPropertyValue('--accent-color').trim();
+}
+
+function draw() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    if (document.documentElement.getAttribute('data-theme') === 'light') {
+        ctx.fillStyle = 'rgba(248, 249, 250, 0.05)';
     }
+    ctx.fillRect(0, 0, width, height);
 
-    function getThemeColor() {
-        const styles = getComputedStyle(document.documentElement);
-        return styles.getPropertyValue('--accent-color').trim() || '#007bff';
-    }
+    ctx.fillStyle = getRainColor();
+    ctx.font = '15px Fira Code';
 
-    function draw() {
-        ctx.fillStyle = 'rgba(10, 25, 47, 0.1)'; // Fading effect for dark theme
-        if (document.documentElement.getAttribute('data-theme') === 'light') {
-            ctx.fillStyle = 'rgba(248, 249, 250, 0.1)'; // Fading effect for light theme
+    for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * 20, drops[i] * 20);
+
+        if (drops[i] * 20 > height && Math.random() > 0.975) {
+            drops[i] = 0;
         }
-        ctx.fillRect(0, 0, width, height);
-
-        ctx.fillStyle = getThemeColor();
-        ctx.font = `${fontSize}px Fira Code`;
-
-        for (let i = 0; i < drops.length; i++) {
-            const text = letters[Math.floor(Math.random() * letters.length)];
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-            if (drops[i] * fontSize > height && Math.random() > 0.975) {
-                drops[i] = 0;
-            }
-            drops[i]++;
-        }
+        drops[i]++;
     }
+}
 
-    let animationInterval = setInterval(draw, 50);
-
-    window.addEventListener('resize', () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-        const newColumns = Math.floor(width / fontSize);
-        while(drops.length < newColumns) drops.push(1);
-        while(drops.length > newColumns) drops.pop();
-    });
-
-    // Re-initialize colors when theme changes
-    const themeSwitcher = document.getElementById('theme-switcher');
-    if(themeSwitcher) {
-        themeSwitcher.addEventListener('click', () => {
-            // We need a small delay for the CSS variables to update
-            setTimeout(() => {
-                // No need to do anything here, getThemeColor() will pick up the new color on the next draw call
-            }, 50);
-        });
+window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    columns = Math.floor(width / 20);
+    drops = [];
+    for (let x = 0; x < columns; x++) {
+        drops[x] = 1;
     }
 });
+
+// Start the animation
+setInterval(draw, 33);
