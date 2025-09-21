@@ -1,12 +1,12 @@
 :root {
-    /* Light Theme (Default) */
+    /* Light Theme (Default) - UPDATED ACCENT */
     --bg-color: #f8f9fa;
     --text-color: #212529;
     --text-color-muted: #6c757d;
     --section-bg-color: #ffffff;
     --header-color: #343a40;
-    --accent-color: #007bff;
-    --accent-hover-color: #0056b3;
+    --accent-color: #6f42c1; /* Vibrant Purple */
+    --accent-hover-color: #5a3d9a;
     --border-color: #dee2e6;
     --code-bg-color: #e9ecef;
     --input-bg-color: #ffffff;
@@ -104,6 +104,9 @@ code { background-color: var(--code-bg-color); color: var(--accent-color); paddi
 .donation-button { display: inline-block; padding: 12px 25px; font-size: 1.1em; font-weight: bold; border: 2px solid var(--final-answer-color); border-radius: 5px; color: var(--final-answer-color); text-decoration: none; transition: all 0.2s; }
 .donation-button:hover { background-color: var(--final-answer-color); color: var(--section-bg-color); }
 
+footer {
+    color: var(--text-color-muted) !important; /* CORRECTED: Ensure footer text color adapts */
+}
 footer a, section a { color: var(--accent-color); }
 
 .shake { animation: shake 0.5s ease-in-out; }
