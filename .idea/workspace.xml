@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50350d4a-48f4-48cb-849b-1dff3eef744e" name="Changes" comment="lang/themees/tabs">
-      <change beforePath="$PROJECT_DIR$/locales/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/ar.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/de.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/de.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/es.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/es.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/fr.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/fr.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/he.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/he.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/ja.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/ja.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/ru.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/zh.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/zh.json" afterDir="false" />
-    </list>
+    <list default="true" id="50350d4a-48f4-48cb-849b-1dff3eef744e" name="Changes" comment="commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -180,30 +170,6 @@
       <workItem from="1758425240653" duration="1916000" />
       <workItem from="1758427334375" duration="9393000" />
       <workItem from="1758437221260" duration="10450000" />
-    </task>
-    <task id="LOCAL‎-00166" summary="תרגום">
-      <option name="closed" value="true" />
-      <created>1758451010967</created>
-      <option name="number" value="00166" />
-      <option name="presentableId" value="LOCAL‎-00166" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758451010967</updated>
-    </task>
-    <task id="LOCAL‎-00167" summary="תרגום">
-      <option name="closed" value="true" />
-      <created>1758451134271</created>
-      <option name="number" value="00167" />
-      <option name="presentableId" value="LOCAL‎-00167" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758451134271</updated>
-    </task>
-    <task id="LOCAL‎-00168" summary="תרגום">
-      <option name="closed" value="true" />
-      <created>1758451259162</created>
-      <option name="number" value="00168" />
-      <option name="presentableId" value="LOCAL‎-00168" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758451259162</updated>
     </task>
     <task id="LOCAL‎-00169" summary="תרגום">
       <option name="closed" value="true" />
@@ -573,7 +539,31 @@
       <option name="project" value="LOCAL‎" />
       <updated>1758495484391</updated>
     </task>
-    <option name="localTasksCounter" value="215" />
+    <task id="LOCAL‎-00215" summary="lang/themes/tabs">
+      <option name="closed" value="true" />
+      <created>1758496101718</created>
+      <option name="number" value="00215" />
+      <option name="presentableId" value="LOCAL‎-00215" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758496101718</updated>
+    </task>
+    <task id="LOCAL‎-00216" summary="lang/themes/tabs">
+      <option name="closed" value="true" />
+      <created>1758496198481</created>
+      <option name="number" value="00216" />
+      <option name="presentableId" value="LOCAL‎-00216" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758496198481</updated>
+    </task>
+    <task id="LOCAL‎-00217" summary="commit">
+      <option name="closed" value="true" />
+      <created>1758496375353</created>
+      <option name="number" value="00217" />
+      <option name="presentableId" value="LOCAL‎-00217" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758496375353</updated>
+    </task>
+    <option name="localTasksCounter" value="218" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -581,7 +571,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="design" />
-    <MESSAGE value="commit" />
     <MESSAGE value="rc" />
     <MESSAGE value="dev" />
     <MESSAGE value="stable" />
@@ -597,7 +586,9 @@
     <MESSAGE value="themes" />
     <MESSAGE value="lang" />
     <MESSAGE value="lang/themees/tabs" />
-    <option name="LAST_COMMIT_MESSAGE" value="lang/themees/tabs" />
+    <MESSAGE value="lang/themes/tabs" />
+    <MESSAGE value="commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PythonProject$.coverage" NAME=" Coverage Results" MODIFIED="1758447187993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

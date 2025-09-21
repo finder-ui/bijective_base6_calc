@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function applyTranslations(data) {
-        document.querySelectorAll('[data-i18n]').forEach(el => { if (data[el.dataset.i18n]) el.innerHTML = data[el.dataset.i18n]; });
-        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { if (data[el.dataset.i18nPlaceholder]) el.placeholder = data[el.dataset.i18nPlaceholder]; });
-        document.querySelectorAll('[data-i18n-aria-label]').forEach(el => { if (data[el.dataset.i18nAriaLabel]) el.setAttribute('aria-label', data[el.dataset.i18nAriaLabel]); });
+        document.querySelectorAll('[data-i18n]').forEach(el => { if (data[el.dataset.i18n] !== undefined) el.innerHTML = data[el.dataset.i18n]; });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { if (data[el.dataset.i18nPlaceholder] !== undefined) el.placeholder = data[el.dataset.i18nPlaceholder]; });
+        document.querySelectorAll('[data-i18n-aria-label]').forEach(el => { if (data[el.dataset.i18nAriaLabel] !== undefined) el.setAttribute('aria-label', data[el.dataset.i18nAriaLabel]); });
     }
 
     function setupLangSwitcher() {
