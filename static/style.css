@@ -33,14 +33,14 @@ body { background-color: var(--bg-color); color: var(--text-color); font-family:
 
 /* --- Header, Footer --- */
 header h1 { color: var(--header-color); font-weight: 500; }
-footer { color: var(--text-color-muted); }
+footer { color: var(--text-color-muted) !important; }
 footer a, section a { color: var(--accent-color); }
 
 /* --- Theme & Language Switchers --- */
 #theme-switcher { position: fixed; top: 20px; left: 20px; width: 45px; height: 45px; background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.4em; z-index: 1000; }
-#lang-switcher-container { position: fixed; top: 20px; right: 20px; z-index: 1000; }
-.lang-btn-main { background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-radius: 50% !important; width: 45px; height: 45px; font-size: 1.4em; display: flex; justify-content: center; align-items: center; padding: 0; }
-.lang-btn-main::after { display: none; }
+.lang-switcher-container { position: fixed; top: 20px; right: 20px; z-index: 1000; }
+.lang-btn-main { background-color: var(--section-bg-color) !important; border: 1px solid var(--border-color) !important; border-radius: 50% !important; width: 45px; height: 45px; font-size: 1.4em; display: flex; justify-content: center; align-items: center; padding: 0; }
+.lang-btn-main::after { display: none; } /* Hide Bootstrap's default dropdown arrow */
 .dropdown-menu { background-color: var(--section-bg-color); border-color: var(--border-color); }
 .dropdown-item { color: var(--text-color) !important; display: flex; align-items: center; gap: 10px; }
 .dropdown-item:hover { background-color: var(--accent-color) !important; color: var(--calc-btn-text-color) !important; }
@@ -51,6 +51,7 @@ footer a, section a { color: var(--accent-color); }
 .nav-tabs .nav-link { color: var(--text-color-muted); border-bottom-color: transparent; }
 .nav-tabs .nav-link.active { background-color: transparent; color: var(--accent-color); border-color: transparent transparent var(--accent-color); }
 .tab-content { background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-top: none; border-radius: 0 0 .25rem .25rem;}
+section { background-color: transparent !important; padding: 2rem; }
 .form-control { background-color: var(--input-bg-color); color: var(--text-color); border-color: var(--border-color); font-family: var(--font-mono); }
 .form-control:focus { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 25%, transparent); border-color: var(--accent-color); }
 .btn-primary { background-color: var(--accent-color); border-color: var(--accent-color); color: var(--calc-btn-text-color); font-weight: bold; }
