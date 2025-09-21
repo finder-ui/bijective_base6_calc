@@ -42,9 +42,6 @@ class AllOpsRequest(BaseModel):
     num1: str
     num2: str
 
-class ConversionRequest(BaseModel):
-    decimal_value: int
-
 # --- FastAPI Endpoints ---
 
 @app.get("/", response_class=HTMLResponse)
@@ -87,20 +84,6 @@ async def calculate_all_ops(problem: AllOpsRequest):
 
     except ValueError as e: return {"error": str(e)}
     except Exception as e: return {"error": f"An unexpected error occurred: {e}"}
-
-
-@app.post("/convert-all")
-async def convert_all_systems(req: ConversionRequest):
-    if req.decimal_value <= 0: return {"error": "Please enter a positive whole number."}
-    try:
-        decimal_val = req.decimal_value
-        return {
-            "decimal": str(decimal_val),
-            "binary": bin(decimal_val)[2:],
-            "hexadecimal": hex(decimal_val)[2:].upper(),
-            "bijective_base6": to_bijective_base6(decimal_val)
-        }
-    except Exception as e: return {"error": f"An error occurred during conversion: {e}"}
 
 
 @app.get("/get-tables")
