@@ -27,6 +27,7 @@
    Base & Global Styles
    ========================================================================== */
 body {
+    background: var(--bg-color); /* Fallback for older browsers */
     background-color: var(--bg-color) !important;
     color: var(--text-color) !important;
     font-family: var(--font-sans);
@@ -97,9 +98,15 @@ footer a {
     width: 45px;
     height: 45px;
     font-size: 1.4em;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     padding: 0;
 }
 
@@ -114,8 +121,12 @@ footer a {
 
 .dropdown-item {
     color: var(--text-color) !important;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     gap: 10px;
 }
 
@@ -208,6 +219,8 @@ section {
 /* --- Calculator & Results --- */
 #result-area {
     opacity: 0;
+    -webkit-transition: opacity 0.5s;
+    -o-transition: opacity 0.5s;
     transition: opacity 0.5s;
 }
 
@@ -271,8 +284,12 @@ section {
 
 .vis-step {
     opacity: 0;
+    -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+    -o-transition: opacity 0.5s, -o-transform 0.5s;
     transition: opacity 0.5s, transform 0.5s;
-    transform: translateY(20px);
+    -webkit-transform: translateY(20px);
+        -ms-transform: translateY(20px);
+            transform: translateY(20px);
     margin-bottom: 1rem;
     padding: 1rem;
     border-left: 3px solid var(--accent-color);
@@ -282,7 +299,9 @@ section {
 
 .vis-step.visible {
     opacity: 1;
-    transform: translateY(0);
+    -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+            transform: translateY(0);
 }
 
 /* --- Quiz Mode --- */
@@ -307,11 +326,18 @@ section {
 }
 
 .shake {
-    animation: shake 0.5s ease-in-out;
+    -webkit-animation: shake 0.5s ease-in-out;
+            animation: shake 0.5s ease-in-out;
+}
+
+@-webkit-keyframes shake {
+    0%, 100% { -webkit-transform: translateX(0); transform: translateX(0); }
+    20%, 60% { -webkit-transform: translateX(-10px); transform: translateX(-10px); }
+    40%, 80% { -webkit-transform: translateX(10px); transform: translateX(10px); }
 }
 
 @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    20%, 60% { transform: translateX(-10px); }
-    40%, 80% { transform: translateX(10px); }
+    0%, 100% { -webkit-transform: translateX(0); transform: translateX(0); }
+    20%, 60% { -webkit-transform: translateX(-10px); transform: translateX(-10px); }
+    40%, 80% { -webkit-transform: translateX(10px); transform: translateX(10px); }
 }
