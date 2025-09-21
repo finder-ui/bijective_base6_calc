@@ -1,18 +1,18 @@
 :root {
-    /* Light Theme (Default) */
-    --bg-color: #e9ecef;
-    --text-color: #212529;
-    --text-color-muted: #6c757d;
-    --section-bg-color: #f8f9fa;
-    --header-color: #212529;
-    --accent-color: #0056b3; /* A deeper, more muted blue */
-    --accent-hover-color: #004494;
-    --border-color: #ced4da;
-    --code-bg-color: #dee2e6;
-    --input-bg-color: #f8f9fa;
-    --input-border-color: #ced4da;
-    --final-answer-color: #28a745;
-    --error-color: #dc3545;
+    /* Modern & Professional Theme */
+    --bg-color: #ffffff;
+    --text-color: #111827; /* Gray 900 */
+    --text-color-muted: #6b7280; /* Gray 500 */
+    --section-bg-color: #f9fafb; /* Gray 50 */
+    --header-color: #111827;
+    --accent-color: #4f46e5; /* Indigo 600 */
+    --accent-hover-color: #4338ca; /* Indigo 700 */
+    --border-color: #e5e7eb; /* Gray 200 */
+    --code-bg-color: #f3f4f6; /* Gray 100 */
+    --input-bg-color: #ffffff;
+    --input-border-color: #d1d5db; /* Gray 300 */
+    --final-answer-color: #10b981; /* Emerald 500 */
+    --error-color: #ef4444; /* Red 500 */
     --btn-text-color: #ffffff;
     --rain-color: var(--accent-color);
 }
@@ -50,7 +50,7 @@ section { box-shadow: none !important; border: none !important; background-color
 
 /* --- Custom Styles --- */
 h2 { color: var(--accent-color); font-family: var(--font-mono); }
-code { background-color: var(--code-bg-color); color: var(--accent-color); padding: .2em .4em; border-radius: .25rem; }
+code { background-color: var(--code-bg-color); color: #c81e7c; padding: .2em .4em; border-radius: .25rem; font-family: var(--font-mono); }
 #result-area { opacity: 0; transition: opacity 0.5s; }
 #result-area.visible { opacity: 1; }
 .op-result-item { background-color: var(--bg-color); padding: 15px; border-radius: .25rem; border: 1px solid var(--border-color); text-align: center; }
