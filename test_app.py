@@ -39,7 +39,7 @@ def test_from_bijective_base6_invalid_char():
 
 def test_convert_live_endpoint():
     """Tests the /convert endpoint for live conversions."""
-    response = client.post("/convert-all", json={"decimal_value": 43})
+    response = client.post("/convert", json={"decimal_value": 43})
     assert response.status_code == 200
     data = response.json()
     assert data["bijective_base6"] == "111"
