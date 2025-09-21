@@ -19,36 +19,30 @@
     "additionTableTitle": "Addition Table (1 to 12)",
     "multiplicationTableTitle": "Multiplication Table (1 to 12)",
     "primerTitle": "A Primer on Numerical Systems",
-    "primerDesc1": "Most number systems we use are <strong>positional</strong>. This means the value of a digit depends on its position within a number. The 'base' of a system tells us how many unique digits are used. The value of each position is an exponent of the base, starting from 0 on the right.",
-    "primerList1": [
-        "<strong>Base-10 (Decimal):</strong> We use ten digits (<code>0-9</code>). In the number <code>345</code>, the value is <code>(3 * 10²) + (4 * 10¹) + (5 * 10⁰) = 345</code>.",
-        "<strong>Base-2 (Binary):</strong> Computers use two digits (<code>0, 1</code>). In the binary number <code>1101</code>, the value is <code>(1 * 2³) + (1 * 2²) + (0 * 2¹) + (1 * 2⁰) = 13</code>."
-    ],
-    "primerDesc2": "In these standard systems, the digit <strong>zero</strong> is essential. It is not just a number, but a fundamental <strong>placeholder</strong>. It signifies an empty position, like the tens place in <code>101</code>. The bijective system you are exploring is fascinating because it works without this placeholder.",
+    "primerDesc1": "Most number systems we use are <strong>positional</strong>. This means a digit's value depends on its position. The 'base' of a system tells us how many unique digits are used.",
+    "primerDesc2": "In standard systems, <strong>zero</strong> is an essential placeholder. The bijective system is fascinating because it works without this.",
     "explanationTitle": "Understanding the Bijective System",
-    "explanationDesc1": "This system is a <strong>bijective base-6 numeration</strong>. It is positional, but with two key differences: it has no zero, and its digits run from 1 to 6. Because there is no zero to act as a placeholder, the system 'rolls over' differently. After <code>6</code>, the next number is <code>11</code>.",
+    "explanationDesc1": "This system is a <strong>bijective base-6 numeration</strong>. It has no zero, and its digits run from 1 to 6. Because there is no zero, the system 'rolls over' differently. After <code>6</code>, the next number is <code>11</code>.",
     "algoTitle": "The Conversion Algorithm Explained",
-    "algoDesc1": "The trick to converting from decimal to bijective base-6 is to temporarily shift the number system. Computers naturally work with remainders from 0 to 5, but our digits are 1 to 6. We bridge this gap by subtracting 1 before each calculation.",
+    "algoDesc1": "The trick to converting from decimal is to temporarily shift the number system. Computers use remainders from 0-5, but our digits are 1-6. We bridge this gap by subtracting 1 before each calculation.",
     "algoExampleTitle": "Let's convert the decimal number <strong>43</strong>:",
     "algoSteps": [
-        "<strong>Step 1:</strong> Start with 43. Subtract 1: <code>43 - 1 = 42</code>. Now, find the remainder when dividing by 6. <code>42 % 6 = 0</code>. The 0th digit in our character set <code>'123456'</code> is '1'. Our first result digit is <strong>1</strong>. The new number for the next step is <code>(42 - 0) / 6 = 7</code>.",
-        "<strong>Step 2:</strong> Start with 7. Subtract 1: <code>7 - 1 = 6</code>. Now, find the remainder. <code>6 % 6 = 0</code>. The 0th digit is again '1'. Our second result digit is <strong>1</strong>. The new number is <code>(6 - 0) / 6 = 1</code>.",
-        "<strong>Step 3:</strong> Start with 1. Subtract 1: <code>1 - 1 = 0</code>. Now, find the remainder. <code>0 % 6 = 0</code>. The 0th digit is again '1'. Our third result digit is <strong>1</strong>. The new number is <code>(0 - 0) / 6 = 0</code>."
+        "<strong>Step 1:</strong> <code>(43 - 1) % 6 = 0</code>. The 0th digit in <code>'123456'</code> is '1'. Result: <strong>1</strong>. Next number: <code>(43 - 1) / 6 = 7</code>.",
+        "<strong>Step 2:</strong> <code>(7 - 1) % 6 = 0</code>. The 0th digit is '1'. Result: <strong>1</strong>. Next number: <code>(7 - 1) / 6 = 1</code>.",
+        "<strong>Step 3:</strong> <code>(1 - 1) % 6 = 0</code>. The 0th digit is '1'. Result: <strong>1</strong>. Next number: <code>(1 - 1) / 6 = 0</code>."
     ],
     "algoResult": "Reversing the digits gives <code>111</code>. Thus, 43 in decimal is 111 in bijective base-6.",
     "applicationsTitle": "Practical Applications",
     "appDesc1": "Bijective numeration is more than a curiosity; it solves real-world problems in computer science.",
     "appList": [
-        "<strong>Spreadsheet Columns:</strong> Microsoft Excel and Google Sheets use a bijective base-26 system (A-Z) for columns. After Z comes AA, then AB, AC, and so on. This is a perfect, intuitive real-world example where there is no 'zeroth' column.",
-        "<strong>URL Shorteners:</strong> Services like bit.ly need to create the shortest possible unique string for billions of links. A bijective base-62 system (<code>a-z, A-Z, 0-9</code>) can represent a massive database ID like <code>2,183,401,055,849</code> as the short, clean string <code>'short'</code>."
+        "<strong>Spreadsheet Columns:</strong> Excel and Google Sheets use a bijective base-26 system (A-Z). After Z comes AA, then AB. This is a perfect real-world example where there is no 'zeroth' column.",
+        "<strong>URL Shorteners:</strong> Services like bit.ly use a bijective base-62 system (<code>a-z, A-Z, 0-9</code>) to create the shortest possible unique string for billions of links."
     ],
     "advancedTitle": "Deeper Mathematical Connections",
-    "advFactorizationTitle": "A Note on 'Composite' Digits and Factorization",
-    "advFactorizationDesc": "An astute observer of the multiplication table will notice something curious: <code>2 × 3 = 6</code>, but also <code>1 × 6 = 6</code>. In our standard number system, the number 6 has a unique prime factorization (2 and 3). However, in the bijective system, <strong>the digit <code>6</code> itself acts like a composite number</strong>. The digits <code>1, 2, 3, 4, 5</code> are the 'primes' of this single-digit world. This reveals a deep property: the set of single digits in a bijective system does not form a <a href='https://en.wikipedia.org/wiki/Unique_factorization_domain' target='_blank'>Unique Factorization Domain</a>. This is a direct consequence of using the base `k` as a digit instead of `0`. It doesn't break the system; rather, it highlights its unique algebraic structure.",
-    "advFormalLangTitle": "Connection to Formal Language Theory",
-    "advFormalLangDesc": "The bijective base-6 system has a beautiful connection to theoretical computer science. If we define an alphabet of symbols, Σ (Sigma), as our set of digits <code>{1, 2, 3, 4, 5, 6}</code>, then the set of all possible finite strings you can create with these symbols is called the Kleene Star, denoted Σ*. This set includes <code>{ε, 1, 2, ..., 6, 11, 12, ...}</code>, where ε is the empty string. The bijective system is a perfect, ordered enumeration of this set, providing a seamless way to assign a unique integer to any sequence of choices from our set of six.",
-    "advGeoTitle": "Geometric Interpretation: The Infinite Tree",
-    "advGeoDesc": "We can visualize the entire system as an infinite, complete 6-ary tree, where every node has exactly six children. The root of the tree represents a starting point. The first level of nodes are labeled 1 through 6. Each of those nodes is the parent of six more nodes. For example, node '2' is the parent of nodes '21', '22', '23', '24', '25', and '26'. In this model, every bijective base-6 number is the unique 'address' or path from the root to a specific node.",
+    "advFactorizationTitle": "A Note on 'Composite' Digits",
+    "advFactorizationDesc": "An astute observer will notice that in the multiplication table, <code>2 × 3 = 6</code>, but also <code>1 × 6 = 6</code>. In this system, the digit <strong><code>6</code></strong> itself acts like a composite number, and the digits <code>1, 2, 3, 4, 5</code> are the 'primes' of this single-digit world. This is a direct consequence of using the base `k` as a digit instead of `0`.",
+    "advFingerCountingTitle": "A Fun Insight: Counting Higher on 10 Fingers",
+    "advFingerCountingDesc": "With our standard base-10 system, you can count from 0 to 9 on your fingers. With a bijective system, you can do better! If you assign each finger a value from 1 to 10, you can represent numbers far higher. For example, holding up one finger could be '1', while holding up all ten could be the bijective number for 1023 (in base-2). This system provides a more efficient way to map sets of choices (like raised fingers) to numbers.",
     "donationBtn": "Support this Project",
     "githubLink": "Project source available on",
     "licenseLink": "Released under the"
