@@ -55,8 +55,8 @@ footer a, section a { color: var(--accent-color); }
 .lang-btn-main { background-color: var(--section-bg-color) !important; border: 1px solid var(--border-color) !important; border-radius: 50% !important; width: 45px; height: 45px; font-size: 1.4em; display: flex; justify-content: center; align-items: center; padding: 0; }
 .lang-btn-main::after { display: none; } /* Hide Bootstrap's default dropdown arrow */
 .dropdown-menu { background-color: var(--section-bg-color); border-color: var(--border-color); }
-.dropdown-item { color: var(--text-color); display: flex; align-items: center; gap: 10px; }
-.dropdown-item:hover { background-color: var(--accent-color); color: var(--calc-btn-text-color); }
+.dropdown-item { color: var(--text-color) !important; display: flex; align-items: center; gap: 10px; }
+.dropdown-item:hover { background-color: var(--accent-color) !important; color: var(--calc-btn-text-color) !important; }
 .dropdown-item .flag { font-size: 1.5em; }
 
 /* --- Bootstrap Component Theming --- */
