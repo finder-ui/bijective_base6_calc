@@ -4,19 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50350d4a-48f4-48cb-849b-1dff3eef744e" name="Changes" comment="dev">
+    <list default="true" id="50350d4a-48f4-48cb-849b-1dff3eef744e" name="Changes" comment="stable">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/ar.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/de.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/de.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/es.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/es.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/fr.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/fr.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/he.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/he.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locales/ru.json" beforeDir="false" afterPath="$PROJECT_DIR$/locales/ru.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,23 +156,7 @@
       <updated>1757185942094</updated>
       <workItem from="1758425240653" duration="1916000" />
       <workItem from="1758427334375" duration="9393000" />
-      <workItem from="1758437221260" duration="6233000" />
-    </task>
-    <task id="LOCAL‎-00081" summary="dev">
-      <option name="closed" value="true" />
-      <created>1758431420186</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL‎-00081" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758431420186</updated>
-    </task>
-    <task id="LOCAL‎-00082" summary="dev">
-      <option name="closed" value="true" />
-      <created>1758431654369</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL‎-00082" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1758431654369</updated>
+      <workItem from="1758437221260" duration="7380000" />
     </task>
     <task id="LOCAL‎-00083" summary="dev">
       <option name="closed" value="true" />
@@ -559,7 +534,23 @@
       <option name="project" value="LOCAL‎" />
       <updated>1758436559589</updated>
     </task>
-    <option name="localTasksCounter" value="130" />
+    <task id="LOCAL‎-00130" summary="stable">
+      <option name="closed" value="true" />
+      <created>1758443599423</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL‎-00130" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758443599424</updated>
+    </task>
+    <task id="LOCAL‎-00131" summary="stable">
+      <option name="closed" value="true" />
+      <created>1758443927888</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL‎-00131" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1758443927888</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -570,6 +561,7 @@
     <MESSAGE value="commit" />
     <MESSAGE value="rc" />
     <MESSAGE value="dev" />
-    <option name="LAST_COMMIT_MESSAGE" value="dev" />
+    <MESSAGE value="stable" />
+    <option name="LAST_COMMIT_MESSAGE" value="stable" />
   </component>
 </project>
