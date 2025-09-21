@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!langSwitcherContainer) return;
         langSwitcherContainer.innerHTML = ''; // Clear previous buttons
 
+        // Use a robust loop to create buttons and attach listeners directly
         for (const [code, details] of Object.entries(supportedLangs)) {
             const btn = document.createElement('span');
             btn.className = 'lang-btn';
