@@ -1,20 +1,13 @@
+
 import uvicorn
 import os
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
-from starlette.staticfiles import StaticFiles
-from slowapi import Limiter, _rate_limit_exceeded_handler
-from slowapi.util import get_remote_address
-from slowapi.errors import RateLimitExceeded
-
-# --- Initialize Rate Limiter ---
-limiter = Limiter(key_func=get_remote_address)
 
 app = FastAPI()
-app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # --- Mount static files and templates ---
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -49,9 +42,6 @@ class AllOpsRequest(BaseModel):
     num1: str
     num2: str
 
-class ConversionRequest(BaseModel):
-    decimal_value: int
-
 # --- FastAPI Endpoints ---
 
 @app.get("/", response_class=HTMLResponse)
@@ -68,8 +58,7 @@ async def get_locale(lang: str):
 
 
 @app.post("/calculate-all")
-@limiter.limit("15/minute")
-async def calculate_all_ops(request: Request, problem: AllOpsRequest):
+async def calculate_all_ops(problem: AllOpsRequest):
     try:
         n1 = from_bijective_base6(problem.num1)
         n2 = from_bijective_base6(problem.num2)
@@ -79,16 +68,20 @@ async def calculate_all_ops(request: Request, problem: AllOpsRequest):
         mul_res_dec = n1 * n2
         
         div_res_dec = None
-        div_err = None
-        if n2 == 0: div_err = "(Division by zero)"
-        elif n1 % n2 != 0: div_err = f"(Rem: {n1 % n2})"
-        else: div_res_dec = n1 // n2
+        div_err = "(N/A)" # Default error message
+        if n2 == 0: 
+            div_err = "(Division by zero)"
+        elif n1 % n2 != 0: 
+            div_err = f"(Rem: {to_bijective(n1 % n2)})"
+        else: 
+            div_res_dec = n1 // n2
+            div_err = None # No error
 
         results = {
             "addition": {"decimal": add_res_dec, "bijective": to_bijective_base6(add_res_dec)},
             "subtraction": {"decimal": sub_res_dec, "bijective": to_bijective_base6(sub_res_dec)},
             "multiplication": {"decimal": mul_res_dec, "bijective": to_bijective_base6(mul_res_dec)},
-            "division": {"decimal": div_res_dec, "bijective": to_bijective_base6(div_res_dec) if div_res_dec is not None else div_err}
+            "division": {"decimal": div_res_dec, "bijective": to_bijective_base6(div_res_dec) if div_err is None else div_err}
         }
         
         return {"n1_decimal": n1, "n2_decimal": n2, "results": results}
@@ -97,24 +90,9 @@ async def calculate_all_ops(request: Request, problem: AllOpsRequest):
     except Exception as e: return {"error": f"An unexpected error occurred: {e}"}
 
 
-@app.post("/convert")
-@limiter.limit("45/minute")
-async def convert_live(request: Request, req: ConversionRequest):
-    if req.decimal_value <= 0: return {"error": "Please enter a positive whole number."}
-    try:
-        decimal_val = req.decimal_value
-        return {
-            "decimal": str(decimal_val),
-            "binary": bin(decimal_val)[2:],
-            "hexadecimal": hex(decimal_val)[2:].upper(),
-            "bijective_base6": to_bijective_base6(decimal_val)
-        }
-    except Exception as e: return {"error": f"An error occurred during conversion: {e}"}
-
-
 @app.get("/get-tables")
 async def get_tables():
-    table_size = 24 # Expanded from 12 to 24
+    table_size = 12
     header = [to_bijective_base6(i) for i in range(1, table_size + 1)]
     add_table = [[to_bijective_base6(i + j) for j in range(1, table_size + 1)] for i in range(1, table_size + 1)]
     mul_table = [[to_bijective_base6(i * j) for j in range(1, table_size + 1)] for i in range(1, table_size + 1)]
