@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         applyTranslations(langData);
         
         htmlElement.setAttribute('lang', lang);
-        document.dir = (lang === 'he' || lang === 'ar') ? 'rtl' : 'ltr';
+        htmlElement.dir = (lang === 'he' || lang === 'ar') ? 'rtl' : 'ltr';
 
         localStorage.setItem('language', lang);
         updateLangSwitcher(lang);
@@ -41,23 +41,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function createLangSwitcher() {
-        const langSwitcherContainer = document.getElementById('lang-switcher-container');
+        const menu = document.getElementById('lang-switcher-menu');
+        menu.innerHTML = ''; // Clear any existing options
         for (const [code, details] of Object.entries(supportedLangs)) {
-            const btn = document.createElement('span');
-            btn.className = 'lang-btn';
-            btn.textContent = details.flag;
-            btn.dataset.lang = code;
-            btn.setAttribute('role', 'button');
-            btn.setAttribute('aria-label', `Switch to ${details.name}`);
-            btn.addEventListener('click', () => setLanguage(code));
-            langSwitcherContainer.appendChild(btn);
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.className = 'dropdown-item';
+            a.href = '#';
+            a.dataset.lang = code;
+            a.innerHTML = `<span class="flag">${details.flag}</span> ${details.name}`;
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                setLanguage(code);
+            });
+            li.appendChild(a);
+            menu.appendChild(li);
         }
     }
 
     function updateLangSwitcher(lang) {
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.lang === lang);
-        });
+        const mainBtn = document.getElementById('lang-switcher-btn');
+        if (mainBtn && supportedLangs[lang]) {
+            mainBtn.innerHTML = supportedLangs[lang].flag;
+        }
     }
 
     // --- Theme Switcher Logic ---
@@ -72,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTheme(currentTheme === 'dark' ? 'light' : 'dark');
     });
 
-    // --- Tab & Table Logic (Corrected for Bootstrap) ---
+    // --- Tab & Table Logic ---
     const tablesTab = document.getElementById('tables-tab');
     let tablesData = null;
     tablesTab.addEventListener('shown.bs.tab', async () => {
