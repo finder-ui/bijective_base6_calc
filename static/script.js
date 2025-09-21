@@ -17,48 +17,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme') || 'light';
     setTheme(savedTheme);
 
-    // --- Tab Navigation Logic (CORRECTED) ---
-    const tabLinks = document.querySelectorAll('.tab-link');
-    const tabContents = document.querySelectorAll('.tab-content');
+    // --- Tab & Table Logic (Corrected for Bootstrap) ---
+    const tablesTab = document.getElementById('tables-tab');
     let tablesData = null; // Cache for the table data
 
-    tabLinks.forEach(link => {
-        link.addEventListener('click', async () => {
-            const tabId = link.dataset.tab;
+    tablesTab.addEventListener('shown.bs.tab', async () => {
+        if (!tablesData) {
+            const addContainer = document.getElementById('addition-table-container');
+            const mulContainer = document.getElementById('multiplication-table-container');
+            addContainer.innerHTML = '<p class="text-center">Loading tables...</p>';
+            mulContainer.innerHTML = '';
+            
+            const response = await fetch('/get-tables');
+            tablesData = await response.json();
 
-            tabLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-
-            tabContents.forEach(content => {
-                // CORRECTED: Use classList to toggle visibility
-                if (content.id === tabId) {
-                    content.classList.add('active');
-                } else {
-                    content.classList.remove('active');
-                }
-            });
-
-            if (tabId === 'tab-tables' && !tablesData) {
-                const addContainer = document.getElementById('addition-table-container');
-                const mulContainer = document.getElementById('multiplication-table-container');
-                addContainer.innerHTML = '<p>Loading tables...</p>';
-                mulContainer.innerHTML = ''; // Clear second container
-                
-                const response = await fetch('/get-tables');
-                tablesData = await response.json();
-
-                renderTable(tablesData.header, tablesData.addition, addContainer);
-                renderTable(tablesData.header, tablesData.multiplication, mulContainer);
-            }
-        });
+            renderTable(tablesData.header, tablesData.addition, addContainer);
+            renderTable(tablesData.header, tablesData.multiplication, mulContainer);
+        }
     });
 
     function renderTable(header, data, container) {
-        let tableHTML = '<table><thead><tr><th></th>';
-        header.forEach(h => tableHTML += `<th>${h}</th>`);
+        let tableHTML = '<table class="table table-bordered table-hover"><thead><tr><th scope="col">#</th>';
+        header.forEach(h => tableHTML += `<th scope="col">${h}</th>`);
         tableHTML += '</tr></thead><tbody>';
         data.forEach((row, rowIndex) => {
-            tableHTML += `<tr><th>${header[rowIndex]}</th>`;
+            tableHTML += `<tr><th scope="row">${header[rowIndex]}</th>`;
             row.forEach(cell => tableHTML += `<td>${cell}</td>`);
             tableHTML += '</tr>';
         });
@@ -82,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         const data = await response.json();
         if (data.error) {
-            conversionResults.innerHTML = `<div class="error-display">${data.error}</div>`;
+            conversionResults.innerHTML = `<div class="text-danger">${data.error}</div>`;
         } else {
             conversionResults.innerHTML = `<div class="result-grid"><div><strong>Decimal:</strong> <code>${data.decimal}</code></div><div><strong>Binary:</strong> <code>${data.binary}</code></div><div><strong>Hexadecimal:</strong> <code>${data.hexadecimal}</code></div><div><strong>Bijective Base-6:</strong> <code>${data.bijective_base6}</code></div></div>`;
         }
@@ -130,17 +113,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function displayAllOpsResults(num1, num2, data) {
         const ops = { addition: '+', subtraction: '-', multiplication: '×', division: '÷' };
+        opsResultsGrid.innerHTML = ''; // Clear previous results
         for (const opName in data.results) {
             const opData = data.results[opName];
             const resultItem = document.createElement('div');
-            resultItem.classList.add('op-result-item');
+            resultItem.classList.add('col'); // Bootstrap grid column
             const problemBijective = `${num1} ${ops[opName]} ${num2}`;
             const decimalStep = opData.decimal !== null ? `${data.n1_decimal} ${ops[opName]} ${data.n2_decimal} = ${opData.decimal}` : opData.bijective;
             resultItem.innerHTML = `
-                <div class="op-title">${opName.charAt(0).toUpperCase() + opName.slice(1)}</div>
-                <div class="op-problem">${problemBijective}</div>
-                <div class="op-step">${decimalStep}</div>
-                <div class="op-answer">${opData.decimal !== null ? opData.bijective : ''}</div>
+                <div class="op-result-item h-100">
+                    <div class="op-title">${opName.charAt(0).toUpperCase() + opName.slice(1)}</div>
+                    <div class="op-problem">${problemBijective}</div>
+                    <div class="op-step">${decimalStep}</div>
+                    <div class="op-answer">${opData.decimal !== null ? opData.bijective : '&nbsp;'}</div>
+                </div>
             `;
             opsResultsGrid.appendChild(resultItem);
         }
