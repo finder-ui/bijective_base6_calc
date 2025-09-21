@@ -4,6 +4,7 @@
     "mainTitle": "Calculatrice et Explorateur Bijective Base-6",
     "tabCalculator": "Calculatrice",
     "tabTables": "Tables de Référence",
+    "tabProsCons": "Avantages & Inconvénients",
     "tabLearn": "Apprendre",
     "tabPractice": "Pratiquer",
     "calculatorTitle": "Calculatrice Mathématique Bijective",
@@ -39,6 +40,22 @@
     "geomPathList": [ "Commencer à la racine.", "Prendre la 4ème branche.", "À partir de ce nœud, prendre la 2ème branche.", "À partir de ce nœud, prendre la 5ème branche." ],
     "hashingTitle": "Note sur les Collisions et le Hachage",
     "hashingDesc": "L'observation de la table de multiplication révèle que <code>2 × 3 = 6</code> et <code>1 × 6 = 6</code>. C'est une <strong>collision</strong>. Bien qu'intéressant sur le plan mathématique, cette propriété est à l'opposé de ce qui est souhaité dans les fonctions de hachage cryptographiques (comme SHA-256), qui doivent être spécifiquement conçues pour rendre la recherche de collisions informatiquement irréalisable. Ce système est donc un bon outil pour comprendre le concept de collisions, mais n'est pas un algorithme de hachage sécurisé en soi.",
+    "prosTitle": "Avantages de la Base 6 Bijective",
+    "prosIntro": "La nature sans zéro de ce système offre plusieurs avantages uniques, notamment en informatique et pour les identifiants lisibles par l'homme.",
+    "pros": [
+        { "title": "Sans Ambigüité et Convivial", "desc": "L'absence de zéros non significatifs élimine toute confusion. <code>123</code> est toujours <code>123</code>, jamais <code>0123</code>. C'est idéal pour les codes de produits, les numéros de série ou les liens courts où la clarté est essentielle." },
+        { "title": "Compact et Efficace", "desc": "Chaque chaîne de chiffres possible est un nombre valide, ce qui en fait un moyen très dense et efficace de représenter les données. Il n'y a pas de combinaisons gaspillées ou invalides." },
+        { "title": "Adaptation Naturelle à l'Informatique", "desc": "La correspondance biunivoque entre les nombres et les chaînes est parfaite pour les algorithmes nécessitant des identifiants uniques, comme l'indexation de structures de données complexes ou la génération de clés uniques dans les systèmes distribués." },
+        { "title": "Pas de Pointeurs Nuls (Une Idée Théorique)", "desc": "Puisque chaque chaîne est un nombre valide, il n'y a pas de représentation 'vide' ou 'nulle'. Cela correspond aux concepts de programmation modernes visant à éliminer les erreurs de référence nulle, une source courante de bogues." }
+    ],
+    "consTitle": "Inconvénients et Compromis",
+    "consIntro": "Bien que puissant, le système n'est pas largement utilisé pour l'arithmétique générale pour quelques raisons clés.",
+    "cons": [
+        { "title": "Arithmétique Peu Familière", "desc": "Les règles de retenue pour l'addition et la soustraction sont différentes de celles du système décimal, ce qui rend le calcul mental et manuel difficile pour la plupart des gens." },
+        { "title": "Surcharge de Conversion", "desc": "Ce n'est pas un système natif pour les ordinateurs (qui utilisent le binaire) ou les humains (qui utilisent le décimal). une étape de conversion est toujours nécessaire lors de l'interaction avec d'autres systèmes, ce qui ajoute une surcharge de calcul." },
+        { "title": "Support Natif Limité", "desc": "Très peu de langages de programmation ou de bibliothèques standard ont des fonctions intégrées pour la numération bijective. Cela signifie que les développeurs doivent implémenter une logique personnalisée pour toutes les opérations arithmétiques et de conversion." },
+        { "title": "Modèles de Multiplication Complexes", "desc": "Contrairement aux bases standard où la multiplication par la base ajoute simplement un zéro, les modèles de la multiplication bijective sont moins intuitifs, ce qui rend plus difficile la réalisation d'estimations ou de calculs rapides." }
+    ],
     "practiceTitle": "Mode Pratique",
     "practiceDesc": "Testez vos compétences contre la montre ! Choisissez une difficulté et résolvez les problèmes.",
     "difficultyLabel": "Difficulté :",

@@ -4,6 +4,7 @@
     "mainTitle": "Calculadora y Explorador Bijective Base-6",
     "tabCalculator": "Calculadora",
     "tabTables": "Tablas de Referencia",
+    "tabProsCons": "Pros y Contras",
     "tabLearn": "Aprender",
     "tabPractice": "Practicar",
     "calculatorTitle": "Calculadora Matemática Biyectiva",
@@ -39,6 +40,22 @@
     "geomPathList": [ "Comenzar en la raíz.", "Tomar la 4ª rama.", "Desde ese nodo, tomar la 2ª rama.", "Desde ese nodo, tomar la 5ª rama." ],
     "hashingTitle": "Una Nota sobre Colisiones y Hashing",
     "hashingDesc": "Al observar la tabla de multiplicar se revela que <code>2 × 3 = 6</code> y <code>1 × 6 = 6</code>. Esto es una <strong>colisión</strong>. Aunque es interesante matemáticamente, esta propiedad es lo opuesto a lo que se desea en las funciones de hash criptográficas (como SHA-256), que deben diseñarse específicamente para que encontrar colisiones sea computacionalmente inviable. Este sistema, por lo tanto, es una buena herramienta para comprender el concepto de colisiones, pero no es un algoritmo de hash seguro en sí mismo.",
+    "prosTitle": "Ventajas de la Base 6 Biyectiva",
+    "prosIntro": "La naturaleza sin cero de este sistema proporciona varios beneficios únicos, especialmente en computación e identificadores legibles por humanos.",
+    "pros": [
+        { "title": "Sin Ambigüedades y Amigable para Humanos", "desc": "La ausencia de ceros a la izquierda significa que no hay confusión. <code>123</code> es siempre <code>123</code>, nunca <code>0123</code>. Esto es ideal para códigos de producto, números de serie o enlaces cortos donde la claridad es crítica." },
+        { "title": "Compacto y Eficiente", "desc": "Cada posible cadena de dígitos es un número válido, lo que lo convierte en una forma muy densa y eficiente de representar datos. No hay combinaciones desperdiciadas o inválidas." },
+        { "title": "Ajuste Natural para la Computación", "desc": "El mapeo uno a uno entre números y cadenas es perfecto para algoritmos que requieren identificadores únicos, como la indexación de estructuras de datos complejas o la generación de claves únicas en sistemas distribuidos." },
+        { "title": "Sin Punteros Nulos (Una Idea Teórica)", "desc": "Dado que cada cadena es un número válido, no hay una representación 'vacía' o 'nula'. Esto se alinea con los conceptos de programación modernos destinados a eliminar los errores de referencia nula, una fuente común de errores." }
+    ],
+    "consTitle": "Desventajas y Compensaciones",
+    "consIntro": "Aunque es potente, el sistema no se utiliza ampliamente para la aritmética general por algunas razones clave.",
+    "cons": [
+        { "title": "Aritmética No Familiar", "desc": "Las reglas para llevar y pedir prestado en la suma y la resta son diferentes a las del sistema decimal, lo que hace que el cálculo mental y manual sea un desafío para la mayoría de las personas." },
+        { "title": "Sobrecarga de Conversión", "desc": "No es un sistema nativo para las computadoras (que usan binario) ni para los humanos (que usan decimal). Siempre se requiere un paso de conversión al interactuar con otros sistemas, lo que añade una sobrecarga computacional." },
+        { "title": "Soporte Nativo Limitado", "desc": "Muy pocos lenguajes de programación o bibliotecas estándar tienen funciones integradas para la numeración biyectiva. Esto significa que los desarrolladores deben implementar una lógica personalizada para todas las operaciones aritméticas y de conversión." },
+        { "title": "Patrones de Multiplicación Complejos", "desc": "A diferencia de las bases estándar donde multiplicar por la base simplemente añade un cero, los patrones en la multiplicación biyectiva son menos intuitivos, lo que dificulta la realización de estimaciones o cálculos rápidos." }
+    ],
     "practiceTitle": "Modo de Práctica",
     "practiceDesc": "¡Pon a prueba tus habilidades contra el reloj! Elige una dificultad y resuelve los problemas.",
     "difficultyLabel": "Dificultad:",

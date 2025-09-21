@@ -4,6 +4,7 @@
     "mainTitle": "Bijektiver Base-6 Rechner & Explorer",
     "tabCalculator": "Rechner",
     "tabTables": "Referenztabellen",
+    "tabProsCons": "Vor- & Nachteile",
     "tabLearn": "Lernen",
     "tabPractice": "Üben",
     "calculatorTitle": "Bijektiver Mathe-Rechner",
@@ -39,6 +40,22 @@
     "geomPathList": [ "Beginnen Sie an der Wurzel.", "Nehmen Sie den 4. Zweig.", "Nehmen Sie von diesem Knoten den 2. Zweig.", "Nehmen Sie von diesem Knoten den 5. Zweig." ],
     "hashingTitle": "Ein Hinweis zu Kollisionen und Hashing",
     "hashingDesc": "Bei der Betrachtung der Multiplikationstabelle stellt man fest, dass <code>2 × 3 = 6</code> und <code>1 × 6 = 6</code> ist. Dies ist eine <strong>Kollision</strong>. Obwohl mathematisch interessant, ist diese Eigenschaft das Gegenteil von dem, was in kryptographischen Hash-Funktionen (wie SHA-256) erwünscht ist, die speziell darauf ausgelegt sein müssen, das Finden von Kollisionen rechnerisch unmöglich zu machen. Dieses System ist daher ein gutes Werkzeug, um das Konzept der Kollisionen zu verstehen, aber es ist selbst kein sicherer Hashing-Algorithmus.",
+    "prosTitle": "Vorteile der bijektiven Basis 6",
+    "prosIntro": "Die nulllose Natur dieses Systems bietet mehrere einzigartige Vorteile, insbesondere in der Datenverarbeitung und bei für Menschen lesbaren Bezeichnern.",
+    "pros": [
+        { "title": "Eindeutig & menschenfreundlich", "desc": "Keine führenden Nullen bedeuten keine Verwirrung. <code>123</code> ist immer <code>123</code>, niemals <code>0123</code>. Dies ist ideal für Produktcodes, Seriennummern oder kurze Links, bei denen Klarheit entscheidend ist." },
+        { "title": "Kompakt & Effizient", "desc": "Jede mögliche Zeichenfolge von Ziffern ist eine gültige Zahl, was es zu einer sehr dichten und effizienten Art der Datendarstellung macht. Es gibt keine verschwendeten oder ungültigen Kombinationen." },
+        { "title": "Natürliche Eignung für die Datenverarbeitung", "desc": "Die Eins-zu-eins-Zuordnung zwischen Zahlen und Zeichenfolgen ist perfekt für Algorithmen, die eindeutige Bezeichner erfordern, wie z. B. die Indizierung komplexer Datenstrukturen oder die Erzeugung eindeutiger Schlüssel in verteilten Systemen." },
+        { "title": "Keine Nullzeiger (Eine theoretische Idee)", "desc": "Da jede Zeichenfolge eine gültige Zahl ist, gibt es keine 'leere' oder 'null'-Darstellung. Dies entspricht modernen Programmierkonzepten, die darauf abzielen, Null-Referenz-Fehler zu eliminieren, eine häufige Fehlerquelle." }
+    ],
+    "consTitle": "Nachteile und Kompromisse",
+    "consIntro": "Obwohl leistungsstark, wird das System aus einigen wichtigen Gründen nicht für die allgemeine Arithmetik verwendet.",
+    "cons": [
+        { "title": "Ungewohnte Arithmetik", "desc": "Die Regeln für den Übertrag beim Addieren und Subtrahieren unterscheiden sich vom Dezimalsystem, was Kopfrechnen und manuelle Berechnungen für die meisten Menschen zu einer Herausforderung macht." },
+        { "title": "Konvertierungsaufwand", "desc": "Es ist kein natives System für Computer (die binär verwenden) oder Menschen (die dezimal verwenden). Ein Konvertierungsschritt ist immer erforderlich, wenn mit anderen Systemen interagiert wird, was zusätzlichen Rechenaufwand bedeutet." },
+        { "title": "Begrenzte native Unterstützung", "desc": "Sehr wenige Programmiersprachen oder Standardbibliotheken haben eingebaute Funktionen für die bijektive Zählung. Das bedeutet, dass Entwickler benutzerdefinierte Logik für alle arithmetischen und Konvertierungsoperationen implementieren müssen." },
+        { "title": "Komplexe Multiplikationsmuster", "desc": "Im Gegensatz zu Standardbasen, bei denen die Multiplikation mit der Basis einfach eine Null hinzufügt, sind die Muster bei der bijektiven Multiplikation weniger intuitiv, was schnelle Schätzungen oder Berechnungen erschwert." }
+    ],
     "practiceTitle": "Übungsmodus",
     "practiceDesc": "Testen Sie Ihre Fähigkeiten gegen die Uhr! Wählen Sie einen Schwierigkeitsgrad und lösen Sie die Aufgaben.",
     "difficultyLabel": "Schwierigkeit:",
