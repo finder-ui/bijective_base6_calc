@@ -268,10 +268,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function generateQuestion() {
             const maxNum = parseInt(difficultySelector.value, 10) || 12;
-            const decimalToConvert = (Math.floor(Math.random() * 1000) % maxNum) + 1;
-            correctAnswer = toBijective(decimalToConvert);
-            
-            container.innerHTML = `<div id="quiz-question">${i18nData.quizQuestion || 'What is'} <code>${decimalToConvert}</code> in bijective base-6?</div><div class="input-group mt-3 mx-auto" style="max-width: 300px;"><input type="text" id="quiz-answer" class="form-control" placeholder="Answer..."><button id="quiz-submit" class="btn btn-primary">${i18nData.quizSubmitBtn || 'Submit'}</button></div><div id="quiz-feedback" class="mt-3 text-center"></div>`;
+            let questionHTML = '';
+
+            // Randomly choose between a math problem and a conversion problem
+            if (Math.random() > 0.5) {
+                const num1 = (Math.floor(Math.random() * 1000) % maxNum) + 1;
+                const num2 = (Math.floor(Math.random() * 1000) % maxNum) + 1;
+                const op = Math.random() > 0.5 ? '+' : '×';
+                correctAnswer = (op === '+') ? toBijective(num1 + num2) : toBijective(num1 * num2);
+                questionHTML = `${i18nData.quizQuestion || 'What is'} <code>${toBijective(num1)} ${op} ${toBijective(num2)}</code>?`;
+            } else {
+                const decimalToConvert = (Math.floor(Math.random() * 1000) % maxNum) + 1;
+                correctAnswer = toBijective(decimalToConvert);
+                questionHTML = `${i18nData.quizQuestion || 'What is'} <code>${decimalToConvert}</code> in bijective base-6?`;
+            }
+
+            container.innerHTML = `<div id="quiz-question">${questionHTML}</div><div class="input-group mt-3 mx-auto" style="max-width: 300px;"><input type="text" id="quiz-answer" class="form-control" placeholder="Answer..."><button id="quiz-submit" class="btn btn-primary">${i18nData.quizSubmitBtn || 'Submit'}</button></div><div id="quiz-feedback" class="mt-3 text-center"></div>`;
             document.getElementById('quiz-submit').addEventListener('click', checkAnswer);
             document.getElementById('quiz-answer').addEventListener('keypress', e => { if (e.key === 'Enter') checkAnswer(); });
         }
