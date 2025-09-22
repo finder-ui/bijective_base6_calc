@@ -28,82 +28,30 @@
                 <button class="nav-link active" id="calculator-tab" data-bs-toggle="tab" data-bs-target="#tab-calculator" type="button" role="tab" data-i18n="tabCalculator"></button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="practice-tab" data-bs-toggle="tab" data-bs-target="#tab-practice" type="button" role="tab" data-i18n="tabPractice"></button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pros-cons-tab" data-bs-toggle="tab" data-bs-target="#tab-pros-cons" type="button" role="tab" data-i18n="tabProsCons"></button>
-            </li>
-            <li class="nav-item" role="presentation">
                 <button class="nav-link" id="tables-tab" data-bs-toggle="tab" data-bs-target="#tab-tables" type="button" role="tab" data-i18n="tabTables"></button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="explanations-tab" data-bs-toggle="tab" data-bs-target="#tab-explanations" type="button" role="tab" data-i18n="tabExplanations"></button>
             </li>
         </ul>
 
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active p-4" id="tab-calculator" role="tabpanel">
-                <div class="row g-5">
-                    <div class="col-lg-6">
-                        <section>
-                            <h2 data-i18n="liveConverterTitle"></h2>
-                            <p data-i18n="liveConverterDesc"></p>
-                            <div class="mb-3">
-                                <label for="decimal-input" class="form-label" data-i18n="decimalInputLabel"></label>
-                                <input type="tel" class="form-control" id="decimal-input" data-i18n-placeholder="decimalInputPlaceholder">
-                            </div>
-                            <div id="conversion-results"></div>
-                        </section>
+                <section>
+                    <h2 data-i18n="calculatorTitle"></h2>
+                    <p data-i18n="calculatorDesc"></p>
+                    <div class="row g-2 mb-3">
+                        <div class="col-sm-6"><input type="tel" class="form-control" id="num1" data-i18n-placeholder="num1Placeholder"></div>
+                        <div class="col-sm-6"><input type="tel" class="form-control" id="num2" data-i18n-placeholder="num2Placeholder"></div>
                     </div>
-                    <div class="col-lg-6">
-                        <section>
-                            <h2 data-i18n="calculatorTitle"></h2>
-                            <p data-i18n="calculatorDesc"></p>
-                            <div class="row g-2 mb-3">
-                                <div class="col-sm-6"><input type="tel" class="form-control" id="num1" data-i18n-placeholder="num1Placeholder"></div>
-                                <div class="col-sm-6"><input type="tel" class="form-control" id="num2" data-i18n-placeholder="num2Placeholder"></div>
-                            </div>
-                            <div class="d-grid">
-                                <button id="calculate-all-btn" class="btn btn-primary" data-i18n="calculateBtn"></button>
-                            </div>
-                        </section>
+                    <div class="d-grid">
+                        <button id="calculate-all-btn" class="btn btn-primary" data-i18n="calculateBtn"></button>
                     </div>
-                </div>
+                </section>
                 <section id="result-area" class="mt-4">
                     <h3 data-i18n="resultsTitle"></h3>
                     <div id="ops-results-grid" class="row row-cols-1 row-cols-md-2 g-3"></div>
                     <div id="error-display" class="mt-3 text-center"></div>
-                </section>
-            </div>
-
-            <div class="tab-pane fade p-4" id="tab-practice" role="tabpanel">
-                <section id="quiz-section">
-                    <h2 data-i18n="practiceTitle"></h2>
-                    <p data-i18n="practiceDesc"></p>
-                    <div class="d-flex justify-content-center gap-3 mb-4">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="quiz-mode-conversions" checked>
-                            <label class="form-check-label" for="quiz-mode-conversions" data-i18n="quizModeConversions"></label>
-                        </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="quiz-mode-arithmetic" checked>
-                            <label class="form-check-label" for="quiz-mode-arithmetic" data-i18n="quizModeArithmetic"></label>
-                        </div>
-                    </div>
-                    <div id="quiz-container" class="text-center"></div>
-                </section>
-            </div>
-
-            <div class="tab-pane fade p-4" id="tab-pros-cons" role="tabpanel">
-                <section>
-                    <h2 data-i18n="prosConsTitle"></h2>
-                    <div class="row g-4 mt-3">
-                        <div class="col-lg-6">
-                            <h3 class="text-success" data-i18n="prosTitle"></h3>
-                            <ul class="list-group list-group-flush" data-i18n-list="prosList"></ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <h3 class="text-danger" data-i18n="consTitle"></h3>
-                            <ul class="list-group list-group-flush" data-i18n-list="consList"></ul>
-                        </div>
-                    </div>
                 </section>
             </div>
 
@@ -115,6 +63,14 @@
                 <section>
                     <h2 data-i18n="multiplicationTableTitle"></h2>
                     <div id="multiplication-table-container" class="table-responsive"></div>
+                </section>
+            </div>
+
+            <div class="tab-pane fade p-4" id="tab-explanations" role="tabpanel">
+                 <section class="mb-5">
+                    <h2 data-i18n="primerTitle"></h2>
+                    <p data-i18n="primerDesc1"></p>
+                    <p data-i18n="primerDesc2"></p>
                 </section>
             </div>
         </div>
