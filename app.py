@@ -5,6 +5,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -12,7 +13,6 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 # This function is kept ONLY for generating the reference tables on the server.
-# All other calculations are now handled on the client-side.
 def to_bijective_base6(n: int) -> str:
     if n <= 0: return "(N/A)"
     chars = "123456"
