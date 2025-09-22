@@ -268,6 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(generateQuestion, 1500);
                 } else {
                     feedbackEl.innerHTML = `<div class="alert alert-danger">${(i18nData.quizIncorrectFeedback || 'Not quite! The correct answer was {answer}.').replace('{answer}', `<strong>${currentQuestion.answer}</strong>`)}</div>`;
+                    setTimeout(generateQuestion, 3000); // Generate next question after a longer delay on failure
                 }
             } catch (err) {
                 console.error("Error checking quiz answer:", err);
