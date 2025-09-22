@@ -26,15 +26,31 @@
     --rain-color: var(--final-answer-color);
 }
 
+[data-theme="dark-green"] {
+    /* Dark Theme (Classic Sci-Fi Green) */
+    --bg-color: #0a192f;
+    --section-bg-color: #112240;
+    --text-color: #a8b2d1;
+    --text-color-muted: #8892b0;
+    --header-color: #ccd6f6;
+    --border-color: #233554;
+    --accent-color: #64ffda;
+    --final-answer-color: #64ffda;
+    --calc-btn-text-color: #0a192f;
+    --rain-color: var(--accent-color);
+}
+
 /* --- Base & Animation --- */
 body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Roboto', sans-serif; }
 #background-animation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.5; }
 .container { z-index: 1; position: relative; }
 
-/* --- Header, Footer --- */
+/* --- Header, Footer, Donation --- */
 header h1 { color: var(--header-color); font-weight: 500; }
 footer { color: var(--text-color-muted) !important; }
 footer a, section a { color: var(--accent-color); }
+.donation-button { border-color: var(--final-answer-color); color: var(--final-answer-color); text-decoration: none; }
+.donation-button:hover { background-color: var(--final-answer-color); color: var(--section-bg-color); }
 
 /* --- Theme & Language Switchers --- */
 #theme-switcher { position: fixed; top: 20px; left: 20px; width: 45px; height: 45px; background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.4em; z-index: 1000; }
@@ -65,7 +81,4 @@ code { background-color: color-mix(in srgb, var(--text-color) 5%, transparent); 
 .table-responsive { border: 1px solid var(--border-color); border-radius: .25rem; }
 
 /* --- RTL Alignment Fix --- */
-[dir="rtl"] .nav-tabs {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
+[dir="rtl"] .nav-tabs { justify-content: flex-start !important; }
