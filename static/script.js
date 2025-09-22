@@ -290,11 +290,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        difficultyRadios.forEach(radio => radio.addEventListener('change', generateQuestion));
-
-        [conversionCheckbox, arithmeticCheckbox].forEach(el => {
-            el.addEventListener('change', generateQuestion);
-        });
+        document.querySelectorAll('input[name="difficulty"]').forEach(radio => radio.addEventListener('change', generateQuestion));
+        if (conversionCheckbox) conversionCheckbox.addEventListener('change', generateQuestion);
+        if (arithmeticCheckbox) arithmeticCheckbox.addEventListener('change', generateQuestion);
 
         generateQuestion();
     }
