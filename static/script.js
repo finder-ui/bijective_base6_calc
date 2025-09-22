@@ -58,7 +58,103 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- i18n (unchanged, but safe fetch already) ---
+    // --- Internationalization (i18n) Logic ---
+    const supportedLangs = {
+        'en': { flag: 'us', name: 'English' }, 'ru': { flag: 'ru', name: 'Русский' }, 'he': { flag: 'il', name: 'עברית' },
+        'es': { flag: 'es', name: 'Español' }, 'fr': { flag: 'fr', name: 'Français' }, 'de': { flag: 'de', name: 'Deutsch' },
+        'ar': { flag: 'sa', name: 'العربية' }, 'zh': { flag: 'cn', name: '中文' }, 'ja': { flag: 'jp', name: '日本語' }
+    };
+
+    async function setLanguage(lang) {
+        if (!supportedLangs[lang]) { console.warn(`Language '${lang}' not supported.`); return; }
+        try {
+            const response = await fetch(`/locales/${lang}.json`);
+            if (!response.ok) { console.error(`Failed to fetch locale file for ${lang}.`); return; }
+            i18nData = await response.json();
+            applyTranslations(i18nData);
+            htmlElement.setAttribute('lang', lang);
+            htmlElement.dir = (lang === 'he' || lang === 'ar') ? 'rtl' : 'ltr';
+            localStorage.setItem('language', lang);
+            updateLangSwitcherUI(lang);
+        } catch (error) { console.error(`Error setting language to ${lang}:`, error); }
+    }
+
+    function applyTranslations(data) {
+        document.title = data.pageTitle || "Bijective Base-6 Calculator";
+        document.querySelector('meta[name="description"]').setAttribute('content', data.pageDescription || "");
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.dataset.i18n;
+            if (data[key] !== undefined) el.innerHTML = data[key];
+        });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.dataset.i18nPlaceholder;
+            if (data[key] !== undefined) el.placeholder = data[key];
+        });
+        document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+            const key = el.dataset.i18nAriaLabel;
+            if (data[key] !== undefined) el.setAttribute('aria-label', data[key]);
+        });
+        document.querySelectorAll('[data-i18n-list]').forEach(ul => {
+            const key = ul.dataset.i18nList;
+            if (data[key] && Array.isArray(data[key])) {
+                ul.innerHTML = data[key].map(item => `<li class="list-group-item">${item.replace(/<strong>/g, '<strong class="text-success">')}</li>`).join('');
+            }
+        });
+    }
+
+    function setupLangSwitcher() {
+        const mainBtn = document.getElementById('lang-switcher-btn');
+        const menu = document.getElementById('lang-switcher-menu');
+        if (!mainBtn || !menu) { console.warn("Language switcher elements not found."); return; }
+        menu.innerHTML = '';
+        for (const [code, details] of Object.entries(supportedLangs)) {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.className = 'dropdown-item';
+            a.href = '#';
+            a.dataset.lang = code;
+            a.innerHTML = `<span class="fi fi-${details.flag} me-2"></span> ${details.name}`;
+            a.addEventListener('click', (e) => { e.preventDefault(); setLanguage(code); });
+            li.appendChild(a);
+            menu.appendChild(li);
+        }
+    }
+
+    function updateLangSwitcherUI(lang) {
+        const mainBtn = document.getElementById('lang-switcher-btn');
+        if (mainBtn && supportedLangs[lang]) mainBtn.innerHTML = `<span class="fi fi-${supportedLangs[lang].flag}"></span>`;
+    }
+
+    // --- Tab & Table Logic ---
+    const tablesTab = document.getElementById('tables-tab');
+    let tablesData = null;
+    if (tablesTab) {
+        tablesTab.addEventListener('shown.bs.tab', async () => {
+            if (!tablesData) {
+                const addContainer = document.getElementById('addition-table-container');
+                const mulContainer = document.getElementById('multiplication-table-container');
+                if(addContainer) addContainer.innerHTML = `<p class="text-center">${i18nData.ui_loading || 'Loading...'}</p>`;
+                const response = await fetch('/get-tables');
+                tablesData = await response.json();
+                if(addContainer) renderTable(tablesData.header, tablesData.addition, addContainer);
+                if(mulContainer) renderTable(tablesData.header, tablesData.multiplication, mulContainer);
+            }
+        });
+    }
+
+    function renderTable(header, data, container) {
+        let tableHTML = '<table class="table table-bordered table-hover table-sm"><thead><tr><th>#</th>';
+        header.forEach(h => tableHTML += `<th>${h}</th>`);
+        tableHTML += '</tr></thead><tbody>';
+        data.forEach((row, rowIndex) => {
+            tableHTML += `<tr><th>${header[rowIndex]}</th>`;
+            row.forEach(cell => tableHTML += `<td>${cell}</td>`);
+            tableHTML += '</tr>';
+        });
+        tableHTML += '</tbody></table>';
+        container.innerHTML = tableHTML;
+    }
 
     // --- Calculator & Converter Logic ---
     function setupCalculator() {
