@@ -62,7 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
             htmlElement.dir = (lang === 'he' || lang === 'ar') ? 'rtl' : 'ltr';
             localStorage.setItem('language', lang);
             updateLangSwitcherUI(lang);
-        } catch (error) { console.error(`Error setting language to ${lang}:`, error); }
+        } catch (error) {
+            console.error(`Error setting language to ${lang}:`, error);
+            // Fallback to English if the selected language fails to load
+            if (lang !== 'en') await setLanguage('en');
+        }
     }
 
     function applyTranslations(data) {
@@ -224,13 +228,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById('quiz-container');
         if (!container) return;
 
-        const difficultySelector = document.getElementById('difficulty-range');
+        const difficultyRadios = document.querySelectorAll('input[name="difficulty"]');
         const conversionCheckbox = document.getElementById('quiz-type-conversions');
         const arithmeticCheckbox = document.getElementById('quiz-type-arithmetic');
         let currentQuestion = null;
 
         const generateQuestion = () => {
-            const maxNum = parseInt(difficultySelector.value, 10);
+            const selectedDifficulty = document.querySelector('input[name="difficulty"]:checked').value;
+            const difficultyMap = { easy: 12, medium: 42, hard: 258 };
+            const maxNum = difficultyMap[selectedDifficulty] || 12;
+
             const types = [];
             if (conversionCheckbox.checked) types.push('conversion');
             if (arithmeticCheckbox.checked) types.push('arithmetic');
@@ -283,7 +290,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        [difficultySelector, conversionCheckbox, arithmeticCheckbox].forEach(el => {
+        difficultyRadios.forEach(radio => radio.addEventListener('change', generateQuestion));
+
+        [conversionCheckbox, arithmeticCheckbox].forEach(el => {
             el.addEventListener('change', generateQuestion);
         });
 
