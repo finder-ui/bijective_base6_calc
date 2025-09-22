@@ -13,7 +13,10 @@
 <body>
     <canvas id="background-animation"></canvas>
     <div id="theme-switcher" role="button" data-i18n-aria-label="themeSwitcherLabel"></div>
-    <div id="lang-switcher-container"></div>
+    <div class="lang-switcher-container dropdown">
+        <button class="btn dropdown-toggle lang-btn-main" type="button" id="lang-switcher-btn" data-bs-toggle="dropdown" aria-expanded="false"></button>
+        <ul class="dropdown-menu dropdown-menu-end" id="lang-switcher-menu" aria-labelledby="lang-switcher-btn"></ul>
+    </div>
 
     <div class="container my-4">
         <header class="text-center mb-5">
@@ -25,13 +28,10 @@
                 <button class="nav-link active" id="calculator-tab" data-bs-toggle="tab" data-bs-target="#tab-calculator" type="button" role="tab" data-i18n="tabCalculator"></button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="practice-tab" data-bs-toggle="tab" data-bs-target="#tab-practice" type="button" role="tab" data-i18n="tabPractice"></button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pros-cons-tab" data-bs-toggle="tab" data-bs-target="#tab-pros-cons" type="button" role="tab" data-i18n="tabProsCons"></button>
-            </li>
-            <li class="nav-item" role="presentation">
                 <button class="nav-link" id="tables-tab" data-bs-toggle="tab" data-bs-target="#tab-tables" type="button" role="tab" data-i18n="tabTables"></button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="explanations-tab" data-bs-toggle="tab" data-bs-target="#tab-explanations" type="button" role="tab" data-i18n="tabExplanations"></button>
             </li>
         </ul>
 
@@ -55,30 +55,6 @@
                 </section>
             </div>
 
-            <div class="tab-pane fade p-4" id="tab-practice" role="tabpanel">
-                <section id="quiz-section">
-                    <h2 data-i18n="practiceTitle"></h2>
-                    <p data-i18n="practiceDesc"></p>
-                    <div id="quiz-container" class="text-center"></div>
-                </section>
-            </div>
-
-            <div class="tab-pane fade p-4" id="tab-pros-cons" role="tabpanel">
-                <section>
-                    <h2 data-i18n="prosConsTitle"></h2>
-                    <div class="row g-4">
-                        <div class="col-lg-6">
-                            <h3 class="text-success" data-i18n="prosTitle"></h3>
-                            <ul data-i18n-list="prosList"></ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <h3 class="text-danger" data-i18n="consTitle"></h3>
-                            <ul data-i18n-list="consList"></ul>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
             <div class="tab-pane fade p-4" id="tab-tables" role="tabpanel">
                 <section class="mb-5">
                     <h2 data-i18n="additionTableTitle"></h2>
@@ -88,6 +64,10 @@
                     <h2 data-i18n="multiplicationTableTitle"></h2>
                     <div id="multiplication-table-container" class="table-responsive"></div>
                 </section>
+            </div>
+
+            <div class="tab-pane fade p-4" id="tab-explanations" role="tabpanel">
+                <!-- All Explanations Content Will Be Populated by JS -->
             </div>
         </div>
 
