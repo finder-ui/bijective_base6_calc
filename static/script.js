@@ -239,8 +239,8 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const checkedRadio = document.querySelector('input[name="difficulty"]:checked');
                 const selectedDifficulty = checkedRadio ? checkedRadio.value : 'easy';
-                const difficultyMap = { easy: 12, medium: 42, hard: 258 };
-                const maxNum = difficultyMap[selectedDifficulty] || 12;
+                const difficultyMap = { easy: 6, medium: 20, hard: 50 };
+                const maxNum = difficultyMap[selectedDifficulty] || 6;
 
                 const types = [];
                 if (conversionCheckbox?.checked) types.push('conversion');
