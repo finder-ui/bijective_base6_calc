@@ -29,11 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- Internationalization (i18n) Logic ---
-    const supportedLangs = {
-        'en': { flag: 'us', name: 'English' }, 'ru': { flag: 'ru', name: 'Русский' }, 'he': { flag: 'il', name: 'עברית' },
-        'es': { flag: 'es', name: 'Español' }, 'fr': { flag: 'fr', name: 'Français' }, 'de': { flag: 'de', name: 'Deutsch' },
-        'ar': { flag: 'sa', name: 'العربية' }, 'zh': { flag: 'cn', name: '中文' }, 'ja': { flag: 'jp', name: '日本語' }
-    };
+    const supportedLangs = { 'en': { flag: 'us', name: 'English' }, 'ru': { flag: 'ru', name: 'Русский' }, 'he': { flag: 'il', name: 'עברית' } };
 
     async function setLanguage(lang) {
         if (!supportedLangs[lang]) { console.warn(`Language '${lang}' not supported.`); return; }
