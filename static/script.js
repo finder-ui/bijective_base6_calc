@@ -72,6 +72,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function setupTabMemory() {
+        const tabButtons = document.querySelectorAll('#myTab button[data-bs-toggle="tab"]');
+        tabButtons.forEach(tab => {
+            tab.addEventListener('shown.bs.tab', (event) => {
+                if (event.target.dataset.bsTarget) {
+                    localStorage.setItem('lastActiveTab', event.target.dataset.bsTarget);
+                }
+            });
+        });
+
+        const lastTabId = localStorage.getItem('lastActiveTab');
+        if (lastTabId) {
+            const lastTab = document.querySelector(`button[data-bs-target="${lastTabId}"]`);
+            if (lastTab) new bootstrap.Tab(lastTab).show();
+        }
+    }
+
     // --- Tab & Table Logic ---
     const tablesTab = document.getElementById('tables-tab');
     let tablesData = null;
@@ -198,9 +215,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById('quiz-container');
         if (!container) return;
 
+        const difficultyRadios = document.querySelectorAll('input[name="difficulty"]');
         const conversionCheckbox = document.getElementById('quiz-type-conversions');
         const arithmeticCheckbox = document.getElementById('quiz-type-arithmetic');
         let currentQuestion = null;
+
+        // Load saved settings from localStorage
+        const savedDifficulty = localStorage.getItem('quizDifficulty') || 'easy';
+        const difficultyRadio = document.getElementById(`difficulty-${savedDifficulty}`);
+        if (difficultyRadio) difficultyRadio.checked = true;
+
+        const savedConvChecked = localStorage.getItem('quizConvChecked');
+        if (conversionCheckbox && savedConvChecked !== null) {
+            conversionCheckbox.checked = (savedConvChecked === 'true');
+        }
+
+        const savedArithChecked = localStorage.getItem('quizArithChecked');
+        if (arithmeticCheckbox && savedArithChecked !== null) {
+            arithmeticCheckbox.checked = (savedArithChecked === 'true');
+        }
 
         const generateQuestion = () => {
             try {
@@ -275,11 +308,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        document.querySelectorAll('input[name="difficulty"]').forEach(radio =>
-            radio.addEventListener('change', generateQuestion)
-        );
-        conversionCheckbox?.addEventListener('change', generateQuestion);
-        arithmeticCheckbox?.addEventListener('change', generateQuestion);
+        difficultyRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                localStorage.setItem('quizDifficulty', e.target.value);
+                generateQuestion();
+            });
+        });
+        if (conversionCheckbox) conversionCheckbox.addEventListener('change', () => {
+            localStorage.setItem('quizConvChecked', conversionCheckbox.checked);
+            generateQuestion();
+        });
+        if (arithmeticCheckbox) arithmeticCheckbox.addEventListener('change', () => {
+            localStorage.setItem('quizArithChecked', arithmeticCheckbox.checked);
+            generateQuestion();
+        });
 
         generateQuestion();
     }
@@ -340,6 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Initial Load ---
     setupSettingsModal();
+    setupTabMemory();
     setupCalculator();
     setupPracticeMode();
 
