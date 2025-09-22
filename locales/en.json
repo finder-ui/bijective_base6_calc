@@ -4,9 +4,8 @@
     "themeSwitcherLabel": "Toggle theme",
     "mainTitle": "Bijective Base-6 Calculator & Explorer",
     "tabCalculator": "Calculator & Explorer",
-    "tabPractice": "Practice",
-    "tabProsCons": "Pros & Cons",
     "tabTables": "Reference Tables",
+    "tabExplanations": "Explanations",
     "calculatorTitle": "Bijective Math Calculator",
     "calculatorDesc": "Enter two bijective base-6 numbers to see the results for all operations.",
     "num1Placeholder": "First number",
@@ -33,30 +32,6 @@
     "appCrypto": "<strong>Natural Fit for Cryptography:</strong> Guarantees one-to-one mappings (canonical representation), which is critical for preventing subtle bugs and security vulnerabilities. In a theoretical computer built on this system, the classic 'null pointer exception' (an error from accessing address 0) wouldn't exist in the same way, as the first address is 1.",
     "darkSecretTitle": "The Philosophical Implication of a Zero-less World",
     "darkSecretDesc": "The absence of zero is not just a curiosity; it has profound philosophical implications. In our mathematics, zero represents both a quantity (nothing) and a concept (the origin). A bijective system has no symbol for nothingness. The number zero is represented by the empty string—the absence of symbols. This implies a universe where the concept of 'nothing' isn't a state to be represented, but a true void. In computation, this means there is no 'null' address, potentially eliminating an entire class of common programming errors at a fundamental level.",
-    "prosConsTitle": "Pros & Cons of Bijective Numeration",
-    "prosTitle": "Advantages",
-    "prosList": [
-        "<strong>Uniqueness:</strong> Every number has exactly one representation. No leading zeros, no ambiguity.",
-        "<strong>Compactness:</strong> Generally more compact than standard positional systems for the same base.",
-        "<strong>Intuitive for Labeling:</strong> A natural fit for sequences that don't have a zeroth element, like spreadsheet columns."
-    ],
-    "consTitle": "Disadvantages",
-    "consList": [
-        "<strong>Unfamiliar Arithmetic:</strong> Standard addition and multiplication algorithms need to be modified.",
-        "<strong>Zero Representation:</strong> The concept of zero as an empty string can be counter-intuitive.",
-        "<strong>Lack of Native Support:</strong> Not built into standard libraries or computer hardware."
-    ],
-    "practiceTitle": "Practice Mode",
-    "practiceDesc": "Test your skills! Choose a difficulty and solve the exercises.",
-    "difficultyLabel": "Difficulty Level:",
-    "difficultyEasy": "Easy",
-    "difficultyMedium": "Medium",
-    "difficultyHard": "Hard",
-    "quizModeConversions": "Conversions",
-    "quizModeArithmetic": "Arithmetic",
-    "quizAnswerPlaceholder": "Answer...",
-    "quizQuestionConversion": "What is {number} in bijective base-6?",
-    "quizQuestionArithmetic": "What is {num1} {op} {num2}?",
     "githubLink": "Project source available on",
     "licenseLink": "Released under the"
 }
