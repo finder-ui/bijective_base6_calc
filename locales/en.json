@@ -49,6 +49,7 @@
     "languageLabel": "Language",
     "themeDark": "Dark Mode",
     "themeLight": "Light Mode",
+    "ui_loading": "Loading...",
     "githubLink": "Project source available on",
     "licenseLink": "Released under the"
 }
