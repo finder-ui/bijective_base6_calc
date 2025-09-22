@@ -6,8 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://github.com/tripping-alien/bijective_base6_calc/blob/main/LICENSE)
 
 An interactive web app for exploring the **bijective base-6 number system**—a system with no zero. This educational tool features a hands-on calculator, a live number system converter, detailed explanations, and a configurable practice mode, all presented in a clean, Nord-inspired dark theme.
-
-### [➡️ View the Live Demo](https://bijective-base6-calc.onrender.com)
+Dive into the fascinating world of zero-less mathematics with this interactive web application dedicated to the **bijective base-6 number system**. More than just a calculator, this educational tool provides in-depth explanations, a configurable practice mode, and full support for 9 languages. Explore a number system used in modern computing, from spreadsheet columns to URL shorteners, all within a polished, Nord-inspired interface.
 
 ---
 
@@ -29,12 +28,11 @@ An interactive web app for exploring the **bijective base-6 number system**—a 
 ## ✨ Features
 
 - **Live Conversion Explorer**: Instantly see any decimal number represented in Decimal, Binary, Hexadecimal, and Bijective Base-6.
-- **All-in-One Calculator**: Enter two bijective numbers and get the results for Addition, Subtraction, Multiplication, and Division at once.
-- **Pros & Cons Analysis**: A dedicated tab that clearly explains the advantages and disadvantages of using a bijective system.
-- **In-Depth Learning**: Detailed explanations of the conversion algorithm, its connection to formal language theory, and its geometric interpretation as an infinite tree.
+- **Bijective Calculator**: Perform addition, subtraction, multiplication, and division directly with bijective base-6 numbers.
+- **Educational Content**: A dedicated "Study" tab tailored for engineers, explaining the practical pros and cons and teaching the algorithms for manual calculation.
 - **Configurable Practice Mode**: Test your skills with math or conversion problems across Easy, Medium, and Hard difficulty levels.
-- **Full Internationalization**: Core support for English and Russian, with a cross-browser compatible flag selector.
-- **Polished UI**: A clean, responsive "Nord" theme that's easy on the eyes, with subtle animations for a better user experience.
+- **Reference Tables**: View pre-calculated 24x24 Addition and Multiplication tables to easily see patterns.
+- **Polished UI**: A clean, responsive, dual-theme interface that's easy on the eyes.
 
 ---
 

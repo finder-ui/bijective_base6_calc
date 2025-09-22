@@ -49,15 +49,18 @@ footer a, section a { color: var(--accent-color); }
 .nav-tabs { border-bottom-color: var(--border-color); }
 .nav-tabs .nav-link { color: var(--text-color-muted); border-bottom-color: transparent; }
 .nav-tabs .nav-link.active { background-color: transparent; color: var(--accent-color); border-color: transparent transparent var(--accent-color); }
-.tab-content { background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-top: none; border-radius: 0 0 .25rem .25rem;}
+.tab-content { background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-top: none; border-radius: 0 0 .25rem .25rem; }
 section { background-color: transparent !important; padding: 2rem; }
 .form-control { background-color: var(--input-bg-color); color: var(--text-color); border-color: var(--border-color); font-family: var(--font-mono); }
-.form-control:focus { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 25%, transparent); border-color: var(--accent-color); }
+.form-control:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.2rem rgba(136, 132, 255, 0.25); /* Universal fallback for color-mix() */
+}
 .btn-primary { background-color: var(--accent-color); border-color: var(--accent-color); color: var(--calc-btn-text-color); font-weight: bold; }
 
 /* --- Custom Components & Text --- */
 h2 { color: var(--accent-color); font-family: var(--font-mono); }
-code { background-color: color-mix(in srgb, var(--text-color) 5%, transparent); color: var(--accent-color); padding: .2em .4em; border-radius: .25rem; }
+code { background-color: rgba(128, 128, 128, 0.1); color: var(--accent-color); padding: .2em .4em; border-radius: .25rem; }
 .op-result-item { background-color: var(--bg-color); padding: 15px; border-radius: .25rem; border: 1px solid var(--border-color); text-align: center; }
 .op-problem { font-family: var(--font-mono); color: var(--text-color-muted); }
 .op-answer { font-family: var(--font-mono); font-size: 1.6em; font-weight: bold; color: var(--final-answer-color); }

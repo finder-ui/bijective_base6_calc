@@ -34,7 +34,7 @@ async def get_locale(lang: str):
 
 @app.get("/get-tables")
 async def get_tables():
-    table_size = 12
+    table_size = 24
     header = [to_bijective_base6(i) for i in range(1, table_size + 1)]
     add_table = [[to_bijective_base6(i + j) for j in range(1, table_size + 1)] for i in range(1, table_size + 1)]
     mul_table = [[to_bijective_base6(i * j) for j in range(1, table_size + 1)] for i in range(1, table_size + 1)]
