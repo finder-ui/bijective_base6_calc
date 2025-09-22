@@ -28,16 +28,13 @@
                 <button class="nav-link active" id="calculator-tab" data-bs-toggle="tab" data-bs-target="#tab-calculator" type="button" role="tab" data-i18n="tabCalculator"></button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="tables-tab" data-bs-toggle="tab" data-bs-target="#tab-tables" type="button" role="tab" data-i18n="tabTables"></button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="study-tab" data-bs-toggle="tab" data-bs-target="#tab-study" type="button" role="tab" data-i18n="tabStudy"></button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="learn-tab" data-bs-toggle="tab" data-bs-target="#tab-learn" type="button" role="tab" data-i18n="tabLearn"></button>
-            </li>
-            <li class="nav-item" role="presentation">
                 <button class="nav-link" id="practice-tab" data-bs-toggle="tab" data-bs-target="#tab-practice" type="button" role="tab" data-i18n="tabPractice"></button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pros-cons-tab" data-bs-toggle="tab" data-bs-target="#tab-pros-cons" type="button" role="tab" data-i18n="tabProsCons"></button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tables-tab" data-bs-toggle="tab" data-bs-target="#tab-tables" type="button" role="tab" data-i18n="tabTables"></button>
             </li>
         </ul>
 
@@ -76,18 +73,19 @@
                 </section>
             </div>
 
-            <div class="tab-pane fade p-4" id="tab-tables" role="tabpanel">
-                <section class="mb-5">
-                    <h2 data-i18n="additionTableTitle"></h2>
-                    <div id="addition-table-container" class="table-responsive"></div>
-                </section>
-                <section>
-                    <h2 data-i18n="multiplicationTableTitle"></h2>
-                    <div id="multiplication-table-container" class="table-responsive"></div>
+            <div class="tab-pane fade p-4" id="tab-practice" role="tabpanel">
+                <section id="quiz-section">
+                    <h2 data-i18n="practiceTitle"></h2>
+                    <p data-i18n="practiceDesc"></p>
+                    <div class="d-flex justify-content-center gap-4 mb-4">
+                        <div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="quiz-type-conversions" checked><label class="form-check-label" for="quiz-type-conversions" data-i18n="quizModeConversions"></label></div>
+                        <div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="quiz-type-arithmetic" checked><label class="form-check-label" for="quiz-type-arithmetic" data-i18n="quizModeArithmetic"></label></div>
+                    </div>
+                    <div id="quiz-container" class="text-center"></div>
                 </section>
             </div>
 
-            <div class="tab-pane fade p-4" id="tab-study" role="tabpanel">
+            <div class="tab-pane fade p-4" id="tab-pros-cons" role="tabpanel">
                 <section>
                     <h2 data-i18n="prosConsTitle"></h2>
                     <div class="row g-4">
@@ -103,56 +101,20 @@
                 </section>
             </div>
 
-            <div class="tab-pane fade p-4" id="tab-learn" role="tabpanel">
+            <div class="tab-pane fade p-4" id="tab-tables" role="tabpanel">
                 <section class="mb-5">
-                    <h2 data-i18n="explanationTitle"></h2>
-                    <p data-i18n="explanationDesc1"></p>
-                    <h4 class="mt-4" data-i18n="algoTitle"></h4>
-                    <p data-i18n="algoDesc1"></p>
-                    <p data-i18n="algoExampleTitle"></p>
-                    <ol>
-                        <li data-i18n="algoStep1"></li>
-                        <li data-i18n="algoStep2"></li>
-                        <li data-i18n="algoStep3"></li>
-                    </ol>
-                    <p data-i18n="algoResult"></p>
+                    <h2 data-i18n="additionTableTitle"></h2>
+                    <div id="addition-table-container" class="table-responsive"></div>
                 </section>
-            </div>
-
-            <div class="tab-pane fade p-4" id="tab-practice" role="tabpanel">
-                <section id="quiz-section">
-                    <h2 data-i18n="practiceTitle"></h2>
-                    <p data-i18n="practiceDesc"></p>
-                    <div class="d-flex justify-content-center gap-3 mb-4">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="quiz-type-conversions" checked>
-                            <label class="form-check-label" for="quiz-type-conversions" data-i18n="quizModeConversions"></label>
-                        </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="quiz-type-arithmetic" checked>
-                            <label class="form-check-label" for="quiz-type-arithmetic" data-i18n="quizModeArithmetic"></label>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center gap-3 mb-4">
-                        <div class="btn-group" role="group">
-                            <input type="radio" class="btn-check" name="difficulty" id="difficulty-easy" autocomplete="off" value="easy" checked>
-                            <label class="btn btn-outline-primary" for="difficulty-easy" data-i18n="difficultyEasy"></label>
-                            <input type="radio" class="btn-check" name="difficulty" id="difficulty-medium" autocomplete="off" value="medium">
-                            <label class="btn btn-outline-primary" for="difficulty-medium" data-i18n="difficultyMedium"></label>
-                            <input type="radio" class="btn-check" name="difficulty" id="difficulty-hard" autocomplete="off" value="hard">
-                            <label class="btn btn-outline-primary" for="difficulty-hard" data-i18n="difficultyHard"></label>
-                        </div>
-                    </div>
-                    <div id="quiz-container" class="text-center"></div>
+                <section>
+                    <h2 data-i18n="multiplicationTableTitle"></h2>
+                    <div id="multiplication-table-container" class="table-responsive"></div>
                 </section>
             </div>
         </div>
 
         <footer class="text-center py-4 mt-5">
-            <p class="mb-0">
-                <span data-i18n="githubLink"></span> <a href="https://github.com/tripping-alien/bijective_base6_calc" target="_blank">GitHub</a>. 
-                <span data-i18n="licenseLink"></span> <a href="https://github.com/tripping-alien/bijective_base6_calc/blob/main/LICENSE" target="_blank">MIT License</a>.
-            </p>
+            <p class="mb-0"><span data-i18n="githubLink"></span> <a href="https://github.com/tripping-alien/bijective_base6_calc" target="_blank">GitHub</a>. <span data-i18n="licenseLink"></span> <a href="https://github.com/tripping-alien/bijective_base6_calc/blob/main/LICENSE" target="_blank">MIT License</a>.</p>
         </footer>
     </div>
 
