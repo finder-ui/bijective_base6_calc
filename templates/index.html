@@ -105,12 +105,9 @@
 
             <div class="tab-pane fade p-4" id="tab-learn" role="tabpanel">
                 <section class="mb-5">
-                    <h2 data-i18n="primerTitle"></h2>
-                    <p data-i18n="primerDesc1"></p>
-                    <p data-i18n="primerDesc2"></p>
-                </section>
-                <section>
-                    <h2 data-i18n="algoTitle"></h2>
+                    <h2 data-i18n="explanationTitle"></h2>
+                    <p data-i18n="explanationDesc1"></p>
+                    <h4 class="mt-4" data-i18n="algoTitle"></h4>
                     <p data-i18n="algoDesc1"></p>
                     <p data-i18n="algoExampleTitle"></p>
                     <ol>
@@ -126,6 +123,26 @@
                 <section id="quiz-section">
                     <h2 data-i18n="practiceTitle"></h2>
                     <p data-i18n="practiceDesc"></p>
+                    <div class="d-flex justify-content-center gap-3 mb-4">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="quiz-type-conversions" checked>
+                            <label class="form-check-label" for="quiz-type-conversions" data-i18n="quizModeConversions"></label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="quiz-type-arithmetic" checked>
+                            <label class="form-check-label" for="quiz-type-arithmetic" data-i18n="quizModeArithmetic"></label>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center gap-3 mb-4">
+                        <div class="btn-group" role="group">
+                            <input type="radio" class="btn-check" name="difficulty" id="difficulty-easy" autocomplete="off" value="easy" checked>
+                            <label class="btn btn-outline-primary" for="difficulty-easy" data-i18n="difficultyEasy"></label>
+                            <input type="radio" class="btn-check" name="difficulty" id="difficulty-medium" autocomplete="off" value="medium">
+                            <label class="btn btn-outline-primary" for="difficulty-medium" data-i18n="difficultyMedium"></label>
+                            <input type="radio" class="btn-check" name="difficulty" id="difficulty-hard" autocomplete="off" value="hard">
+                            <label class="btn btn-outline-primary" for="difficulty-hard" data-i18n="difficultyHard"></label>
+                        </div>
+                    </div>
                     <div id="quiz-container" class="text-center"></div>
                 </section>
             </div>
