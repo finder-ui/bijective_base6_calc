@@ -37,14 +37,13 @@ footer { color: var(--text-color-muted) !important; }
 footer a, section a { color: var(--accent-color); }
 
 /* --- Theme & Language Switchers --- */
-#theme-switcher { position: fixed; top: 20px; left: 20px; width: 45px; height: 45px; background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.4em; z-index: 1000; }
-.lang-switcher-container { position: fixed; top: 20px; right: 20px; z-index: 1000; }
-.lang-btn-main { background-color: var(--section-bg-color) !important; border: 1px solid var(--border-color) !important; border-radius: 50% !important; width: 45px; height: 45px; font-size: 1.4em; display: flex; justify-content: center; align-items: center; padding: 0; }
-.lang-btn-main::after { display: none; }
-.dropdown-menu { background-color: var(--section-bg-color); border-color: var(--border-color); }
-.dropdown-item { color: var(--text-color) !important; display: flex; align-items: center; gap: 10px; }
-.dropdown-item:hover { background-color: var(--accent-color) !important; color: var(--calc-btn-text-color) !important; }
-.dropdown-item .flag { font-size: 1.5em; }
+.settings-btn { position: fixed; top: 20px; left: 20px; width: 45px; height: 45px; background-color: var(--section-bg-color); border: 1px solid var(--border-color); border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.4em; z-index: 1000; color: var(--text-color); }
+.settings-btn:hover { background-color: var(--bg-color); }
+.modal-content { background-color: var(--bg-color); border-color: var(--border-color); }
+.modal-header { border-bottom-color: var(--border-color); }
+.list-group-item.language-option { background-color: var(--section-bg-color); border-color: var(--border-color); color: var(--text-color); cursor: pointer; }
+.list-group-item.language-option:hover { background-color: var(--accent-color); color: var(--calc-btn-text-color); }
+.list-group-item.language-option.active { background-color: var(--final-answer-color); color: var(--calc-btn-text-color); border-color: var(--final-answer-color); }
 
 /* --- Bootstrap Component Theming --- */
 .nav-tabs { border-bottom-color: var(--border-color); }

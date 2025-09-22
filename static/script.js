@@ -28,36 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return n;
     };
 
-    // --- Theme Switcher Logic ---
-    const themeSwitcher = document.getElementById('theme-switcher');
-    function setTheme(theme) {
-        try {
-            htmlElement.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
-            if (themeSwitcher) {
-                themeSwitcher.innerHTML = theme === 'dark' ? '☀️' : '🌙';
-                const accentColor = getComputedStyle(htmlElement).getPropertyValue('--accent-color').trim();
-                const rgb = accentColor.startsWith('#')
-                    ? `${parseInt(accentColor.slice(1, 3), 16)}, ${parseInt(accentColor.slice(3, 5), 16)}, ${parseInt(accentColor.slice(5, 7), 16)}`
-                    : '136, 132, 255';
-                htmlElement.style.setProperty('--accent-color-rgb', rgb);
-            }
-        } catch (err) {
-            console.error("Error setting theme:", err);
-        }
-    }
-
-    if (themeSwitcher) {
-        themeSwitcher.addEventListener('click', () => {
-            try {
-                const currentTheme = htmlElement.getAttribute('data-theme') || 'dark';
-                setTheme(currentTheme === 'dark' ? 'light' : 'dark');
-            } catch (err) {
-                console.error("Theme switch error:", err);
-            }
-        });
-    }
-
     // --- Internationalization (i18n) Logic ---
     const supportedLangs = {
         'en': { flag: 'us', name: 'English' }, 'ru': { flag: 'ru', name: 'Русский' }, 'he': { flag: 'il', name: 'עברית' },
@@ -75,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
             htmlElement.setAttribute('lang', lang);
             htmlElement.dir = (lang === 'he' || lang === 'ar') ? 'rtl' : 'ltr';
             localStorage.setItem('language', lang);
-            updateLangSwitcherUI(lang);
         } catch (error) { console.error(`Error setting language to ${lang}:`, error); }
     }
 
@@ -101,29 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 ul.innerHTML = data[key].map(item => `<li class="list-group-item">${item.replace(/<strong>/g, '<strong class="text-success">')}</li>`).join('');
             }
         });
-    }
-
-    function setupLangSwitcher() {
-        const mainBtn = document.getElementById('lang-switcher-btn');
-        const menu = document.getElementById('lang-switcher-menu');
-        if (!mainBtn || !menu) { console.warn("Language switcher elements not found."); return; }
-        menu.innerHTML = '';
-        for (const [code, details] of Object.entries(supportedLangs)) {
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.className = 'dropdown-item';
-            a.href = '#';
-            a.dataset.lang = code;
-            a.innerHTML = `<span class="fi fi-${details.flag} me-2"></span> ${details.name}`;
-            a.addEventListener('click', (e) => { e.preventDefault(); setLanguage(code); });
-            li.appendChild(a);
-            menu.appendChild(li);
-        }
-    }
-
-    function updateLangSwitcherUI(lang) {
-        const mainBtn = document.getElementById('lang-switcher-btn');
-        if (mainBtn && supportedLangs[lang]) mainBtn.innerHTML = `<span class="fi fi-${supportedLangs[lang].flag}"></span>`;
     }
 
     // --- Tab & Table Logic ---
@@ -335,13 +281,65 @@ document.addEventListener('DOMContentLoaded', () => {
         generateQuestion();
     }
 
+    // --- Settings Modal Logic ---
+    function setupSettingsModal() {
+        const themeSwitch = document.getElementById('theme-switch-modal');
+        const themeLabel = document.getElementById('theme-switch-label');
+        const languageList = document.getElementById('language-list-modal');
+
+        if (!themeSwitch || !languageList) return;
+
+        // Theme Switcher
+        function updateThemeUI(theme) {
+            themeSwitch.checked = theme === 'dark';
+            themeLabel.textContent = theme === 'dark' ? (i18nData.themeDark || 'Dark Mode') : (i18nData.themeLight || 'Light Mode');
+        }
+
+        function setTheme(theme) {
+            htmlElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            updateThemeUI(theme);
+        }
+
+        themeSwitch.addEventListener('change', () => {
+            setTheme(themeSwitch.checked ? 'dark' : 'light');
+        });
+
+        // Language List
+        function populateLanguageList() {
+            languageList.innerHTML = '';
+            const currentLang = localStorage.getItem('language') || 'en';
+            for (const [code, details] of Object.entries(supportedLangs)) {
+                const langItem = document.createElement('a');
+                langItem.href = '#';
+                langItem.className = 'list-group-item list-group-item-action language-option';
+                if (code === currentLang) {
+                    langItem.classList.add('active');
+                }
+                langItem.innerHTML = `<span class="fi fi-${details.flag} me-2"></span> ${details.name}`;
+                langItem.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    setLanguage(code).then(() => {
+                        // Repopulate to update active state and labels
+                        populateLanguageList();
+                        updateThemeUI(localStorage.getItem('theme') || 'dark');
+                    });
+                });
+                languageList.appendChild(langItem);
+            }
+        }
+
+        // Initial setup
+        const initialTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(initialTheme);
+        populateLanguageList();
+    }
+
     // --- Initial Load ---
-    setupLangSwitcher();
+    setupSettingsModal();
     setupCalculator();
     setupPracticeMode();
 
     const initialLang = localStorage.getItem('language') || 'en';
     setLanguage(initialLang);
-    const initialTheme = localStorage.getItem('theme') || 'dark';
-    setTheme(initialTheme);
 });
