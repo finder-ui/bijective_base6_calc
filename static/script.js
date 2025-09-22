@@ -39,9 +39,26 @@ document.addEventListener('DOMContentLoaded', () => {
             i18nData = await response.json();
             applyTranslations(i18nData);
             htmlElement.setAttribute('lang', lang);
-            htmlElement.dir = (lang === 'he' || lang === 'ar') ? 'rtl' : 'ltr';
+            htmlElement.dir = lang === 'ru' ? 'ltr' : 'ltr'; // Simplified for current languages
             localStorage.setItem('language', lang);
+            updateSeoLangTags(lang);
         } catch (error) { console.error(`Error setting language to ${lang}:`, error); }
+    }
+
+    function updateSeoLangTags(currentLang) {
+        // Remove old hreflang tags
+        document.querySelectorAll('link[rel="alternate"]').forEach(el => el.remove());
+        
+        const head = document.head;
+        const baseUrl = window.location.origin + window.location.pathname;
+
+        for (const langCode in supportedLangs) {
+            const link = document.createElement('link');
+            link.rel = 'alternate';
+            link.hreflang = langCode;
+            link.href = `${baseUrl}?lang=${langCode}`;
+            head.appendChild(link);
+        }
     }
 
     function applyTranslations(data) {
@@ -59,6 +76,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
             const key = el.dataset.i18nAriaLabel;
             if (data[key] !== undefined) el.setAttribute('aria-label', data[key]);
+        });
+        document.querySelectorAll('[data-i18n-property]').forEach(el => {
+            const key = el.dataset.i18nProperty.split(':')[1];
+            const property = el.dataset.i18nProperty;
+            if (data[key] !== undefined) {
+                // This handles og:title, twitter:title, etc.
+                el.setAttribute('content', data[key]);
+            }
         });
         document.querySelectorAll('[data-i18n-list]').forEach(ul => {
             const key = ul.dataset.i18nList;
