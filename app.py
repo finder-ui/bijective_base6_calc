@@ -5,13 +5,14 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from pydantic import BaseModel
 
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
+# This function is kept ONLY for generating the reference tables on the server.
+# All other calculations are now handled on the client-side.
 def to_bijective_base6(n: int) -> str:
     if n <= 0: return "(N/A)"
     chars = "123456"
@@ -21,23 +22,7 @@ def to_bijective_base6(n: int) -> str:
         result.append(chars[remainder])
     return "".join(reversed(result))
 
-def from_bijective_base6(s: str) -> int:
-    if not s: raise ValueError("Input cannot be empty.")
-    for char in s:
-        if char not in "123456": raise ValueError(f"Input contains invalid character '{char}'.")
-    n = 0
-    for char in s:
-        n = n * 6 + int(char)
-    return n
-
-class AllOpsRequest(BaseModel):
-    num1: str
-    num2: str
-
-class ConversionRequest(BaseModel):
-    decimal_value: int
-
-@app.get("/", response_class=HTMLResponse)
+@app.get("/")
 async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
@@ -47,48 +32,6 @@ async def get_locale(lang: str):
     if os.path.exists(file_path):
         return FileResponse(file_path)
     return {"error": "Language not found"}, 404
-
-@app.post("/calculate-all")
-async def calculate_all_ops(problem: AllOpsRequest):
-    try:
-        n1 = from_bijective_base6(problem.num1)
-        n2 = from_bijective_base6(problem.num2)
-
-        add_res_dec = n1 + n2
-        sub_res_dec = n1 - n2
-        mul_res_dec = n1 * n2
-        
-        div_bijective = "(N/A)"
-        if n2 != 0:
-            if n1 % n2 == 0:
-                div_bijective = to_bijective_base6(n1 // n2)
-            else:
-                div_bijective = f"(Rem: {n1 % n2})"
-
-        results = {
-            "addition": {"bijective": to_bijective_base6(add_res_dec)},
-            "subtraction": {"bijective": to_bijective_base6(sub_res_dec)},
-            "multiplication": {"bijective": to_bijective_base6(mul_res_dec)},
-            "division": {"bijective": div_bijective}
-        }
-        
-        return {"n1_decimal": n1, "n2_decimal": n2, "results": results}
-
-    except ValueError as e: return {"error": str(e)}
-    except Exception as e: return {"error": f"An unexpected error occurred: {e}"}
-
-@app.post("/convert-all")
-async def convert_all_systems(req: ConversionRequest):
-    if req.decimal_value <= 0: return {"error": "Please enter a positive whole number."}
-    try:
-        decimal_val = req.decimal_value
-        return {
-            "decimal": str(decimal_val),
-            "binary": bin(decimal_val)[2:],
-            "hexadecimal": hex(decimal_val)[2:].upper(),
-            "bijective_base6": to_bijective_base6(decimal_val)
-        }
-    except Exception as e: return {"error": f"An error occurred during conversion: {e}"}
 
 @app.get("/get-tables")
 async def get_tables():
