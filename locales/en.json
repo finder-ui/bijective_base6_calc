@@ -18,7 +18,7 @@
     "calculateBtn": "Calculate All Operations",
     "resultsTitle": "Results",
     "practiceTitle": "Practice Mode",
-    "practiceDesc": "Test your skills! Choose a difficulty and what to practice.",
+    "practiceDesc": "Test your skills! Choose a difficulty and solve the exercises.",
     "difficultyLabel": "Difficulty Level:",
     "difficultyEasy": "Easy",
     "difficultyMedium": "Medium",
@@ -31,20 +31,18 @@
     "prosConsTitle": "Pros & Cons for Software Engineering",
     "prosTitle": "Advantages (Pros)",
     "prosList": [
-        "<strong>Unambiguous IDs:</strong> Every integer has exactly one representation. This eliminates bugs from leading zeros (e.g., <code>007</code> vs <code>7</code>) in identifiers, configuration files, or API endpoints.",
+        "<strong>Uniqueness:</strong> Every integer has exactly one representation. This eliminates bugs from leading zeros (e.g., <code>007</code> vs <code>7</code>) in identifiers, configuration files, or API endpoints.",
         "<strong>Naturally Sortable:</strong> The lexicographical order of bijective strings matches their numerical order. This simplifies sorting and indexing operations without special handling.",
         "<strong>No Null Pointer Equivalent:</strong> In a theoretical bijective-native system, since address 1 is the first valid address, the concept of a 'null pointer exception' caused by accessing address 0 would be fundamentally eliminated."
     ],
     "consTitle": "Disadvantages (Cons)",
     "consList": [
-        "<strong>Unfamiliar Algorithms:</strong> Standard arithmetic algorithms for addition, subtraction, and especially multiplication and division do not work directly and must be reimplemented.",
+        "<strong>Unfamiliar Arithmetic:</strong> Standard addition and multiplication algorithms need to be modified.",
         "<strong>Zero Representation:</strong> The concept of zero as an empty string can be counter-intuitive.",
-        "<strong>Interoperability Cost:</strong> Requires conversion to and from standard systems (like binary or decimal) when interacting with any other conventional software, database, or OS."
+        "<strong>Lack of Native Support:</strong> Not built into standard libraries or computer hardware."
     ],
     "additionTableTitle": "Addition Table (1 to 12)",
     "multiplicationTableTitle": "Multiplication Table (1 to 12)",
-    "darkSecretTitle": "The Philosophical Implication of a Zero-less World",
-    "darkSecretDesc": "The absence of zero is not just a curiosity; it has profound philosophical implications. In our mathematics, zero represents both a quantity (nothing) and a concept (the origin). A bijective system has no symbol for nothingness. The number zero is represented by the empty string—the absence of symbols. This implies a universe where the concept of 'nothing' isn't a state to be represented, but a true void. In computation, this means there is no 'null' address, potentially eliminating an entire class of common programming errors at a fundamental level.",
     "githubLink": "Project source available on",
     "licenseLink": "Released under the"
 }
