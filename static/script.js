@@ -24,17 +24,18 @@ document.addEventListener('DOMContentLoaded', () => {
         return n;
     };
 
-    // --- Theme Switcher Logic ---
+    // --- Theme Switcher Logic (Simplified 2-State Toggle) ---
     const themeSwitcher = document.getElementById('theme-switcher');
     function setTheme(theme) {
         htmlElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
         if (themeSwitcher) themeSwitcher.innerHTML = theme === 'dark' ? '☀️' : '🌙';
     }
+
     if (themeSwitcher) {
         themeSwitcher.addEventListener('click', () => {
-            const newTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            setTheme(newTheme);
+            const currentTheme = htmlElement.getAttribute('data-theme') || 'light';
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
         });
     }
 
@@ -56,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             htmlElement.dir = (lang === 'he' || lang === 'ar') ? 'rtl' : 'ltr';
             localStorage.setItem('language', lang);
             updateLangSwitcherUI(lang);
-        } catch (error) { console.error(`Error setting language: ${error}`); }
+        } catch (error) { console.error(`Error setting language to ${lang}:`, error); }
     }
 
     function applyTranslations(data) {
@@ -159,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     addition: toBijective(n1 + n2),
                     subtraction: toBijective(n1 - n2),
                     multiplication: toBijective(n1 * n2),
-                    division: n2 === 0 ? '(N/A)' : (n1 % n2 === 0 ? toBijective(n1 / n2) : `(Rem: ${n1 % n2})`)
+                    division: n2 === 0 ? '(N/A)' : (n1 % n2 === 0 ? toBijective(Math.floor(n1 / n2)) : `(Rem: ${n1 % n2})`)
                 };
 
                 displayAllOpsResults(num1, num2, results);
