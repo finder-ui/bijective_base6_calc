@@ -43,6 +43,8 @@
     ],
     "additionTableTitle": "Addition Table (1 to 12)",
     "multiplicationTableTitle": "Multiplication Table (1 to 12)",
+    "darkSecretTitle": "The Philosophical Implication of a Zero-less World",
+    "darkSecretDesc": "The absence of zero is not just a curiosity; it has profound philosophical implications. In our mathematics, zero represents both a quantity (nothing) and a concept (the origin). A bijective system has no symbol for nothingness. The number zero is represented by the empty string—the absence of symbols. This implies a universe where the concept of 'nothing' isn't a state to be represented, but a true void. In computation, this means there is no 'null' address, potentially eliminating an entire class of common programming errors at a fundamental level.",
     "githubLink": "Project source available on",
     "licenseLink": "Released under the"
 }
