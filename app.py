@@ -11,7 +11,7 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-# The to_bijective_base6 function is kept for generating the reference tables
+# The to_bijective_base6 function is kept only for generating the reference tables
 def to_bijective_base6(n: int) -> str:
     if n <= 0: return "(N/A)"
     chars = "123456"
