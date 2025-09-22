@@ -28,13 +28,13 @@
                 <button class="nav-link active" id="calculator-tab" data-bs-toggle="tab" data-bs-target="#tab-calculator" type="button" role="tab" data-i18n="tabCalculator"></button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="study-tab" data-bs-toggle="tab" data-bs-target="#tab-study" type="button" role="tab" data-i18n="tabStudy"></button>
+                <button class="nav-link" id="practice-tab" data-bs-toggle="tab" data-bs-target="#tab-practice" type="button" role="tab" data-i18n="tabPractice"></button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pros-cons-tab" data-bs-toggle="tab" data-bs-target="#tab-pros-cons" type="button" role="tab" data-i18n="tabProsCons"></button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="tables-tab" data-bs-toggle="tab" data-bs-target="#tab-tables" type="button" role="tab" data-i18n="tabTables"></button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="practice-tab" data-bs-toggle="tab" data-bs-target="#tab-practice" type="button" role="tab" data-i18n="tabPractice"></button>
             </li>
         </ul>
 
@@ -73,50 +73,6 @@
                 </section>
             </div>
 
-            <div class="tab-pane fade p-4" id="tab-study" role="tabpanel">
-                <section class="mb-5">
-                    <h2 data-i18n="primerTitle"></h2>
-                    <p data-i18n="primerDesc1"></p>
-                    <p data-i18n="primerDesc2"></p>
-                </section>
-                <section class="mb-5">
-                    <h2 data-i18n="explanationTitle"></h2>
-                    <p data-i18n="explanationDesc1"></p>
-                    <h4 class="mt-4" data-i18n="algoTitle"></h4>
-                    <p data-i18n="algoDesc1"></p>
-                    <p data-i18n="algoExampleTitle"></p>
-                    <ol>
-                        <li data-i18n="algoStep1"></li>
-                        <li data-i18n="algoStep2"></li>
-                        <li data-i18n="algoStep3"></li>
-                    </ol>
-                    <p data-i18n="algoResult"></p>
-                </section>
-                <section class="mb-5">
-                    <h2 data-i18n="applicationsTitle"></h2>
-                    <ul>
-                        <li class="mb-2" data-i18n="appUnambiguous"></li>
-                        <li class="mb-2" data-i18n="appCompact"></li>
-                        <li class="mb-2" data-i18n="appCrypto"></li>
-                    </ul>
-                </section>
-                 <section>
-                    <h2 data-i18n="darkSecretTitle"></h2>
-                    <p data-i18n="darkSecretDesc"></p>
-                </section>
-            </div>
-
-            <div class="tab-pane fade p-4" id="tab-tables" role="tabpanel">
-                <section class="mb-5">
-                    <h2 data-i18n="additionTableTitle"></h2>
-                    <div id="addition-table-container" class="table-responsive"></div>
-                </section>
-                <section>
-                    <h2 data-i18n="multiplicationTableTitle"></h2>
-                    <div id="multiplication-table-container" class="table-responsive"></div>
-                </section>
-            </div>
-
             <div class="tab-pane fade p-4" id="tab-practice" role="tabpanel">
                 <section id="quiz-section">
                     <h2 data-i18n="practiceTitle"></h2>
@@ -132,6 +88,33 @@
                         </div>
                     </div>
                     <div id="quiz-container" class="text-center"></div>
+                </section>
+            </div>
+
+            <div class="tab-pane fade p-4" id="tab-pros-cons" role="tabpanel">
+                <section>
+                    <h2 data-i18n="prosConsTitle"></h2>
+                    <div class="row g-4">
+                        <div class="col-lg-6">
+                            <h3 class="text-success" data-i18n="prosTitle"></h3>
+                            <ul class="list-group" id="pros-list"></ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <h3 class="text-danger" data-i18n="consTitle"></h3>
+                            <ul class="list-group" id="cons-list"></ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="tab-pane fade p-4" id="tab-tables" role="tabpanel">
+                <section class="mb-5">
+                    <h2 data-i18n="additionTableTitle"></h2>
+                    <div id="addition-table-container" class="table-responsive"></div>
+                </section>
+                <section>
+                    <h2 data-i18n="multiplicationTableTitle"></h2>
+                    <div id="multiplication-table-container" class="table-responsive"></div>
                 </section>
             </div>
         </div>
