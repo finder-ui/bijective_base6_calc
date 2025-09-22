@@ -62,6 +62,7 @@ code { background-color: color-mix(in srgb, var(--text-color) 5%, transparent); 
 .op-problem { font-family: var(--font-mono); color: var(--text-color-muted); }
 .op-answer { font-family: var(--font-mono); font-size: 1.6em; font-weight: bold; color: var(--final-answer-color); }
 .table-responsive { border: 1px solid var(--border-color); border-radius: .25rem; }
+.example-box { background-color: var(--bg-color); border: 1px solid var(--border-color); border-left: 3px solid var(--accent-color); padding: 1rem; border-radius: .25rem; }
 
 /* --- RTL Alignment Fix --- */
 [dir="rtl"] .nav-tabs { justify-content: flex-start !important; }

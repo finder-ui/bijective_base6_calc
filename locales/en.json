@@ -5,7 +5,7 @@
     "mainTitle": "Bijective Base-6 Calculator & Explorer",
     "tabCalculator": "Calculator & Explorer",
     "tabPractice": "Practice",
-    "tabProsCons": "Pros & Cons",
+    "tabEdu": "Edu",
     "tabTables": "Reference Tables",
     "liveConverterTitle": "Live Conversion Explorer",
     "liveConverterDesc": "Enter a decimal number to see its real-time representation across different systems.",
@@ -34,7 +34,12 @@
         "<strong>Uniqueness:</strong> Every integer has exactly one representation. This eliminates bugs from leading zeros (e.g., <code>007</code> vs <code>7</code>) in identifiers, configuration files, or API endpoints.",
         "<strong>Naturally Sortable:</strong> The lexicographical order of bijective strings matches their numerical order. This simplifies sorting and indexing operations without special handling.",
         "<strong>No Null Pointer Equivalent:</strong> In a theoretical bijective-native system, since address 1 is the first valid address, the concept of a 'null pointer exception' caused by accessing address 0 would be fundamentally eliminated."
-    ],
+    ],"studyAdditionTitle": "Addition",
+    "studyAdditionDesc": "Addition is performed column by column, from right to left, just like in decimal. The key difference is how you carry over.",
+    "studyAdditionExample": "<h5>Example: <code>13 + 5</code></h5><p>1. <strong>Rightmost column:</strong> <code>3 + 5 = 8</code>.</p><p>2. Since 8 is greater than our base (6), we find the digit and the carry. The digit is <code>8 % 6 = 2</code>. If the remainder were 0, the digit would be 6. The carry is <code>floor((8 - 1) / 6) = 1</code>.</p><p>3. <strong>Next column:</strong> We have the digit <code>1</code> plus our carry of <code>1</code>, which equals <code>2</code>.</p><p><strong>Result: <code>22</code></strong></p>",
+    "studySubtractionTitle": "Subtraction",
+    "studySubtractionDesc": "Subtraction also works column by column. Borrowing is where it gets interesting: when you borrow from a column, you are borrowing a full <strong>6</strong>, not 10.",
+    "studySubtractionExample": "<h5>Example: <code>22 - 5</code></h5><p>1. <strong>Rightmost column:</strong> We need to calculate <code>2 - 5</code>. Since 2 is smaller than 5, we must borrow from the next column.</p><p>2. The <code>2</code> in the next column becomes a <code>1</code>. We add the borrowed 6 to our current digit: <code>(2 + 6) - 5 = 3</code>.</p><p>3. <strong>Next column:</strong> The digit is now <code>1</code>.</p><p><strong>Result: <code>13</code></strong></p>",
     "consTitle": "Disadvantages (Cons)",
     "consList": [
         "<strong>Unfamiliar Arithmetic:</strong> Standard addition and multiplication algorithms need to be modified.",

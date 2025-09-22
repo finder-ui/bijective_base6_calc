@@ -30,7 +30,7 @@
                 <button class="nav-link" id="practice-tab" data-bs-toggle="tab" data-bs-target="#tab-practice" type="button" role="tab" data-i18n="tabPractice"></button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pros-cons-tab" data-bs-toggle="tab" data-bs-target="#tab-pros-cons" type="button" role="tab" data-i18n="tabProsCons"></button>
+                <button class="nav-link" id="edu-tab" data-bs-toggle="tab" data-bs-target="#tab-edu" type="button" role="tab" data-i18n="tabEdu"></button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="tables-tab" data-bs-toggle="tab" data-bs-target="#tab-tables" type="button" role="tab" data-i18n="tabTables"></button>
@@ -65,7 +65,7 @@
                         </section>
                     </div>
                 </div>
-                <section id="result-area" class="mt-4">
+                <section id="result-area" class="mt-4" style="display: none;">
                     <h3 data-i18n="resultsTitle"></h3>
                     <div id="ops-results-grid" class="row row-cols-1 row-cols-md-2 g-3"></div>
                     <div id="error-display" class="mt-3 text-center"></div>
@@ -90,19 +90,30 @@
                 </section>
             </div>
 
-            <div class="tab-pane fade p-4" id="tab-pros-cons" role="tabpanel">
+            <div class="tab-pane fade p-4" id="tab-edu" role="tabpanel">
                 <section>
                     <h2 data-i18n="prosConsTitle"></h2>
                     <div class="row g-4">
                         <div class="col-lg-6">
                             <h3 class="text-success" data-i18n="prosTitle"></h3>
-                            <ul class="list-group" id="pros-list"></ul>
+                            <ul class="list-group list-group-flush" data-i18n-list="prosList"></ul>
                         </div>
                         <div class="col-lg-6">
                             <h3 class="text-danger" data-i18n="consTitle"></h3>
-                            <ul class="list-group" id="cons-list"></ul>
+                            <ul class="list-group list-group-flush" data-i18n-list="consList"></ul>
                         </div>
                     </div>
+                </section>
+                <hr class="my-5">
+                <section class="mb-5">
+                    <h3 data-i18n="studyAdditionTitle"></h3>
+                    <p data-i18n="studyAdditionDesc"></p>
+                    <div class="example-box" data-i18n-html="studyAdditionExample"></div>
+                </section>
+                <section>
+                    <h3 data-i18n="studySubtractionTitle"></h3>
+                    <p data-i18n="studySubtractionDesc"></p>
+                    <div class="example-box" data-i18n-html="studySubtractionExample"></div>
                 </section>
             </div>
 

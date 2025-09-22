@@ -66,6 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 ul.innerHTML = data[key].map(item => `<li class="list-group-item">${item.replace(/<strong>/g, '<strong class="text-success">')}</li>`).join('');
             }
         });
+        document.querySelectorAll('[data-i18n-html]').forEach(el => {
+            const key = el.dataset.i18nHtml;
+            if (data[key] !== undefined) el.innerHTML = data[key];
+        });
     }
 
     // --- Tab & Table Logic ---
@@ -151,8 +155,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     };
 
                     displayAllOpsResults(num1, num2, results);
-                    if (errorDisplay) errorDisplay.innerHTML = '';
-                    resultArea?.classList.add('visible');
+                    if (resultArea) {
+                        resultArea.style.display = 'block';
+                        resultArea.classList.add('visible');
+                    }
                 } catch (e) {
                     console.warn("Calculator error:", e);
                     if (errorDisplay) errorDisplay.textContent = `${i18nData.errorGeneric || 'Error:'} ${e.message}`;
