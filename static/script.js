@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateLangSwitcherUI(lang) {
         const mainBtn = document.getElementById('lang-switcher-btn');
-        if (mainBtn && supportedLangs[lang]) mainBtn.innerHTML = `<span class="fi fi-${supportedLangs[lang].flag}"></span>`;
+        // The button now has a permanent globe icon, so we don't need to update its content.
     }
 
     // --- Tab & Table Logic ---

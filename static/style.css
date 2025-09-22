@@ -44,7 +44,8 @@ footer a, section a { color: var(--accent-color); }
 .dropdown-menu { background-color: var(--section-bg-color); border-color: var(--border-color); }
 .dropdown-item { color: var(--text-color) !important; display: flex; align-items: center; gap: 10px; }
 .dropdown-item:hover { background-color: var(--accent-color) !important; color: var(--calc-btn-text-color) !important; }
-.dropdown-item .flag { font-size: 1.5em; }
+.lang-btn-main svg { fill: currentColor; }
+.dropdown-item .fi { font-size: 1.2em; border-radius: 3px; }
 
 /* --- Bootstrap Component Theming --- */
 .nav-tabs { border-bottom-color: var(--border-color); }
