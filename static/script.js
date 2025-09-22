@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             htmlElement.dir = (lang === 'he' || lang === 'ar') ? 'rtl' : 'ltr';
             localStorage.setItem('language', lang);
             updateLangSwitcherUI(lang);
-        } catch (error) { console.error(`Error setting language to ${lang}:`, error); }
+        } catch (error) { console.error(`Error setting language: ${error}`); }
     }
 
     function applyTranslations(data) {
@@ -77,14 +77,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!mainBtn || !menu) return;
         menu.innerHTML = '';
         for (const [code, details] of Object.entries(supportedLangs)) {
-            const li = document.createElement('li');
             const a = document.createElement('a');
             a.className = 'dropdown-item';
             a.href = '#';
+            a.dataset.lang = code;
             a.innerHTML = `<span class="flag">${details.flag}</span> ${details.name}`;
             a.addEventListener('click', (e) => { e.preventDefault(); setLanguage(code); });
-            li.appendChild(a);
-            menu.appendChild(li);
+            menu.appendChild(document.createElement('li')).appendChild(a);
         }
     }
 
@@ -93,16 +92,49 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mainBtn && supportedLangs[lang]) mainBtn.innerHTML = supportedLangs[lang].flag;
     }
 
-    // --- Live Conversion Explorer Logic ---
+    // --- Tab & Table Logic ---
+    const tablesTab = document.getElementById('tables-tab');
+    let tablesData = null;
+    if (tablesTab) {
+        tablesTab.addEventListener('shown.bs.tab', async () => {
+            if (!tablesData) {
+                const addContainer = document.getElementById('addition-table-container');
+                const mulContainer = document.getElementById('multiplication-table-container');
+                addContainer.innerHTML = '<p class="text-center">Loading...</p>';
+                const response = await fetch('/get-tables');
+                tablesData = await response.json();
+                renderTable(tablesData.header, tablesData.addition, addContainer);
+                renderTable(tablesData.header, tablesData.multiplication, mulContainer);
+            }
+        });
+    }
+
+    function renderTable(header, data, container) {
+        let tableHTML = '<table class="table table-bordered table-hover"><thead><tr><th>#</th>';
+        header.forEach(h => tableHTML += `<th>${h}</th>`);
+        tableHTML += '</tr></thead><tbody>';
+        data.forEach((row, rowIndex) => {
+            tableHTML += `<tr><th>${header[rowIndex]}</th>`;
+            row.forEach(cell => tableHTML += `<td>${cell}</td>`);
+            tableHTML += '</tr>';
+        });
+        container.innerHTML = tableHTML;
+    }
+
+    // --- Calculator & Converter Logic (Now Client-Side) ---
+    const num1Input = document.getElementById('num1');
+    const num2Input = document.getElementById('num2');
+    const calculateAllBtn = document.getElementById('calculate-all-btn');
+    const resultArea = document.getElementById('result-area');
+    const opsResultsGrid = document.getElementById('ops-results-grid');
+    const errorDisplay = document.getElementById('error-display');
     const decimalInput = document.getElementById('decimal-input');
     const conversionResults = document.getElementById('conversion-results');
+
     if (decimalInput) {
-        decimalInput.addEventListener('input', () => {
-            const decimalValue = parseInt(decimalInput.value, 10);
-            if (!decimalValue || decimalValue <= 0) {
-                conversionResults.innerHTML = '';
-                return;
-            }
+        decimalInput.addEventListener('input', (e) => {
+            const decimalValue = parseInt(e.target.value, 10);
+            if (!decimalValue || decimalValue <= 0) { conversionResults.innerHTML = ''; return; }
             conversionResults.innerHTML = `
                 <div class="result-grid">
                     <div><strong>Decimal:</strong> <code>${decimalValue}</code></div>
@@ -113,66 +145,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Calculator Logic ---
-    const num1Input = document.getElementById('num1');
-    const num2Input = document.getElementById('num2');
-    const calculateAllBtn = document.getElementById('calculate-all-btn');
-    const resultArea = document.getElementById('result-area');
-    const opsResultsGrid = document.getElementById('ops-results-grid');
-    const errorDisplay = document.getElementById('error-display');
-
     if (calculateAllBtn) {
         calculateAllBtn.addEventListener('click', () => {
             try {
                 const num1 = num1Input.value.trim();
                 const num2 = num2Input.value.trim();
-                if (!num1 || !num2) throw new Error('Please enter both numbers.');
+                if (!num1 || !num2) throw new Error("Please enter both numbers.");
 
                 const n1 = fromBijective(num1);
                 const n2 = fromBijective(num2);
 
                 const results = {
-                    addition: { dec: n1 + n2, op: '+' },
-                    subtraction: { dec: n1 - n2, op: '-' },
-                    multiplication: { dec: n1 * n2, op: '×' },
-                    division: { dec: n2 !== 0 ? (n1 / n2) : null, op: '÷', rem: n2 !== 0 ? n1 % n2 : null }
+                    addition: toBijective(n1 + n2),
+                    subtraction: toBijective(n1 - n2),
+                    multiplication: toBijective(n1 * n2),
+                    division: n2 === 0 ? '(N/A)' : (n1 % n2 === 0 ? toBijective(n1 / n2) : `(Rem: ${n1 % n2})`)
                 };
 
-                opsResultsGrid.innerHTML = Object.entries(results).map(([opName, res]) => {
-                    let bijectiveResult;
-                    if (opName === 'division') {
-                        bijectiveResult = res.dec === null ? '(N/A)' : (res.rem !== 0 ? `(Rem: ${res.rem})` : toBijective(res.dec));
-                    } else {
-                        bijectiveResult = toBijective(res.dec);
-                    }
-                    return `
-                        <div class="col">
-                            <div class="op-result-item h-100">
-                                <div class="op-title">${opName.charAt(0).toUpperCase() + opName.slice(1)}</div>
-                                <div class="op-problem">${num1} ${res.op} ${num2}</div>
-                                <div class="op-step">${n1} ${res.op} ${n2} = ${res.dec !== null ? (Number.isInteger(res.dec) ? res.dec : res.dec.toFixed(2)) : 'N/A'}</div>
-                                <div class="op-answer">${bijectiveResult}</div>
-                            </div>
-                        </div>`;
-                }).join('');
-
-                errorDisplay.textContent = '';
+                displayAllOpsResults(num1, num2, results);
+                errorDisplay.innerHTML = '';
                 resultArea.classList.add('visible');
-
-            } catch (error) {
-                errorDisplay.textContent = `Error: ${error.message}`;
+            } catch (e) {
+                errorDisplay.textContent = `Error: ${e.message}`;
                 resultArea.classList.add('visible');
-                opsResultsGrid.innerHTML = '';
             }
         });
     }
 
-    // --- Practice Mode Logic ---
-    const quizContainer = document.getElementById('quiz-container');
-    if(quizContainer) {
-        // ... (Practice mode logic will be added here in a subsequent step)
-    }
+    function clearCalculatorResults() { if(resultArea) { resultArea.classList.remove('visible'); opsResultsGrid.innerHTML = ''; errorDisplay.innerHTML = ''; } }
+    function triggerShake(element) { element.classList.add('shake'); setTimeout(() => { element.classList.remove('shake'); }, 500); }
 
+    function displayAllOpsResults(num1, num2, data) {
+        const ops = { addition: '+', subtraction: '-', multiplication: '×', division: '÷' };
+        opsResultsGrid.innerHTML = '';
+        for (const opName in data) {
+            const resultItem = document.createElement('div');
+            resultItem.classList.add('col');
+            resultItem.innerHTML = `
+                <div class="op-result-item h-100">
+                    <div class="op-title">${opName.charAt(0).toUpperCase() + opName.slice(1)}</div>
+                    <div class="op-problem">${num1} ${ops[opName]} ${num2}</div>
+                    <div class="op-answer">${data[opName]}</div>
+                </div>
+            `;
+            opsResultsGrid.appendChild(resultItem);
+        }
+    }
+    
     // --- Initial Load ---
     setupLangSwitcher();
     const initialLang = localStorage.getItem('language') || 'en';
