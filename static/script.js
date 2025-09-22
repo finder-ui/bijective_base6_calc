@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- Internationalization (i18n) Logic ---
-    const supportedLangs = { 'en': { flag: 'us', name: 'English' }, 'ru': { flag: 'ru', name: 'Русский' }, 'he': { flag: 'il', name: 'עברית' } };
+    const supportedLangs = { 'en': { flag: 'us', name: 'English' }, 'ru': { flag: 'ru', name: 'Русский' } };
 
     async function setLanguage(lang) {
         if (!supportedLangs[lang]) { console.warn(`Language '${lang}' not supported.`); return; }
