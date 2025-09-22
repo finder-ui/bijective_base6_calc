@@ -28,14 +28,14 @@
     "quizAnswerPlaceholder": "Answer...",
     "quizQuestionConversion": "What is {number} in bijective base-6?",
     "quizQuestionArithmetic": "What is {num1} {op} {num2}?",
-    "prosConsTitle": "Pros & Cons of Bijective Numeration",
-    "prosTitle": "Advantages",
+    "prosConsTitle": "Pros & Cons of Bijective Numeration for Software Engineering",
+    "prosTitle": "Advantages (Pros)",
     "prosList": [
-        "<strong>Uniqueness:</strong> Every number has exactly one representation. No leading zeros, no ambiguity.",
-        "<strong>Compactness:</strong> Generally more compact than standard positional systems for the same base.",
-        "<strong>Intuitive for Labeling:</strong> A natural fit for sequences that don't have a zeroth element, like spreadsheet columns."
+        "<strong>Uniqueness:</strong> Every integer has exactly one representation. This eliminates bugs from leading zeros (e.g., <code>007</code> vs <code>7</code>) in identifiers, configuration files, or API endpoints.",
+        "<strong>Naturally Sortable:</strong> The lexicographical order of bijective strings matches their numerical order. This simplifies sorting and indexing operations without special handling.",
+        "<strong>No Null Pointer Equivalent:</strong> In a theoretical bijective-native system, since address 1 is the first valid address, the concept of a 'null pointer exception' caused by accessing address 0 would be fundamentally eliminated."
     ],
-    "consTitle": "Disadvantages",
+    "consTitle": "Disadvantages (Cons)",
     "consList": [
         "<strong>Unfamiliar Arithmetic:</strong> Standard addition and multiplication algorithms need to be modified.",
         "<strong>Zero Representation:</strong> The concept of zero as an empty string can be counter-intuitive.",
