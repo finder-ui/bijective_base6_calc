@@ -67,5 +67,24 @@ code { background-color: rgba(128, 128, 128, 0.1); color: var(--accent-color); p
 .table-responsive { border: 1px solid var(--border-color); border-radius: .25rem; }
 .example-box { background-color: var(--bg-color); border: 1px solid var(--border-color); border-left: 3px solid var(--accent-color); padding: 1rem; border-radius: .25rem; }
 
-/* --- RTL Alignment Fix --- */
-[dir="rtl"] .nav-tabs { justify-content: flex-start !important; }
+/* ==========================================================================
+   RTL (Right-to-Left) Support
+   ========================================================================== */
+[dir="rtl"] .nav-tabs {
+    justify-content: flex-end !important;
+}
+
+[dir="rtl"] .settings-btn {
+    left: auto;
+    right: 20px;
+}
+
+[dir="rtl"] .example-box {
+    border-left: 1px solid var(--border-color);
+    border-right: 3px solid var(--accent-color);
+}
+
+[dir="rtl"] .modal-header .btn-close {
+    margin-left: 0;
+    margin-right: auto;
+}
