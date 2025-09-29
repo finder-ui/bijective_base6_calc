@@ -6,6 +6,7 @@ from fastapi.responses import HTMLResponse, FileResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.responses import PlainTextResponse
+from datetime import date
 
 app = FastAPI()
 
@@ -29,19 +30,32 @@ async def read_root(request: Request):
 
 @app.get("/robots.txt", response_class=PlainTextResponse)
 def robots():
-    return """User-agent: *
-Allow: /
-Sitemap: https://base6.art/sitemap.xml"""
+    return """# For all crawlers
+User-agent: *
+Disallow:
+
+# Yandex-specific directive for the main mirror
+Host: https://base6.art
+
+# Sitemap location
+Sitemap: https://base6.art/sitemap.xml
+"""
 
 @app.get("/sitemap.xml")
 def sitemap():
     base_url = "https://base6.art"
     supported_langs = ["en", "ru"]  # Keep this in sync with your frontend
+    today = date.today().isoformat()
     
     xml_content = '<?xml version="1.0" encoding="UTF-8"?>\n'
     xml_content += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
     xml_content += '  <url>\n'
     xml_content += f'    <loc>{base_url}/</loc>\n'
+    xml_content += f'    <lastmod>{today}</lastmod>\n'
+    xml_content += '    <changefreq>monthly</changefreq>\n'
+    xml_content += '    <priority>1.0</priority>\n'
+    # Add x-default for users whose language is not supported
+    xml_content += f'    <xhtml:link rel="alternate" hreflang="x-default" href="{base_url}/?lang=en"/>\n'
     for lang in supported_langs:
         xml_content += f'    <xhtml:link rel="alternate" hreflang="{lang}" href="{base_url}/?lang={lang}"/>\n'
     xml_content += '  </url>\n'

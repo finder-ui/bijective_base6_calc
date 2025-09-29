@@ -27,6 +27,8 @@
     "quizAnswerPlaceholder": "Ответ...",
     "quizQuestionConversion": "Что такое {number} в биективной системе счисления по основанию 6?",
     "quizQuestionArithmetic": "Что такое {num1} {op} {num2}?",
+    "quizCorrectFeedback": "Правильно! 🎉",
+    "quizIncorrectFeedback": "Не совсем! Правильный ответ был {answer}.",
     "prosConsTitle": "Зачем изучать эту систему?",
     "prosTitle": "Преимущества (Плюсы)",
     "prosList": [
