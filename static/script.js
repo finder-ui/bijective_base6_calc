@@ -29,7 +29,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- Internationalization (i18n) Logic ---
-    const supportedLangs = { 'en': { flag: 'us', name: 'English' }, 'ru': { flag: 'ru', name: 'Русский' } };
+    const supportedLangs = {
+        'en': { flag: 'us', name: 'English' },
+        'ru': { flag: 'ru', name: 'Русский' },
+        'de': { flag: 'de', name: 'Deutsch' },
+        'fr': { flag: 'fr', name: 'Français' },
+        'he': { flag: 'il', name: 'עברית' },
+        'ar': { flag: 'sa', name: 'العربية' },
+        'zh': { flag: 'cn', name: '中文' },
+        'ja': { flag: 'jp', name: '日本語' }
+    };
 
     async function setLanguage(lang) {
         if (!supportedLangs[lang]) { console.warn(`Language '${lang}' not supported.`); return; }
@@ -39,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             i18nData = await response.json();
             applyTranslations(i18nData);
             htmlElement.setAttribute('lang', lang);
-            htmlElement.dir = lang === 'ru' ? 'ltr' : 'ltr'; // Simplified for current languages
+            htmlElement.dir = ['he', 'ar'].includes(lang) ? 'rtl' : 'ltr';
             localStorage.setItem('language', lang);
             updateSeoLangTags(lang);
         } catch (error) { console.error(`Error setting language to ${lang}:`, error); }

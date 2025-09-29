@@ -44,7 +44,7 @@ Sitemap: https://base6.art/sitemap.xml
 @app.get("/sitemap.xml")
 def sitemap():
     base_url = "https://base6.art"
-    supported_langs = ["en", "ru"]  # Keep this in sync with your frontend
+    supported_langs = ["en", "ru", "de", "fr", "he", "ar", "zh", "ja"]  # Keep this in sync with your frontend
     today = date.today().isoformat()
     
     xml_content = '<?xml version="1.0" encoding="UTF-8"?>\n'
