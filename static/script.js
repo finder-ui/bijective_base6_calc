@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
             container.innerHTML = `
                 <div class="mb-3 fs-4">${currentQuestion.questionText}</div>
                 <div class="input-group" style="max-width: 300px; margin: auto;">
-                    <input type="text" id="quiz-answer" class="form-control" data-i18n-placeholder="quizAnswerPlaceholder">
+                    <input type="tel" id="quiz-answer" class="form-control" data-i18n-placeholder="quizAnswerPlaceholder">
                     <button id="quiz-submit" class="btn btn-primary" data-i18n="quizSubmitBtn"></button>
                 </div>
                 <div id="quiz-feedback" class="mt-3"></div>
